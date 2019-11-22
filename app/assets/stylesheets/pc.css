@@ -154,7 +154,7 @@ body {
   padding: 0;
   height: 52px;
   text-align: left;
-  background-image: url(/assets/head_menu_back_base.gif);
+  background-image: url(/head_menu_back_base.gif);
   background-repeat: repeat-x;
 }
 
@@ -163,7 +163,7 @@ body {
   text-align: left;
   margin: 0 auto 0 auto;
   padding: 0;
-  background-image: url(/assets/head_menu_back_base.gif);
+  background-image: url(/head_menu_back_base.gif);
   background-repeat: repeat-x;
 }
 
@@ -184,12 +184,12 @@ body {
   border-right: solid 1px #85c6d8;
   text-decoration: none;
   padding: 9px 28px 5px 28px;
-  background: #dfcda9 url(/assets/head_menu_back_abase.gif) repeat-x;
+  background: #dfcda9 url(/head_menu_back_abase.gif) repeat-x;
 }
 
 #header-menu li a:hover {
   color: #033347;
-  background: #dfcda9 url(/assets/head_menu_back_hover.gif) repeat-x;
+  background: #dfcda9 url(/head_menu_back_hover.gif) repeat-x;
 }
 
 #header-menu li.home a {
@@ -223,7 +223,7 @@ body {
   margin: 14px auto 0 auto;
   overflow: hidden;
   padding: 8px 10px 6px 5px;
-  background: #ffffff url(/assets/side_yback.jpg);
+  background: #ffffff url(/side_yback.jpg);
   background-repeat: repeat-y;
 }
 
@@ -268,7 +268,7 @@ body {
   font-size: 20px;
   color: #033347;
   border: none;
-  background-image: url(/assets/page_title.gif);
+  background-image: url(/page_title.gif);
   background-repeat: no-repeat;
 }
 
@@ -302,7 +302,7 @@ body {
   font-size: 18px;
   color: #fffffc;
   border: none;
-  background-image: url(/assets/h3_beta.gif);
+  background-image: url(/h3_beta.gif);
   background-repeat: no-repeat;
 }
 
@@ -316,7 +316,7 @@ body {
   border-right: solid 1px #bbbbbb;
   border-bottom: solid 4px #663300;
   border-left: solid 1px #bbbbbb;
-  background-image: url(/assets/h3_point.gif);
+  background-image: url(/h3_point.gif);
   background-repeat: repeat-x;
 }
 
@@ -359,7 +359,7 @@ td.head {
   padding: 9px 6px 6px 15px;
   border: solid 1px #cccccc;
   border-collapse: collapse;
-  background-image: url(/assets/main_block_bg.gif);
+  background-image: url(/main_block_bg.gif);
 }
 
 td.t00 {
@@ -462,13 +462,13 @@ td.table_line {
   font-size: 13px;
   line-height: 1.9;
   text-decoration: none;
-  background-image: url(/assets/side_menu_bg.gif);
+  background-image: url(/side_menu_bg.gif);
   background-repeat: no-repeat;
 }
 
 .menulist li a:hover{
   color: #54351f;
-  background-image: url(/assets/side_menu_bg_hover.gif);
+  background-image: url(/side_menu_bg_hover.gif);
   background-repeat: no-repeat;
 }
 
