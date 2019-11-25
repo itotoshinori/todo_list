@@ -5,3 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Portal.create!( title:"初期データ",
+             content: "初期データです")
+Portal.create!( title:"初期データ",
+             content: "初期データです")

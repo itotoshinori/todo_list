@@ -1,6 +1,6 @@
 class PortalsController < ApplicationController
   def index
-    @portal=Portal.find(1)
+    @portal=Portal.find(2)
   end
 
   def new
