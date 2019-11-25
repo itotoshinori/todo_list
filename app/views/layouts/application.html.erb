@@ -33,14 +33,13 @@
 
 <div id="header">
 
-<h1>こちらには、メインキーワードや紹介文を入れてください</h1>
 
   <div id="header_inner">
    <div id="h_logo"><h2><a href="/">マイカンパニーのページ</a></h2></div>
    <div id="h_info">
 <p>お問い合わせをお待ちしております</p>
 <p class="tel">TEL. 06-12345-6789</p>
-<p><b>営業時間</b> AM10:00 ～ PM20:00</p>
+<p><b>営業時間</b> 下記に表記しております</p>
 
 </div>
   </div>
@@ -50,7 +49,7 @@
 <div id="header-menu">
    <ul class="clearfix">
     <li class="home"><a href="/">ホーム<br><span class="sub">home</span></a></li>
-    <li><a href="goaisatu.html">ごあいさつ<br><span class="sub">goaisatu</span></a></li>
+    <li><%= link_to "修正","/portals/#{@portal.id.to_s}/edit" %><br><span class="sub">edit</span></li>
     <li><a href="service.html">サービス情報<br><span class="sub">service</span></a></li>
     <li><a href="profile.html">会社情報<br><span class="sub">profile</span></a></li>
     <li><a href="faq.html">よくあるご質問<br><span class="sub">faq</span></a></li>
