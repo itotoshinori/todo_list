@@ -1,6 +1,7 @@
 <% if @blog.present? %>
     <% @blog.each do |f| %>
         <h2 class="page_title"><%= f.title %></h2>
+        <%=simple_format(@portal.content) %>
     <% end %>
 <% end %>
 
