@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   
-  
+  resources :blogs
+ 
+
   #get 'portals/:id/edit'
   get '/'=>'portals#index'
   

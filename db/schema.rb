@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191123015054) do
+ActiveRecord::Schema.define(version: 20191126014940) do
+
+  create_table "blogs", force: :cascade do |t|
+    t.string "title"
+    t.string "content"
+    t.date "postdate"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "portals", force: :cascade do |t|
     t.string "title"
