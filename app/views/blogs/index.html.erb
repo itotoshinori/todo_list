@@ -2,8 +2,6 @@
     <% @blog.each do |f| %>
         <h2 class="page_title"><%= f.title %></h2>
         <%=simple_format(f.content) %>
+        <%= link_to "修正","/blogs/#{f.id.to_s}/edit" %>
     <% end %>
 <% end %>
-
-<h1>Blogs#index</h1>
-<p>Find me in app/views/blogs/index.html.erb</p>
