@@ -22,6 +22,9 @@ class BlogsController < ApplicationController
     @blog.update(blog_params)
     redirect_to('/blogs/')
   end
+  def show
+    @blog=Blog.find(params[:id])
+  end
 
   def blog_params
      params.require(:blog).permit(:title, :content,:postdate)

@@ -2,7 +2,8 @@
     <% @blog.each do |f| %>
         <h2 class="page_title"><%= f.title %></h2>
         <%=simple_format(f.content) %>
-        <%= f.created_at %><br>
-        <%= link_to "修正","/blogs/#{f.id.to_s}/edit" %>
+        <%= f.created_at.strftime("%Y-%m-%d %H:%M") %><br>
+        <%= link_to "修正","/blogs/#{f.id.to_s}/edit" %><br>
+        <%= link_to "単体ページ","/blogs/#{f.id.to_s}" %>
     <% end %>
 <% end %>
