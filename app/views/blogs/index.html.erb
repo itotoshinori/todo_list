@@ -4,8 +4,7 @@
         <%=simple_format(f.content) %>
         <%= f.created_at.strftime("%Y-%m-%d %H:%M") %>
         <%= link_to "単体ページ","/blogs/#{f.id.to_s}" %>
-        <%= link_to "修正","/blogs/#{f.id.to_s}/edit" %><br>
-        
-    <% end %>
+        <%= link_to "修正","/blogs/#{f.id.to_s}/edit" %><br><br>
+        <% end %>
     <hr class="line">
-<%= will_paginate %>
+<%= will_paginate %><p class="back"><a href="#header">
