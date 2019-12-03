@@ -3,5 +3,26 @@
         <%= @blog.title %></h2>
         <%=simple_format(@blog.content) %>
         <%= @blog.created_at.strftime("%Y-%m-%d %H:%M") %><br>
-        <%= link_to "修正","/blogs/#{@blog.id.to_s}/edit" %>
+        <%#= link_to "修正","/blogs/#{@blog.id.to_s}/edit" %>
+        <hr class="line">
+        ■コメント投稿<br>
+        <%= form_for(@comment) do |f| %>
+              <%= f.text_field :name, placeholder: 'enter お名前(必須)' %>
+              <p>
+              <%= f.text_area :body, placeholder: 'enter コメント(必須)',cols:65,rows:10 %>
+              <%= f.hidden_field :blog_id, value:@blog.id.to_i %><br>
+       <%= f.submit "実行", class: "btn btn-primary",data: { disable_with: '送信中...' },style:"width:100px;height:50px" %>
+        <% end %>
+        <hr class="line">
+        <% if @commentcontent.present? %>
+          <% @commentcontent.each do |f| %>
+              <%= f.name %>さん　投稿日時：<%=f.created_at.strftime("%Y-%m-%d %H:%M") %><br>
+              <table>
+                <tr><td width="610">
+              <%=simple_format(f.body) %>
+              <hr class="line">
+              </td></tr>
+              </table>
+          <% end %>
+        <% end %> 
 <% end %>

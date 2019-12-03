@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>としのページ</title>
+<title>フリーランスエンジニアを目指すページ</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="keywords" content="キーワード">
 <meta name="description" content="紹介文">
@@ -35,7 +35,7 @@
 
 
   <div id="header_inner">
-   <div id="h_logo"><h2><a href="/">としのホームページ</a></h2></div>
+   <div id="h_logo"><h2><a href="/">フリーランスエンジニアを目指すページ</a></h2></div>
    <div id="h_info">
 
 </div>
@@ -48,11 +48,13 @@
     <li class="home"><a href="/">ホーム<br><span class="sub">home</span></a></li>
     <li><a href="/blogs/">ブログ<br><span class="sub">blog</span></a></li>
     <li><a href="/blogs/4">リンク<br><span class="sub">link</span></a></li>
-    <li><a href="contact.html">お問い合わせ<br><span class="sub">contact</span></a></li>
-    <li><a href="pswd.html">管理者サイト<br><span class="sub">Manege</span></a></li></li>
-    <li><a href="http://titonet384.sakura.ne.jp/linkmake/">リンク作成<br><span class="sub">linkmake</span></a></li></li>
-    <li><a href="/blogs/new">記事新規<br><span class="sub">blog new</span></a></li>
-    <li><a href="/portals/2/edit">紹介修正<br><span class="sub">edit</span></a></li>
+    <li><a href="http://titonet384.sakura.ne.jp/linkmake/">リンク作成<br><span class="sub">linkmake</span></a></li>
+    <% if cookies[:passwd].present? %>
+        <li><a href="pswd.html">管理者サイト<br><span class="sub">Manege</span></a></li></li>
+        <li><a href="http://titonet384.sakura.ne.jp/linkmake/">リンク作成<br><span class="sub">linkmake</span></a></li></li>
+        <li><a href="/blogs/new">記事新規<br><span class="sub">blog new</span></a></li>
+        <li><a href="/portals/2/edit">紹介修正<br><span class="sub">edit</span></a></li>
+    <% end %>    
     </ul>
 </div>
 
@@ -95,7 +97,7 @@
 
 
 <div class="menu_top">
-<a href="contact.html"><img src="/contact_form_banner.jpg" alt="contact_form_banner"></a>
+<a href="http://titonet384.sakura.ne.jp/mail/mail.html"><img src="/contact_form_banner.jpg" alt="contact_form_banner"></a>
 </div>
 
 
@@ -107,35 +109,19 @@
 <li><a href="/">ホーム</a></li>
 <li><a href="/blogs/">ブログ</a></li>
 <li><a href="/blogs/4">リンク</a></li>
-<li><a href="contact.html">お問い合わせ</a></li>
 </ul>
 </div>
-
-
-
-
 
 <div class="menulist">
-   <h3>コンテンツ・メニュー</h3>
+   <h3>作成ツール</h3>
 <ul>
-<li><a href="#">基礎知識1</a></li>
-<li><a href="#">基礎知識2</a></li>
-<li><a href="#">基礎知識3</a></li>
+<li><a href="http://titonet384.sakura.ne.jp/linkmake/">リンクタグ作成</a></li>
+<li><a href="http://titonet384.sakura.ne.jp/imagelink/">画像表示作成タグ</a></li>
+<li><a href="http://titonet384.sakura.ne.jp/uploads/pwd.php">画像アップロード</a></li>
 </ul>
 </div>
 
 
-
-
-
-<div class="menu_free">
-   <h3>Information</h3>
-<p><img src="img/side_info.png" alt=""><br>
-<span class="brown_b">【テンプネート製作所】</span><br>
-<img src="img/icon.gif" alt=""> <span class="red_b">TEL.06-12345-6789</span><br>
-天賦市天賦の町1-10-10
-</p>
-</div>
 
 
 
@@ -143,7 +129,7 @@
 
 
 <div class="menu_btn_under">
-<a href="#" target="_blank"><img src="/ameblo_banner.jpg" alt="banner"></a>
+<a href="/blogs/" target="_blank"><img src="/ameblo_banner.jpg" alt="banner"></a>
 </div>
 
 

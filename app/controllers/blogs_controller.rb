@@ -1,7 +1,7 @@
 class BlogsController < ApplicationController
   def index
     @blogs=Blog.paginate(page: params[:page], per_page: 5).order(created_at: "DESC")
-    #@blog=Blog.order(created_at: "DESC").page(params[:page]).per(PER)
+    
   end
 
   def new
@@ -25,7 +25,10 @@ class BlogsController < ApplicationController
   end
   def show
     @blog=Blog.find(params[:id])
+    @commentcontent=Comment.where(blog_id:@blog.id)
+    @comment=Comment.new
   end
+  
 
   def blog_params
      params.require(:blog).permit(:title, :content,:postdate)
