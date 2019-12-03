@@ -7,10 +7,12 @@
         <hr class="line">
         ■コメント投稿<br>
         <%= form_for(@comment) do |f| %>
-              <%= f.text_field :name, placeholder: 'enter お名前(必須)' %>
-              <p>
-              <%= f.text_area :body, placeholder: 'enter コメント(必須)',cols:65,rows:10 %>
-              <%= f.hidden_field :blog_id, value:@blog.id.to_i %><br>
+        <% if @comment.errors.messages[:name].any? %>
+          <b><font color="red"><%= @comment.errors.messages[:name][0] %></font></b>
+        <% end %>
+          <%= f.text_field :name, placeholder: 'enter お名前(必須)' ,value:@comment.name %><p>
+          <%= f.text_area :body, placeholder: 'enter コメント(必須)',cols:65,rows:10 %>
+          <%= f.hidden_field :blog_id, value:@blog.id.to_i %><br>
        <%= f.submit "実行", class: "btn btn-primary",data: { disable_with: '送信中...' },style:"width:100px;height:50px" %>
         <% end %>
         <hr class="line">
