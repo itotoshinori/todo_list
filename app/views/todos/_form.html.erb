@@ -22,7 +22,7 @@
                 <td data-label="内容" style="text-align: left;">
                 <% title=mojiseigen(form.title,10) %>
                 <%= link_to title, "/todos/#{form.id}" %></td>
-                <td style="text-align: right;"><%=kei %></td>
+                <td style="text-align: right; width:100px;"><%=kei %></td>
                 <td>
                 <% if @kubun==1 %>
                     <%= button_to "完", todos_finished_path, { method: :get, params: {id: form.id,baction:1} } %></td>
