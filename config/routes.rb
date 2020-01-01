@@ -1,7 +1,24 @@
 Rails.application.routes.draw do
-  
+  get 'accounts/index'
+  get 'accounts/new'
+
+  post '/accounts/create'
+
+  get 'accounts/edit'
+
+  get 'todos/wshow'
+  post 'todos/wshow'
+  get 'todos/indexfinished'
+  get 'todos/finished'
+  get 'todos/index'
+  get 'todos/schedule'
+  get 'user/new'
+  #get '/user/create'
+  post '/user/create'
   get 'login/index'
   post 'login/login'
+  get 'login/logout'
+  resources :todos
   resources :blogs
   #get 'portals/:id/edit'
   get '/'=>'portals#index'
@@ -11,6 +28,7 @@ Rails.application.routes.draw do
   get '/comments/test', as: :test
   #post 'blogs/commentcreate'
   resources :comments, only: [:create]
+  
   resources :portals
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

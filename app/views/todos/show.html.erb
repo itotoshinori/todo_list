@@ -1,0 +1,104 @@
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<table>
+<tr><td width="120" valign="top">■イベント名：</td><td><%= @todo.title %></td></tr>
+<tr><td valign="top">
+■期　限　：</td>
+<td>
+<%= dateweekday(@todo.term) %>(<%=weekdate(@todo.term) %>)
+<% if @todo.starttime.present? %>
+    <% times=@todo.starttime-32400 %>
+    <%= times.strftime("%H:%M") %>
+<% end %><br>
+</td></tr>
+<tr><td>
+<% kei=Account.where(todo_id:@todo.id).sum(:amount) %>
+■使用金額　：</td><td><%= kei.to_s(:delimited, delimiter: ',') %></td></tr>
+<tr><td  colspan="2" width="610">
+■開催詳細<br><%=simple_format(@todo.body) %>
+</td></tr>
+</table>
+<hr class="line">
+<% if @url %>
+  <%= link_to("前のページに戻る",@url) %>
+<% end %>
+<%= link_to "編集","/todos/#{@todo.id}/edit" %>
+<br>
+<div>
+<button class="btn btn-primary"  data-toggle="modal" data-target="#modal-sa">
+        会計編集
+</button>
+<button class="btn btn-primary"  data-toggle="modal" data-target="#modal-new">
+        会計新規追加
+</button></div>
+<!-- 2.編集モーダルの配置 -->
+<div class="modal fade" id="modal-sa" tabindex="-1">
+  <div class="modal-dialog modal-sm">
+<!-- 3.モーダルのコンテンツ -->
+    <div class="modal-content">
+      <!-- 4.モーダルのヘッダ -->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="modal-label"><b>会計編集</b></h4>
+        <div class="modal-body">
+        <% @items=Item.all %>    
+        <% @account=Account.where(todo_id:@todo.id) %>
+        <%= form_tag '/todos/index', method: :put do %>
+        <% @account.each do |account| %>
+          <%= fields_for "account[]",account do |ac| %>
+            <%= ac.label :削除 %><%= ac.check_box :deletecheck %><br>
+            <%= ac.label :費用品目： %><br>
+            <%= ac.select :item,Item.all.collect { |i| [ i.name, i.id ] } %><br>
+            <%= ac.label :金　額　： %><%= ac.text_field :amount , placeholder: '金額(必須)'%><br>
+            <%= ac.label :備　考　： %><%= ac.text_field :remark , placeholder: '備考'%><br>
+            <hr>
+          <% end %>
+        <% end %>
+        <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 2.編集モーダルの配置終了 -->
+<!-- 2.編集モーダルの配置 -->
+<div class="modal fade" id="modal-new" tabindex="-1">
+  <div class="modal-dialog modal-sm">
+<!-- 3.モーダルのコンテンツ -->
+    <div class="modal-content">
+      <!-- 4.モーダルのヘッダ -->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="modal-label"><b>会計新規追加</b></h4>
+        <div class="modal-body">
+      <p>
+      <% @account=Account.new %>
+      <%= form_with(url: accounts_create_path, local: true) do |f| %>
+      <%= f.label :費用品目： %>
+      <%= f.select :item,Item.all.collect { |i| [ i.name, i.id ] } %><br>
+      <%= f.label :金　額　： %><%= f.text_field :amount , placeholder: '金額(必須)'%><br>
+      <%= f.label :備　考　： %><%= f.text_field :remark , placeholder: '備考'%><br>
+      <%= f.hidden_field :id ,value:@todo.id %>
+      <p>
+      <%= f.submit "登録", class: "btn btn-primary",data: { disable_with: '送信中...' },style:"width:100px;height:50px" %>
+      </p>
+<% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+            
+  
+

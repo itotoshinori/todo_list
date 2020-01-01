@@ -220,9 +220,9 @@ body {
 
 #container {
   width: 885px;
-  margin: 14px auto 0 auto;
+  margin: 5px auto 0 auto;
   overflow: hidden;
-  padding: 8px 10px 6px 5px;
+  padding: 2px px 6px 5px;
   background: #ffffff url(/side_yback.jpg);
   background-repeat: repeat-y;
 }
@@ -233,7 +233,7 @@ body {
 #contents {
   float: right;
   margin: 0;
-  padding: 4px 0 5px 0;
+  padding: 10px 0 5px 0;
   font-size: 16px;
   width: 640px;
   letter-spacing: 0.05em;

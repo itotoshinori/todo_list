@@ -1,0 +1,43 @@
+<% if @kubun==1 %>
+    <% statusname="期限" %>
+<% else %>
+    <% statusname="完了" %>
+<% end %>
+
+<div>
+<table class="table1" align="left">
+        <thead>
+            <tr>
+                <th scope="col" style="width:250px">内容</th>
+                <th>費用</th>
+                <th style="width:10px"></th>
+                <th style="width:10px"></th>
+                <th scope="col"><%= statusname %></th>
+            </tr>
+        </thead>
+        <tbody>
+        <% @todos.each do |form|%>
+        <% kei=form.accounts.sum(:amount).to_s(:delimited, delimiter: ',') %>
+            <tr>
+                <td data-label="内容" style="text-align: left;">
+                <% title=mojiseigen(form.title,10) %>
+                <%= link_to title, "/todos/#{form.id}" %></td>
+                <td style="text-align: right;"><%=kei %></td>
+                <td>
+                <% if @kubun==1 %>
+                    <%= button_to "完", todos_finished_path, { method: :get, params: {id: form.id,baction:1} } %></td>
+                    <td><%= button_to "詳", todos_wshow_path, { method: :get, params: {id: form.id,baction:1} } %></td>
+                    </td>
+                    <td data-label="期限"><%= dateweekday(form.term) %>(<%=weekdate(form.term) %>)</td>
+                <% else %>
+                    <%= button_to "仕", todos_finished_path, { method: :get,params: {id: form.id,baction:2} } %></td>
+                    <td><%= button_to "詳", todos_wshow_path, { method: :get, params: {id: form.id,baction:1} } %></td>
+                    <td data-label="完了日"><%= dateweekday(form.finishday) %>(<%=weekdate(form.finishday) %>)</td>
+                <% end %>
+            </tr>
+        <% end %>
+        </tbody>
+    </table>
+</div>
+
+

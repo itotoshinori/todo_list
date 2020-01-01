@@ -1,18 +1,28 @@
 class LoginController < ApplicationController
   def index
-    #cookie[:user_id] = @user.id
+    
+  end
+  def new
+    @user=User.new()
+  end
+  def create
   end
   def login
-    if params[:password]=="654321"
-      cookies.signed[:passwd] = {:value => "OK", :expires => 1.days.from_now } 
-      #cookies[:passwd] = { :value => "OK", :expires => "30.days.from_now",:secure => true }
-      redirect_to('/')
-    elsif params[:commit] == "ログアウト"
-      cookies.delete :passwd
+    mail=params[:mail]
+    password=params[:password]
+    user=User.find_by(email:mail)
+    if user and user.authenticate(password)
+      cookies[:userid] = {:value => user.id, :expires => 5.days.from_now } 
+      flash[:success]="ログインに成功しました"
       redirect_to('/')
     else
+      flash[:success]="ログインに失敗しました"
       redirect_to('/login/index')
     end
-    
+  end
+  def logout
+    cookies.delete :userid
+    cookies.delete :passwd
+    redirect_to('/login/index')
   end
 end

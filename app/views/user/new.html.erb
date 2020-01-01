@@ -1,0 +1,22 @@
+ユーザー新規登録
+<%= form_with url: user_create_path do |f| %>
+  <div class="field">
+    <%= f.label :名前 %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :メールアドレス %><br>
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :パスワード %><br>
+    <%= f.password_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :パスワード確認 %><br>
+    <%= f.password_field :password_confirmation %>
+  </div>
+  <div class="actions">
+    <%= f.submit value:"登録" %>
+  </div>
+<% end %>

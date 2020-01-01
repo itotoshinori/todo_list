@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  household_id: 1
+  title: MyText
+  body: MyString
+  finished: 
+  term: 2019-12-08
+  starttime: 2019-12-08 08:21:07
+  finishtime: 2019-12-08 08:21:07
+
+two:
+  user_id: 1
+  household_id: 1
+  title: MyText
+  body: MyString
+  finished: 
+  term: 2019-12-08
+  starttime: 2019-12-08 08:21:07
+  finishtime: 2019-12-08 08:21:07

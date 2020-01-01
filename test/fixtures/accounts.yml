@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  item: 1
+  todo_id: 1
+  amount: 1
+  registrationdate: 2019-12-24
+  remark: MyString
+
+two:
+  item: 1
+  todo_id: 1
+  amount: 1
+  registrationdate: 2019-12-24
+  remark: MyString

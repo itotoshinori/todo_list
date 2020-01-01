@@ -7,3 +7,6 @@
       <%= f.text_area :content, placeholder: 'enter ブログ記事(必須)',cols:65,rows:10 %><br>
        <%= f.submit "実行", class: "btn btn-primary",data: { disable_with: '送信中...' },style:"width:100px;height:50px" %>
     <% end %>
+<% if @url %>
+  <%= link_to("前のページに戻る",@url) %>
+<% end %><br>

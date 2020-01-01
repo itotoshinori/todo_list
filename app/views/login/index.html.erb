@@ -1,7 +1,10 @@
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 <%= form_tag('/login/login', method: :post) do %>
   <% if cookies[:passwd].blank? %>
-    <%= label_tag :パスワード %>
-    <%= password_field_tag :password %>
+    <%= label_tag :メールアドレス %><br>
+    <%= text_field_tag :mail %><br><br>
+    <%= label_tag :パスワード %><br>
+    <%= password_field_tag :password %><br><br>
     <%= submit_tag "実行" %>
   <% else %>
     <%= submit_tag "ログアウト" %>
