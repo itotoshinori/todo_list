@@ -4,7 +4,7 @@ class TodosController < ApplicationController
   require 'date'
   require 'active_support/core_ext/date'
   def index
-    @todos=Todo.includes(:accounts).where(finished:false).where(user_id:@userid).order(:term).paginate(page: params[:page], per_page: 20).order(created_at: "DESC")
+    @todos=Todo.includes(:accounts).where(finished:false).where(user_id:@userid).order(:term).paginate(page: params[:page], per_page: 20).order(created_at: "ASC")
     @kubun=1
   end
   def indexfinished
