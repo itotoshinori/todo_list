@@ -55,7 +55,8 @@ class TodosController < ApplicationController
     end
   end
   def accountcreate
-    @account=Account.new(todo_id:@todo.id,item:@todo.item,amount:@todo.itemmoney,expense:false)
+    today=Date.today
+    @account=Account.new(todo_id:@todo.id,item:@todo.item,amount:@todo.itemmoney,expense:false,registrationdate:today)
     @account.save
     flash[:success]="#{@todo.title}が会計も含め新規登録されました"
     redirect_to "/todos/#{@todo.id}"

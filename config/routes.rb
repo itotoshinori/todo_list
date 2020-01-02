@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get 'accounts/new'
 
   post '/accounts/create'
+  put '/accounts/editmany'
 
   get 'accounts/edit'
 

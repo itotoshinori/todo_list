@@ -45,9 +45,9 @@
         <div class="modal-body">
         <% @items=Item.all %>    
         <% @account=Account.where(todo_id:@todo.id) %>
-        <%= form_tag '/todos/index', method: :put do %>
+        <%= form_tag accounts_editmany_path, method: :put do %>
         <% @account.each do |account| %>
-          <%= fields_for "account[]",account do |ac| %>
+          <%= fields_for "accountsmany[]",account do |ac| %>
             <%= ac.label :削除 %><%= ac.check_box :deletecheck %><br>
             <%= ac.label :費用品目： %><br>
             <%= ac.select :item,Item.all.collect { |i| [ i.name, i.id ] } %><br>
@@ -56,6 +56,7 @@
             <hr>
           <% end %>
         <% end %>
+        <%= submit_tag value="一括登録", :class => "btn btn-primary btn-lm", data: { confirm: "更新していいですか"} %>
         <% end %>
         </div>
       </div>
