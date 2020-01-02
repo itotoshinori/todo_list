@@ -21,9 +21,7 @@
 </td></tr>
 </table>
 <hr class="line">
-<% if @url %>
-  <%= link_to("前のページに戻る",@url) %>
-<% end %>
+  <%= link_to("一覧に戻る",session[:url]) if session[:url]%>
 <div>
 <%= link_to "編集","/todos/#{@todo.id}/edit", {class: "btn btn-primary"} %>
 <button class="btn btn-primary"  data-toggle="modal" data-target="#modal-sa">
@@ -32,6 +30,7 @@
 <button class="btn btn-primary"  data-toggle="modal" data-target="#modal-new">
         会計新規追加
 </button></div>
+
 <!-- 2.編集モーダルの配置 -->
 <div class="modal fade" id="modal-sa" tabindex="-1">
   <div class="modal-dialog modal-sm">

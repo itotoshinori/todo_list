@@ -21,9 +21,8 @@
     　<%= f.submit "コピー登録", class: "btn btn-primary",data: { confirm: "本当にコピーして新規登録しますか？" },style:"width:100px;height:50px" %>
     　<%= f.submit "削除", class: "btn btn-primary",data: { confirm: "本当に削除しますか？" } ,style:"width:100px;height:50px" %>
 <% end %>
-<% if @url %>
-  <%= link_to("前のページに戻る",@url) %>
-<% end %>
- <%= link_to "プレビュー","/todos/#{@todo.id}" %>
+  <%= link_to "プレビュー","/todos/#{@todo.id}" %>
+  <%= link_to("前のページに戻る",request.referer) %>
+  <%= link_to("一覧に戻る",session[:url]) if session[:url]%>
 <br>
 

@@ -45,7 +45,7 @@ class TodosController < ApplicationController
       if @todo.itemmoney.present?
         accountcreate
       else
-        redirect_to '/todos/index'
+        redirect_to "/todos/#{@todo.id}"
       end
     else
       flash[:success]="必須項目に入力がありません"
@@ -58,7 +58,7 @@ class TodosController < ApplicationController
     @account=Account.new(todo_id:@todo.id,item:@todo.item,amount:@todo.itemmoney,expense:false)
     @account.save
     flash[:success]="#{@todo.title}が会計も含め新規登録されました"
-    redirect_to '/todos/index'
+    redirect_to "/todos/#{@todo.id}"
   end
   
   def edit
