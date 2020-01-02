@@ -46,3 +46,4 @@
   <% @dateup=(@last_day+1).beginning_of_month %>
   <td><%= button_to"→", {controller: 'todos', action: 'schedule'}, {method: :get, params: {lday:@dateup,kubun:"2"}} %></td>
   </tr></table>
+<% session[:url]=request.url %>
