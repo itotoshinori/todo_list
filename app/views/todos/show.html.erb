@@ -2,7 +2,8 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <table>
-<tr><td width="120" valign="top">■イベント名：</td><td><%= @todo.title %></td></tr>
+<tr><td width="120" valign="top">
+■名　称　：</td><td><%= @todo.title %></td></tr>
 <tr><td valign="top">
 ■期　限　：</td>
 <td>
@@ -14,18 +15,17 @@
 </td></tr>
 <tr><td>
 <% kei=Account.where(todo_id:@todo.id).sum(:amount) %>
-■使用金額　：</td><td><%= kei.to_s(:delimited, delimiter: ',') %></td></tr>
+■金　額　：</td><td><%= kei.to_s(:delimited, delimiter: ',') %></td></tr>
 <tr><td  colspan="2" width="610">
-■開催詳細<br><%=simple_format(@todo.body) %>
+■詳　細<br><%=simple_format(@todo.body) %>
 </td></tr>
 </table>
 <hr class="line">
 <% if @url %>
   <%= link_to("前のページに戻る",@url) %>
 <% end %>
-<%= link_to "編集","/todos/#{@todo.id}/edit" %>
-<br>
 <div>
+<%= link_to "編集","/todos/#{@todo.id}/edit", {class: "btn btn-primary"} %>
 <button class="btn btn-primary"  data-toggle="modal" data-target="#modal-sa">
         会計編集
 </button>
