@@ -9,7 +9,7 @@
 <td>
 <%= dateweekday(@todo.term) %>(<%=weekdate(@todo.term) %>)
 <% if @todo.starttime.present? %>
-    <% times=@todo.starttime-32400 %>
+    <% times=@todo.starttime %>
     <%= times.strftime("%H:%M") %>
 <% end %><br>
 </td></tr>

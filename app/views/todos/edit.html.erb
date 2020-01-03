@@ -7,7 +7,7 @@
        <%= f.label :期限・開催 %><br>
       <%= f.collection_select :term, @dates, :id, :dateweek, :selected=>@todo.term %>
       <% if @todo.starttime.present? %>
-        <% timehm=@todo.starttime-32400 %>
+        <% timehm=@todo.starttime %>
         <%= f.select:starttimehour,@hourselect,  :selected=>timehm.hour %>-
         <%= f.select :starttimemin,@minselect, :selected=>timehm.min %>
         <input type="button" id="timeclear" value="時間クリア" />

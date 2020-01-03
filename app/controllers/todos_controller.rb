@@ -39,7 +39,7 @@ class TodosController < ApplicationController
       starttimehour=@todo.starttimehour
       starttimemin=@todo.starttimemin
       @todo.starttime="2000-01-01 #{starttimehour}:#{starttimemin}".to_datetime if starttimehour.present? and starttimemin.present?
-      
+      @todo.starttime=@todo.starttime-32400
     if  @todo.save
       flash[:success]="#{@todo.title}が新規登録されました"
       if @todo.itemmoney.present?
@@ -75,6 +75,7 @@ class TodosController < ApplicationController
           @todo.starttime=nil
         else
           @todo.starttime="2000-01-01 #{starttimehour}:#{starttimemin}".to_datetime
+          @todo.starttime=@todo.starttime-32400
         end
       if @todo.update(todo_params)
         flash[:success]="「#{@todo.title}」が編集されました"
@@ -89,6 +90,7 @@ class TodosController < ApplicationController
         starttimehour=@todo.starttimehour
         starttimemin=@todo.starttimemin
         @todo.starttime="2000-01-01 #{starttimehour}:#{starttimemin}".to_datetime if starttimehour.present? and starttimemin.present?
+        @todo.starttime=@todo.starttime-32400
       if @todo.save
         flash[:success]="「#{@todo.title}」がコピー新規登録されました"
         redirect_to "/todos/#{@todo.id}"
