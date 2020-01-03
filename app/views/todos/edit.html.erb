@@ -10,10 +10,12 @@
         <% timehm=@todo.starttime-32400 %>
         <%= f.select:starttimehour,@hourselect,  :selected=>timehm.hour %>-
         <%= f.select :starttimemin,@minselect, :selected=>timehm.min %>
+        <input type="button" id="timeclear" value="時間クリア" />
       <% else %>
         <%= f.select:starttimehour,@hourselect,  :include_blank => true %>-
         <%= f.select :starttimemin,@minselect, :include_blank => true %>
-      <% end %><br>
+      <% end %>
+      
       <p>
       <%= f.label :内容 %><br>
       <%= f.text_area :body, placeholder: 'enter 内容',cols:65,rows:5 %><br>
@@ -25,4 +27,12 @@
   <%= link_to("前のページに戻る",request.referer) %>
   <%= link_to("一覧に戻る",session[:url]) if session[:url]%>
 <br>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+$(function() {
+	$("#timeclear").click(function() {
+		$('#todo_starttimehour').val("");
+    $('#todo_starttimemin').val("");
+	});
+});
+</script>

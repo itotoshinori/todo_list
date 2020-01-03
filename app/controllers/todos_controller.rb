@@ -71,7 +71,11 @@ class TodosController < ApplicationController
       @todo = Todo.find(params[:id])
         starttimehour=todo_params[:starttimehour]
         starttimemin=todo_params[:starttimemin]
-        @todo.starttime="2000-01-01 #{starttimehour}:#{starttimemin}".to_datetime if starttimehour.present? and starttimemin.present?
+        if starttimehour.nil? or starttimemin.nil?
+          @todo.starttime=nil
+        else
+          @todo.starttime="2000-01-01 #{starttimehour}:#{starttimemin}".to_datetime
+        end
       if @todo.update(todo_params)
         flash[:success]="「#{@todo.title}」が編集されました"
         redirect_to "/todos/#{@todo.id}"
