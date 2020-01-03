@@ -71,7 +71,7 @@ class TodosController < ApplicationController
       @todo = Todo.find(params[:id])
         starttimehour=todo_params[:starttimehour]
         starttimemin=todo_params[:starttimemin]
-        if starttimehour.nil? or starttimemin.nil?
+        if starttimehour.blank? or starttimemin.blank?
           @todo.starttime=nil
         else
           @todo.starttime="2000-01-01 #{starttimehour}:#{starttimemin}".to_datetime
