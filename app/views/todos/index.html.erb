@@ -4,8 +4,7 @@
 <% today=Date.today %>
 <% account=Account.where(registrationdate:today) %>
 <% finish=Todo.where(finishday:today) %>
-<b><p>本日使った額：<%= account.sum(:amount).to_s(:delimited, delimiter: ',') %>円 本日終わったタスク：<%= finish.count(:finishday) %>件</p>
-<p>仕掛一覧 <%= link_to "仕掛", "index" %> <%= link_to "完了済", "indexfinished" %>　<%= link_to "新規", "new" %></p></b>
+<p><b>仕掛一覧 <%= link_to "仕掛", "index" %> <%= link_to "完了済", "indexfinished" %>　<%= link_to "新規", "new" %> 本日使用額：<%= account.sum(:amount).to_s(:delimited, delimiter: ',') %>円 終了タスク：<%= finish.count(:finishday) %>件</p></b>
 <%= render partial: "form" %>
 
 
