@@ -1,6 +1,9 @@
 <%= stylesheet_link_tag "todoindexcss/todos", :media => "all" %>
 <%= will_paginate %><p class="back"><a href="#header"></a>
-<p><b>仕掛一覧 <%= link_to "仕掛", "index" %> <%= link_to "完了済", "indexfinished" %>　<%= link_to "新規", "new" %></b>
+<% require 'date' %>
+<% today=Date.today %>
+<% account=Account.where(registrationdate:today) %>
+<p><b>仕掛一覧 <%= link_to "仕掛", "index" %> <%= link_to "完了済", "indexfinished" %>　<%= link_to "新規", "new" %>　本日使った額：<%= account.sum(:amount).to_s(:delimited, delimiter: ',') %>円 </b>
 <%= render partial: "form" %>
 
 
