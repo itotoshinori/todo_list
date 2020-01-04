@@ -36,10 +36,12 @@ class TodosController < ApplicationController
   def create
       @todo = Todo.new(todo_params)
       @todo.user_id=@userid
-      starttimehour=@todo.starttimehour
-      starttimemin=@todo.starttimemin
-      @todo.starttime="2000-01-01 #{starttimehour}:#{starttimemin}".to_datetime if starttimehour.present? and starttimemin.present?
-      @todo.starttime=@todo.starttime-32400
+      if @todo.starttimehour.present? and @todo.starttimemin.present?
+        starttimehour=@todo.starttimehour
+        starttimemin=@todo.starttimemin
+        @todo.starttime="2000-01-01 #{starttimehour}:#{starttimemin}".to_datetime if starttimehour.present? and starttimemin.present?
+        @todo.starttime=@todo.starttime-32400
+      end
     if  @todo.save
       flash[:success]="#{@todo.title}が新規登録されました"
       if @todo.itemmoney.present?
