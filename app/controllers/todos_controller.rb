@@ -36,9 +36,9 @@ class TodosController < ApplicationController
   def create
       @todo = Todo.new(todo_params)
       @todo.user_id=@userid
-      if @todo.starttimehour.present? and @todo.starttimemin.present?
-        starttimehour=@todo.starttimehour
-        starttimemin=@todo.starttimemin
+      starttimehour=@todo.starttimehour
+      starttimemin=@todo.starttimemin
+      if starttimehour.present? and starttimemin.present?  
         @todo.starttime="2000-01-01 #{starttimehour}:#{starttimemin}".to_datetime if starttimehour.present? and starttimemin.present?
         @todo.starttime=@todo.starttime-32400
       end
@@ -91,8 +91,10 @@ class TodosController < ApplicationController
         @todo.user_id=@userid
         starttimehour=@todo.starttimehour
         starttimemin=@todo.starttimemin
-        @todo.starttime="2000-01-01 #{starttimehour}:#{starttimemin}".to_datetime if starttimehour.present? and starttimemin.present?
-        @todo.starttime=@todo.starttime-32400
+        if starttimehour.present? and starttimemin.present?
+          @todo.starttime="2000-01-01 #{starttimehour}:#{starttimemin}".to_datetime if starttimehour.present? and starttimemin.present?
+          @todo.starttime=@todo.starttime-32400
+        end
       if @todo.save
         flash[:success]="「#{@todo.title}」がコピー新規登録されました"
         redirect_to "/todos/#{@todo.id}"
