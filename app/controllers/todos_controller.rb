@@ -128,13 +128,13 @@ class TodosController < ApplicationController
     finishday=params[:finishday].to_date
     interval=params[:interval]
     title=params[:title]
-    remark=params[:remark]
+    body=params[:body]
     count=0
     while openday <= finishday
      @todo = Todo.new(
       term:openday,
       title:title,
-      remark:remark,
+      body:body,
       user_id:@userid)
      openday=openday.next_day(interval.to_i)
      count+=1
