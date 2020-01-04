@@ -36,12 +36,9 @@ class TodosController < ApplicationController
   def create
       @todo = Todo.new(todo_params)
       @todo.user_id=@userid
-      starttimehour=@todo.starttimehour
-      starttimemin=@todo.starttimemin
-      if starttimehour.present? and starttimemin.present?  
-        @todo.starttime="2000-01-01 #{starttimehour}:#{starttimemin}".to_datetime if starttimehour.present? and starttimemin.present?
-        @todo.starttime=@todo.starttime-32400
-      end
+      @starttimehour=@todo.starttimehour
+      @starttimemin=@todo.starttimemin
+      newcreate
     if  @todo.save
       flash[:success]="#{@todo.title}が新規登録されました"
       if @todo.itemmoney.present?
@@ -87,14 +84,11 @@ class TodosController < ApplicationController
         render 'edit'
       end
     elsif params[:commit]=="コピー登録"
-        @todo = Todo.new(todo_params)
-        @todo.user_id=@userid
-        starttimehour=@todo.starttimehour
-        starttimemin=@todo.starttimemin
-        if starttimehour.present? and starttimemin.present?
-          @todo.starttime="2000-01-01 #{starttimehour}:#{starttimemin}".to_datetime if starttimehour.present? and starttimemin.present?
-          @todo.starttime=@todo.starttime-32400
-        end
+      @todo = Todo.new(todo_params)
+      @todo.user_id=@userid
+      @starttimehour=@todo.starttimehour
+      @starttimemin=@todo.starttimemin
+      newcreate
       if @todo.save
         flash[:success]="「#{@todo.title}」がコピー新規登録されました"
         redirect_to "/todos/#{@todo.id}"
@@ -156,6 +150,12 @@ class TodosController < ApplicationController
       cookies[:userid] = {:value => @userid, :expires => 5.days.from_now }
     else
       redirect_to('/login/index') 
+    end
+  end
+  def newcreate
+    if @starttimehour.present? and @starttimemin.present?  
+      @todo.starttime="2000-01-01 #{starttimehour}:#{starttimemin}".to_datetime if starttimehour.present? and starttimemin.present?
+      @todo.starttime=@todo.starttime-32400
     end
   end
 end
