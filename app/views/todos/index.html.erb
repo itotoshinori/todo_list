@@ -29,14 +29,15 @@
         <% sdate2=today.next_day(10) %>
         
         <%= form_with(url: todos_createmany_path,local: true) do |f| %>
-          タイトル　：<%= f.text_field :title, placeholder: 'enter タイトル(必須)'  %><br>
+          タイトル　：<%= f.text_field :title, placeholder: 'タイトル(必須)'  %><br>
           開始年月日：<br>
           <%= f.collection_select :openday, @dates, :id, :dateweek, :selected=>today %>
           <br>
           終了年月日：<br>
           <%= f.collection_select :finishday, @dates, :id, :dateweek, :selected=>sdate2 %><br>
           間　隔　　：<br>
-          <%= f.select:interval,@interval %>日
+          <%= f.select:interval,@interval %>日<br>
+          備考　　　：<%= f.text_field :remark, placeholder: '備考'  %><br>
            <p>
           <%= f.submit "登録", class: "btn btn-primary",data: { disable_with: '送信中...' },style:"width:100px;height:50px" %></p>
         <% end %>   
