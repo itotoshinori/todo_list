@@ -1,6 +1,6 @@
 class TodosController < ApplicationController
   before_action :userid_set
-  before_action :timeselect,   only: [:new,:create,:edit,:update]
+  before_action :timeselect,   only: [:new,:create,:edit,:update,:index]
   require 'date'
   require 'active_support/core_ext/date'
   def index
@@ -110,11 +110,7 @@ class TodosController < ApplicationController
     @todo=Todo.includes(:accounts).find(params[:id])
     @url=request.referer
   end
-  def wshow
-    @todo=Todo.includes(:accounts).find(params[:id])
-    @url=request.referer
-    render todos_wshow_path
-  end
+  
   def schedule
     require 'date'
     @event=Todo.where('starttime IS NOT NULL')
@@ -127,6 +123,28 @@ class TodosController < ApplicationController
       @date = Date.today
     end
   end
+  def createmany
+    openday=params[:openday].to_date
+    finishday=params[:finishday].to_date
+    interval=params[:interval]
+    title=params[:title]
+    count=0
+    while openday <= finishday
+     @todo = Todo.new(
+      term:openday,
+      title:title,
+      user_id:@userid)
+     openday=openday.next_day(interval.to_i)
+     count+=1
+     @todo.save
+    end
+    if count>0
+      flash[:success]="「#{title}」が#{count}件追加されました"
+    else
+      flash[:warning]="失敗しました。日付や必須項目等確認し再登録下さい。"
+    end
+    redirect_to '/todos/index'
+  end
   private
   def todo_params
      params.require(:todo).permit(:title, :body,:term,:starttimehour,:starttimemin,:item,:itemmoney)
@@ -134,6 +152,7 @@ class TodosController < ApplicationController
   def timeselect
     @hourselect=[*0..23]
     @minselect=[*0..59]
+    @interval=[*1..90]
     now = Time.current
     @dates=Array.new()
     @idate=now.last_year

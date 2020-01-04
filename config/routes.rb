@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   put '/accounts/editmany'
 
   get 'accounts/edit'
-
+  post 'todos/createmany'
   get 'todos/wshow'
   post 'todos/wshow'
   get 'todos/indexfinished'

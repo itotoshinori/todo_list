@@ -1,11 +1,50 @@
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
 <%= stylesheet_link_tag "todoindexcss/todos", :media => "all" %>
-<%= will_paginate %><p class="back"><a href="#header"></a>
 <% require 'date' %>
 <% today=Date.today %>
 <% account=Account.where(registrationdate:today) %>
 <% finish=Todo.where(finishday:today) %>
-<p><b>仕掛一覧 <%= link_to "仕掛", "index" %> <%= link_to "完了済", "indexfinished" %>　<%= link_to "新規", "new" %><br>本日使用額：<%= account.sum(:amount).to_s(:delimited, delimiter: ',') %>円 終了タスク：<%= finish.count(:finishday) %>件</p></b>
+<div class="lead">仕掛一覧</div><%= link_to "完了済", "indexfinished" %> <%= link_to "新規", "new" %> 
+<button class="btn btn-primary"  data-toggle="modal" data-target="#modal-new">
+まとめ追加(定期的)
+</button>
+<br>本日使用額：<%= account.sum(:amount).to_s(:delimited, delimiter: ',') %>円 終了タスク：<%= finish.count(:finishday) %>件</b>
 <%= render partial: "form" %>
+<%= will_paginate %><p class="back"><a href="#header"></a>
+<!-- 2.編集モーダルの配置 -->
+<div class="modal fade" id="modal-new" tabindex="-1">
+  <div class="modal-dialog modal-sm">
+<!-- 3.モーダルのコンテンツ -->
+    <div class="modal-content">
+      <!-- 4.モーダルのヘッダ -->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="modal-label"><b>新規まとめ追加(定期的)</b></h4>
+        <div class="modal-body">
+        <% sdate2=today.next_day(10) %>
+        
+        <%= form_with(url: todos_createmany_path,local: true) do |f| %>
+          タイトル　：<%= f.text_field :title, placeholder: 'enter タイトル(必須)'  %><br>
+          開始年月日：<br>
+          <%= f.collection_select :openday, @dates, :id, :dateweek, :selected=>today %>
+          <br>
+          終了年月日：<br>
+          <%= f.collection_select :finishday, @dates, :id, :dateweek, :selected=>sdate2 %><br>
+          間　隔　　：<br>
+          <%= f.select:interval,@interval %>日
+           <p>
+          <%= f.submit "登録", class: "btn btn-primary",data: { disable_with: '送信中...' },style:"width:100px;height:50px" %></p>
+        <% end %>   
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
