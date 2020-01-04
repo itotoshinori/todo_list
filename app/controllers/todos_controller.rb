@@ -154,7 +154,7 @@ class TodosController < ApplicationController
   end
   def newcreate
     if @starttimehour.present? and @starttimemin.present?  
-      @todo.starttime="2000-01-01 #{starttimehour}:#{starttimemin}".to_datetime if starttimehour.present? and starttimemin.present?
+      @todo.starttime="2000-01-01 #{@starttimehour}:#{@starttimemin}".to_datetime if @starttimehour.present? and @starttimemin.present?
       @todo.starttime=@todo.starttime-32400
     end
   end
