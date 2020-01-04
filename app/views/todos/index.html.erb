@@ -37,7 +37,7 @@
           <%= f.collection_select :finishday, @dates, :id, :dateweek, :selected=>sdate2 %><br>
           間　隔　　：<br>
           <%= f.select:interval,@interval %>日<br>
-          備考　　　：<%= f.text_field :body, placeholder: '本文'  %><br>
+          備　考　　：<%= f.text_field :body, placeholder: '本文'  %><br>
            <p>
           <%= f.submit "登録", class: "btn btn-primary",data: { disable_with: '送信中...' },style:"width:100px;height:50px" %></p>
         <% end %>   

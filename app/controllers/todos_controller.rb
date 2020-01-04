@@ -103,7 +103,7 @@ class TodosController < ApplicationController
       else
         flash[:success]="「#{@todo.title}」の削除に失敗しました"
       end
-      redirect_to '/todos/index'
+      redirect_to session[:url]
     end
   end
   def show
@@ -130,22 +130,24 @@ class TodosController < ApplicationController
     title=params[:title]
     body=params[:body]
     count=0
-    while openday <= finishday
-     @todo = Todo.new(
-      term:openday,
-      title:title,
-      body:body,
-      user_id:@userid)
-     openday=openday.next_day(interval.to_i)
-     count+=1
-     @todo.save
+    if title.present?
+      while openday <= finishday
+        @todo = Todo.new(
+        term:openday,
+        title:title,
+        body:body,
+        user_id:@userid)
+        openday=openday.next_day(interval.to_i)
+        @todo.save
+        count+=1
+      end
     end
     if count>0
       flash[:success]="「#{title}」が#{count}件追加されました"
     else
       flash[:warning]="失敗しました。日付や必須項目等確認し再登録下さい。"
     end
-    redirect_to '/todos/index'
+    redirect_to request.referer 
   end
   private
   def todo_params
