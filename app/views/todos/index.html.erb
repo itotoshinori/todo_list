@@ -14,7 +14,7 @@
 </button>
 <br>本日使用額：<%= account.sum(:amount).to_s(:delimited, delimiter: ',') %>円 終了タスク：<%= finish.count(:finishday) %>件</b>
 <%= render partial: "form" %>
-<%= will_paginate %><p class="back"><a href="#header"></a>
+<%= will_paginate @todos, :previous_label => ' &lt 前へ', :next_label => '次へ &gt' %>
 <!-- 2.編集モーダルの配置 -->
 <div class="modal fade" id="modal-new" tabindex="-1">
   <div class="modal-dialog modal-sm">
