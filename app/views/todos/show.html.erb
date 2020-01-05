@@ -1,6 +1,18 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<% if session[:item].present? %>
+  <% item=session[:item] %>
+  <% session.delete(:item) %>
+<% else %>
+  <% item=1 %>
+<% end %>
+<% if session[:remark].present? %>
+  <% remark=session[:remark] %>
+  <% session.delete(:remark) %>
+<% else %>
+  <% remark=nil %>
+<% end %>
 <table>
 <tr><td width="120" valign="top">
 ■名　称　：</td><td><%= @todo.title %></td></tr>
@@ -25,11 +37,11 @@
 <% @account=Account.new %>
   <%= form_with(url: accounts_create_path, local: true) do |f| %>
     費用品目：
-    <%= f.select :item,Item.all.collect { |i| [ i.name, i.id ] } %><br>
+    <%= f.select :item,Item.all.collect { |i| [ i.name, i.id ] }, :selected=>item %><br>
     金　額　： 
     <%= f.text_field :amount , placeholder: '必須項目'%><br>
     会計備考：
-    <%= f.text_field :remark %><br>
+    <%= f.text_field :remark,value:remark %><br>
     <%= f.hidden_field :id ,value:@todo.id %>
     <p>
     <%= f.submit "会計登録", class: "btn btn-primary",data: { disable_with: '送信中...' },style:"width:100px;height:50px" %>
@@ -65,7 +77,7 @@
           <%= fields_for "accountsmany[]",account do |ac| %>
             <%= ac.label :削除 %><%= ac.check_box :deletecheck %><br>
             <%= ac.label :費用品目： %><br>
-            <%= ac.select :item,Item.all.collect { |i| [ i.name, i.id ] } %><br>
+            <%= ac.select :item,Item.all.collect { |i| [ i.name, i.id ] }, :selected=>10 %><br>
             <%= ac.label :金　額　： %><%= ac.text_field :amount , placeholder: '金額(必須)'%><br>
             <%= ac.label :備　考　： %><%= ac.text_field :remark , placeholder: '備考'%><br>
             <hr>

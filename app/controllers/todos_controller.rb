@@ -145,7 +145,7 @@ class TodosController < ApplicationController
     if count>0
       flash[:success]="「#{title}」が#{count}件追加されました"
     else
-      flash[:warning]="失敗しました。日付や必須項目等確認し再登録下さい。"
+      flash[:warning]="登録に失敗しました。日付や必須項目等確認し再登録下さい。"
     end
     redirect_to request.referer 
   end

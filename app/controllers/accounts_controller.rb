@@ -14,6 +14,8 @@ class AccountsController < ApplicationController
     if  @account.save
       flash[:success]="会計が新規登録されました"
     else 
+      session[:item]=params[:item]
+      session[:remark]=params[:remark]
       flash[:danger]="会計登録に失敗しました。必須項目に入力がありません。"
     end
     redirect_to "/todos/#{@account.todo_id}"
