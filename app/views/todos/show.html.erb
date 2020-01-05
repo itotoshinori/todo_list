@@ -77,7 +77,7 @@
           <%= fields_for "accountsmany[]",account do |ac| %>
             <%= ac.label :削除 %><%= ac.check_box :deletecheck %><br>
             <%= ac.label :費用品目： %><br>
-            <%= ac.select :item,Item.all.collect { |i| [ i.name, i.id ] }, :selected=>10 %><br>
+            <%= ac.select :item,Item.all.collect { |i| [ i.name, i.id ] } %><br>
             <%= ac.label :金　額　： %><%= ac.text_field :amount , placeholder: '金額(必須)'%><br>
             <%= ac.label :備　考　： %><%= ac.text_field :remark , placeholder: '備考'%><br>
             <hr>
