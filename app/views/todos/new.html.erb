@@ -1,7 +1,7 @@
 <%= form_for(@todo) do |f| %>
     <p></p>
       <%= f.label :タイトル %><br>
-      <%= f.text_field :title, placeholder: 'enter タイトル(必須)'  %>
+      <%= f.text_field :title, placeholder: 'タイトル(必須)'  %>
       <p>
        <%= f.label :期限・開催※時間はイベント時のみ入力 %><br>
       <%= f.collection_select :term, @dates, :id, :dateweek, :selected=>@sdate %>
@@ -11,7 +11,7 @@
       <%= f.select :starttimemin,@minselect, :include_blank => true %><br>
       <p>
       <%= f.label :内容 %><br>
-      <%= f.text_area :body, placeholder: 'enter 内容',cols:65,rows:10,value:@body %></p>
+      <%= f.text_area :body, placeholder: '内容',cols:65,rows:10,value:@body %></p>
       <p>
       <%= f.label :費用品目： %><br>
       <%= f.select :item,Item.all.collect { |i| [ i.name, i.id ] } %><br>

@@ -11,8 +11,13 @@ class BlogsController < ApplicationController
   
   def create
     @blog=Blog.new(blog_params)
-    @blog.save
-    redirect_to('/blogs/')
+    if @blog.save
+      flash[:success]="正常に登録されました"
+      redirect_to('/blogs/')
+    else
+      flash[:warning]="登録に失敗しました。必須項目に入力して下さい。"
+      render 'new'
+    end
   end
 
   def edit
