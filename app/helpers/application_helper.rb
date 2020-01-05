@@ -19,6 +19,7 @@ module ApplicationHelper
       @min=min
     end
   end
+
   def niketa(d)
     if d.present?
       if d.to_i<10

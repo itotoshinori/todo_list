@@ -70,7 +70,6 @@
 <!-- メインコンテンツ -->
 
 <div id="container">
-
 <div id="contents">
 
 <!-- メイン画像 ここから 
@@ -79,20 +78,24 @@
 </div>
 -->
 <!-- メイン画像 ここまで -->
+
+<% flash.each do |name, msg| %>
+<% if name=="success" %>
+  <div style="color:blue;">
+<% else %>
+  <div style="color:red;">
+<% end %>
+<%= msg %>
+</div>
+<% end %>
+
 <div class="container">
-      <div style="color:blue;">
-      <% flash.each do |name, msg| %>
-          <%= msg %>
-      <% end %>
-      </div>
+      
 </div>
 <%= yield %>
 <p class="back"><a href="#header"><img class="scroll" src="/pagetop.png" alt="ページトップに戻る"></a></p>
-
 <br>
-
-
-  </div>
+</div>
 
 <!-- メインコンテンツ終わり -->
 

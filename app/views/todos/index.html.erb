@@ -7,9 +7,10 @@
 <% today=Date.today %>
 <% account=Account.where(registrationdate:today) %>
 <% finish=Todo.where(finishday:today) %>
-<div class="lead">仕掛一覧</div><%= link_to "完了済", "indexfinished" %> <%= link_to "新規", "new" %> 
+<div class="lead">仕掛一覧</div> <%= link_to "完了済", "indexfinished", {class: "btn btn-primary"} %> 
+<%= link_to "新規", "new", {class: "btn btn-primary"} %> 
 <button class="btn btn-primary"  data-toggle="modal" data-target="#modal-new">
-まとめ追加(定期的)
+定期的新規
 </button>
 <br>本日使用額：<%= account.sum(:amount).to_s(:delimited, delimiter: ',') %>円 終了タスク：<%= finish.count(:finishday) %>件</b>
 <%= render partial: "form" %>

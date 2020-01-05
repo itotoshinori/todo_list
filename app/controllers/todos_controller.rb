@@ -47,7 +47,7 @@ class TodosController < ApplicationController
         redirect_to "/todos/#{@todo.id}"
       end
     else
-      flash[:success]="必須項目に入力がありません"
+      flash[:danger]="必須項目に入力がありません"
       @sdate=@todo.term
       @body=@todo.body
       render 'new'
@@ -80,7 +80,7 @@ class TodosController < ApplicationController
         flash[:success]="「#{@todo.title}」が編集されました"
         redirect_to "/todos/#{@todo.id}"
       else
-        flash[:success]="編集に失敗しました"
+        flash[:danger]="編集に失敗しました"
         render 'edit'
       end
     elsif params[:commit]=="コピー登録"
@@ -93,7 +93,7 @@ class TodosController < ApplicationController
         flash[:success]="「#{@todo.title}」がコピー新規登録されました"
         redirect_to "/todos/#{@todo.id}"
       else
-        flash[:success]="新規登録に失敗しました"
+        flash[:danger]="新規登録に失敗しました"
         render 'new'
       end
     elsif params[:commit]=="削除"
@@ -101,7 +101,7 @@ class TodosController < ApplicationController
       if @todo.destroy
         flash[:success]="「#{@todo.title}」が削除されました"
       else
-        flash[:success]="「#{@todo.title}」の削除に失敗しました"
+        flash[:danger]="「#{@todo.title}」の削除に失敗しました"
       end
       redirect_to session[:url]
     end
