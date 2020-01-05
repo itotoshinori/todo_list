@@ -21,4 +21,4 @@
       <%= f.submit "登録", class: "btn btn-primary",data: { disable_with: '送信中...' },style:"width:100px;height:50px" %>
       </p>
 <% end %>
-<a href="javascript:history.back()">前のページに戻る</a>
+<%= link_to("一覧に戻る",session[:url]) if session[:url]%>
