@@ -1,11 +1,19 @@
-
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<% require 'date' %>
+<% @today=Date.today %>
+<% account=Account.where(registrationdate:@today) %>
+<% finish=Todo.where(finishday:@today) %>
+<%= link_to "仕掛", "index", {class: "btn btn-primary"} %> <%= link_to "完了", "indexfinished", {class: "btn btn-primary"} %> <%= link_to "新規", "new", {class: "btn btn-primary"} %> 
+<br>本日使用額：<%= account.sum(:amount).to_s(:delimited, delimiter: ',') %>円 終了タスク：<%= finish.count(:finishday) %>件</b>
 <% if @kubun==1 %>
     <% statusname="期限" %>
 <% else %>
     <% statusname="完了" %>
 <% end %>
 <% require 'date' %>
-<% today=Date.today %>
+<% @today=Date.today %>
 
 <div>
 <table class="table1" align="left">
@@ -21,7 +29,7 @@
         <tbody>
         <% @todos.each do |form|%>
         <% kei=form.accounts.sum(:amount).to_s(:delimited, delimiter: ',') %>
-            <% if today==form.term  or today==form.finishday %>
+            <% if @today==form.term  or @today==form.finishday %>
                 <tr style="background-color: #DDFFFF;">
             <% else %>
                 <tr>
@@ -47,5 +55,6 @@
     </table>
 </div>
 <% session[:url]=request.url %>
+
 
 

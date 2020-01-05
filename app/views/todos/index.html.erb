@@ -1,18 +1,11 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
-<%= stylesheet_link_tag "todoindexcss/todos", :media => "all" %>
-<% require 'date' %>
-<% today=Date.today %>
-<% account=Account.where(registrationdate:today) %>
-<% finish=Todo.where(finishday:today) %>
-<div class="lead">仕掛一覧</div> <%= link_to "完了済", "indexfinished", {class: "btn btn-primary"} %> 
-<%= link_to "新規", "new", {class: "btn btn-primary"} %> 
+<div class="lead">仕掛一覧</div>
 <button class="btn btn-primary"  data-toggle="modal" data-target="#modal-new">
 定期的新規
 </button>
-<br>本日使用額：<%= account.sum(:amount).to_s(:delimited, delimiter: ',') %>円 終了タスク：<%= finish.count(:finishday) %>件</b>
+<%= stylesheet_link_tag "todoindexcss/todos", :media => "all" %>
 <%= render partial: "form" %>
 <%= will_paginate @todos, :previous_label => ' &lt 前へ', :next_label => '次へ &gt' %>
 <!-- 2.編集モーダルの配置 -->
@@ -27,12 +20,11 @@
         </button>
         <h4 class="modal-title" id="modal-label"><b>新規まとめ追加(定期的)</b></h4>
         <div class="modal-body">
-        <% sdate2=today.next_day(10) %>
-        
+        <% sdate2=@today.next_day(10) %>
         <%= form_with(url: todos_createmany_path,local: true) do |f| %>
           タイトル　：<%= f.text_field :title, placeholder: 'タイトル(必須)'  %><br>
           開始年月日：<br>
-          <%= f.collection_select :openday, @dates, :id, :dateweek, :selected=>today %>
+          <%= f.collection_select :openday, @dates, :id, :dateweek, :selected=>@today %>
           <br>
           終了年月日：<br>
           <%= f.collection_select :finishday, @dates, :id, :dateweek, :selected=>sdate2 %><br>
