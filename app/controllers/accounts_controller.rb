@@ -20,18 +20,18 @@ class AccountsController < ApplicationController
   end
   def editmany
     accountsmanyedit_params.each{|id,val|amount,remark,item,deletecheck = val.values_at("amount","remark","item","deletecheck")
-      account=Account.find(id)
+      @account=Account.find(id)
       if deletecheck=="1"
-        account.destroy
+        @account.destroy
       else
-      account.update(
+      @account.update(
         amount:amount,
         remark:remark,
         item:item)
       end
     }
     flash[:success] = "会計データを更新しました"
-    redirect_to "/todos/index"
+    redirect_to "/todos/#{@account.todo_id}"
   end
   private
   def accountsmanyedit_params

@@ -21,6 +21,21 @@
 </td></tr>
 </table>
 <hr class="line">
+■会計新規
+<% @account=Account.new %>
+  <%= form_with(url: accounts_create_path, local: true) do |f| %>
+    費用品目：
+    <%= f.select :item,Item.all.collect { |i| [ i.name, i.id ] } %><br>
+    金　額　： 
+    <%= f.text_field :amount , placeholder: '金額(必須)'%><br>
+    会計備考：
+    <%= f.text_field :remark , placeholder: '備考'%><br>
+    <%= f.hidden_field :id ,value:@todo.id %>
+    <p>
+    <%= f.submit "会計登録", class: "btn btn-primary",data: { disable_with: '送信中...' },style:"width:100px;height:50px" %>
+    </p>
+<% end %>
+<hr class="line">
   <%= link_to("一覧に戻る",session[:url]) if session[:url]%>
 <div>
 <%= link_to "編集","/todos/#{@todo.id}/edit", {class: "btn btn-primary"} %>
@@ -29,9 +44,7 @@
         会計編集
 </button>
 <% end %>
-<button class="btn btn-primary"  data-toggle="modal" data-target="#modal-new">
-        会計新規追加
-</button></div>
+</div>
 
 <!-- 2.編集モーダルの配置 -->
 <div class="modal fade" id="modal-sa" tabindex="-1">
@@ -67,34 +80,7 @@
 </div>
 <!-- 2.編集モーダルの配置終了 -->
 <!-- 2.編集モーダルの配置 -->
-<div class="modal fade" id="modal-new" tabindex="-1">
-  <div class="modal-dialog modal-sm">
-<!-- 3.モーダルのコンテンツ -->
-    <div class="modal-content">
-      <!-- 4.モーダルのヘッダ -->
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title" id="modal-label"><b>会計新規追加</b></h4>
-        <div class="modal-body">
-      <p>
-      <% @account=Account.new %>
-      <%= form_with(url: accounts_create_path, local: true) do |f| %>
-      <%= f.label :費用品目： %>
-      <%= f.select :item,Item.all.collect { |i| [ i.name, i.id ] } %><br>
-      <%= f.label :金　額　： %><%= f.text_field :amount , placeholder: '金額(必須)'%><br>
-      <%= f.label :備　考　： %><%= f.text_field :remark , placeholder: '備考'%><br>
-      <%= f.hidden_field :id ,value:@todo.id %>
-      <p>
-      <%= f.submit "登録", class: "btn btn-primary",data: { disable_with: '送信中...' },style:"width:100px;height:50px" %>
-      </p>
-<% end %>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+
 
 
 
