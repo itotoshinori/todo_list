@@ -111,6 +111,18 @@ class TodosController < ApplicationController
     @url=request.referer
   end
   
+  def aggregate
+    require 'date'
+    @event=Todo.where('starttime IS NOT NULL')
+    kubun=params[:kubun]
+    if kubun=="1"
+      @date=params[:lday].to_date
+    elsif kubun=="2"
+      @date=params[:lday].to_date
+    else
+      @date = Date.today
+    end
+  end
   def schedule
     require 'date'
     @event=Todo.where('starttime IS NOT NULL')

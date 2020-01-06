@@ -1,0 +1,50 @@
+<% provide(:title, "カレンダー") %>
+  <% @first_day = @date.beginning_of_month %>
+  <% @last_day = @date.end_of_month %>
+  <% today = Date.today %>
+  <table >
+  <% @datedown=(@first_day-1).beginning_of_month %>
+  <tr>
+  <td><%= button_to"←", {controller: 'todos', action: 'aggregate'}, {method: :get, params: {lday:@datedown,kubun:"1"}} %></td>
+  <td><div style="padding : 10px ;"><strong><%= nengetu(@first_day) %>分スケジュール</strong></div></td>
+  <% @dateup=(@last_day+1).beginning_of_month %>
+  <td><%= button_to"→", {controller: 'todos', action: 'aggregate'}, {method: :get, params: {lday:@dateup,kubun:"2"}} %></td>
+  </tr></table>
+  <% agg=Account.where("registrationdate>=@first_day") %>
+  出費額合計：<%= Account.where("(registrationdate >= ?) and (registrationdate <= ?)", @first_day,@last_day).sum(:amount).to_s(:delimited, delimiter: ',') %>
+  <table class="table1">
+<tr><th>月日</th><th>出費額</th></tr> 
+<% (@first_day..@last_day).each do |day| %>
+<% if day==today %>
+  <tr style="background: #D7EEFF;">
+<% else %>
+  <tr>
+<% end %>
+  <td style="width:150px;">
+  <% if day.wday==0  or holiday(day) %>
+    <div style="color: rgb(255,0,0);" >
+  <% elsif day.wday==6 %>
+    <div style="color: blue;" >
+  <% else %>
+    <div>
+  <% end %>
+  <%=monthday(day) %>(<%=weekdate(day) %>)
+  </td>
+<td style="text-align:right; width:150px;">
+<% agg=Account.where("(registrationdate = ?)", day) %>
+<% kei=agg.sum(:amount).to_s(:delimited, delimiter: ',') %>
+<% if kei.to_i!=0 %>
+  <%= kei %>
+<% end %>
+</td></tr>
+<% end %>
+</table>
+<table>
+  <% @datedown=(@first_day-1).beginning_of_month %>
+  <tr>
+  <td><%= button_to"←", {controller: 'todos', action: 'schedule'}, {method: :get, params: {lday:@datedown,kubun:"1"}} %></td>
+  <td><div style="padding : 10px ;"><strong><%= nengetu(@first_day) %>分スケジュール</strong></div></td>
+  <% @dateup=(@last_day+1).beginning_of_month %>
+  <td><%= button_to"→", {controller: 'todos', action: 'schedule'}, {method: :get, params: {lday:@dateup,kubun:"2"}} %></td>
+  </tr></table>
+<% session[:url]=request.url %>

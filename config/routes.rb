@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get 'todos/index'
   get 'todos/edit'
   get 'todos/schedule'
+  get 'todos/aggregate' 
   
   get 'user/new'
   #get '/user/create'
