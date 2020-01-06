@@ -26,6 +26,14 @@
 <% end %><br>
 </td></tr>
 <tr><td>
+■完了日　：</td><td>
+<% if @todo.finishday.present? %>
+  <%= dateweekday(@todo.finishday) %>(<%=weekdate(@todo.finishday) %>)
+<% else %>
+未完了
+<% end %>
+</td></tr>
+<tr><td>
 <% kei=Account.where(todo_id:@todo.id).sum(:amount) %>
 ■金　額　：</td><td><%= kei.to_s(:delimited, delimiter: ',') %></td></tr>
 <tr><td  colspan="2" width="610">
