@@ -15,7 +15,7 @@ class AccountsController < ApplicationController
   
   end
   def create
-    @id=@current_user.id
+    #@id=@current_user.id
     today=Date.today
     @account = Account.new(
       item:params[:item],
