@@ -1,16 +1,21 @@
 class AccountsController < ApplicationController
-  protect_from_forgery 
+  #protect_from_forgery
+  protect_from_forgery :except => [:index]
   require 'date'
+  #before_action :current_user
   def index
-    userid=params[:id]
+    #userid=params[:id]
+    userid=cookies[:userid]
     date=params[:registrationdate]
     @accounts=Account.joins(:todo).where('todos.user_id = ?', userid).where('registrationdate = ?',date)
+    #@id=@current_user.id
   end
  
   def new
   
   end
   def create
+    @id=@current_user.id
     today=Date.today
     @account = Account.new(
       item:params[:item],

@@ -7,7 +7,7 @@
 <% finish=Todo.where(finishday:@today) %>
 <% require 'date' %>
 <% @today=Date.today %>
-<div class="lead">出費額明細</div>
+<div class="lead">出費額明細<%=@id %></div>
 <div>
 <table class="table1" align="left">
         <thead>

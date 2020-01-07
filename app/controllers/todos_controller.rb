@@ -182,6 +182,7 @@ class TodosController < ApplicationController
   def userid_set
     if cookies[:userid].present?
       @userid=cookies[:userid].to_i
+      current_user
       cookies[:userid] = {:value => @userid, :expires => 5.days.from_now }
     else
       redirect_to('/login/index') 
