@@ -14,7 +14,7 @@
             <tr>
                 <th scope="col" style="width:150px">内容</th>
                 <th>費用</th>
-                <th style="width:10px">期限</th>
+                <th style="width:10px">種別</th>
                 <th style="width:10px">完了日</th>
             </tr>
         </thead>
@@ -30,7 +30,7 @@
                 <% title=mojiseigen(form.todo.title,10) %>
                 <%= link_to title, "/todos/#{form.todo_id}" %></td>
                 <td style="text-align: right; width:100px;"><%=kei %></td>
-                <td><%= dateweekday(form.todo.term) %></td>
+                <td><%= Item.find(form.item.to_i).name %></td>
                 <td>
                   <% if form.todo.finishday.present? %>
                     <%= dateweekday(form.todo.finishday) %>
