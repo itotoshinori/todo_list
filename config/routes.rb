@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   get 'accounts/index'
+  post 'accounts/index'
+  #get '/accounts/:id'
   get 'accounts/new'
+  #get '/accounts/:date/hyouji'
 
   post '/accounts/create'
   put '/accounts/editmany'
@@ -22,6 +25,7 @@ Rails.application.routes.draw do
   get 'login/index'
   post 'login/login'
   get 'login/logout'
+  resources :accounts, only: [:show]
   resources :todos
   resources :blogs
   #get 'portals/:id/edit'

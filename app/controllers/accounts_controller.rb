@@ -1,5 +1,12 @@
 class AccountsController < ApplicationController
+  protect_from_forgery 
   require 'date'
+  def index
+    userid=params[:id]
+    date=params[:registrationdate]
+    @accounts=Account.joins(:todo).where('todos.user_id = ?', userid).where('registrationdate = ?',date)
+  end
+ 
   def new
   
   end

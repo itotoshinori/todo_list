@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<% provide(:title, "カレンダー") %>
+<% provide(:title, "出費集計表") %>
   <% @first_day = @date.beginning_of_month %>
   <% @last_day = @date.end_of_month %>
   <% today = Date.today %>
@@ -9,7 +9,7 @@
   <% @datedown=(@first_day-1).beginning_of_month %>
   <tr>
   <td><%= button_to"←", {controller: 'todos', action: 'aggregate'}, {method: :get, params: {lday:@datedown,kubun:"1"}} %></td>
-  <td><div style="padding : 10px ;"><strong><%= nengetu(@first_day) %>分スケジュール</strong></div></td>
+  <td><div style="padding : 10px ;"><strong><%= nengetu(@first_day) %>分出費集計表</strong></div></td>
   <% @dateup=(@last_day+1).beginning_of_month %>
   <td><%= button_to"→", {controller: 'todos', action: 'aggregate'}, {method: :get, params: {lday:@dateup,kubun:"2"}} %></td>
   </tr></table>
@@ -37,7 +37,8 @@
 <% agg=Account.where("(registrationdate = ?)", day) %>
 <% kei=agg.sum(:amount).to_s(:delimited, delimiter: ',') %>
 <% if kei.to_i!=0 %>
-  <%= kei %>
+<%= link_to kei, {controller: "accounts", action: "index", registrationdate: day,id:@userid},method: :post %>
+  <%#= link_to kei,"/acounts/#{day}" %>
 <% end %>
 </td></tr>
 <% end %>
@@ -46,7 +47,7 @@
   <% @datedown=(@first_day-1).beginning_of_month %>
   <tr>
   <td><%= button_to"←", {controller: 'todos', action: 'schedule'}, {method: :get, params: {lday:@datedown,kubun:"1"}} %></td>
-  <td><div style="padding : 10px ;"><strong><%= nengetu(@first_day) %>分スケジュール</strong></div></td>
+  <td><div style="padding : 10px ;"><strong><%= nengetu(@first_day) %>分出費集計表</strong></div></td>
   <% @dateup=(@last_day+1).beginning_of_month %>
   <td><%= button_to"→", {controller: 'todos', action: 'schedule'}, {method: :get, params: {lday:@dateup,kubun:"2"}} %></td>
   </tr></table>
