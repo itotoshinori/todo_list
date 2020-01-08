@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<% provide(:title, "出費集計表") %>
+<% provide(:title, "集計表") %>
   <% @first_day = @date.beginning_of_month %>
   <% @last_day = @date.end_of_month %>
   <% today = Date.today %>
@@ -9,14 +9,15 @@
   <% @datedown=(@first_day-1).beginning_of_month %>
   <tr>
   <td><%= button_to"←", {controller: 'todos', action: 'aggregate'}, {method: :get, params: {lday:@datedown,kubun:"1"}} %></td>
-  <td><div style="padding : 10px ;"><strong><%= nengetu(@first_day) %>分出費集計表</strong></div></td>
+  <td><div style="padding : 10px ;"><strong><%= nengetu(@first_day) %>分集計表</strong></div></td>
   <% @dateup=(@last_day+1).beginning_of_month %>
   <td><%= button_to"→", {controller: 'todos', action: 'aggregate'}, {method: :get, params: {lday:@dateup,kubun:"2"}} %></td>
   </tr></table>
-  <% agg=Account.where("registrationdate>=@first_day") %>
-  出費額合計：<%= Account.where("(registrationdate >= ?) and (registrationdate <= ?)", @first_day,@last_day).sum(:amount).to_s(:delimited, delimiter: ',') %>
+  <%# agg=Account.where("registrationdate>=@first_day") %>
+  出費額合計：<%= Account.where("(registrationdate >= ?) and (registrationdate <= ?)", @first_day,@last_day).sum(:amount).to_s(:delimited, delimiter: ',') %>円
+  完了件数：<%= Todo.where("(finishday >= ?) and (finishday <= ?)", @first_day,@last_day).count %>件
   <table class="table1">
-<tr><th>月日</th><th>出費額</th></tr> 
+<tr><th>月日</th><th>出費額</th><th>完了件数</th></tr> 
 <% (@first_day..@last_day).each do |day| %>
 <% if day==today %>
   <tr style="background: #D7EEFF;">
@@ -38,17 +39,13 @@
 <% kei=agg.sum(:amount).to_s(:delimited, delimiter: ',') %>
 <% if kei.to_i!=0 %>
 <%= link_to kei, {controller: "accounts", action: "index", registrationdate: day},method: :post %>
-  <%#= link_to kei,"/acounts/#{day}" %>
 <% end %>
-</td></tr>
+</td>
+<td style="text-align:right; width:150px;">
+  <% finish=Todo.where("(finishday = ?)", day) %>
+  <%= finish.count if day<=today %>
+</td>
+</tr>
 <% end %>
 </table>
-<table>
-  <% @datedown=(@first_day-1).beginning_of_month %>
-  <tr>
-  <td><%= button_to"←", {controller: 'todos', action: 'schedule'}, {method: :get, params: {lday:@datedown,kubun:"1"}} %></td>
-  <td><div style="padding : 10px ;"><strong><%= nengetu(@first_day) %>分出費集計表</strong></div></td>
-  <% @dateup=(@last_day+1).beginning_of_month %>
-  <td><%= button_to"→", {controller: 'todos', action: 'schedule'}, {method: :get, params: {lday:@dateup,kubun:"2"}} %></td>
-  </tr></table>
 <% session[:url]=request.url %>
