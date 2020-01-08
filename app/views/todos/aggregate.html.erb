@@ -42,8 +42,10 @@
 <% end %>
 </td>
 <td style="text-align:right; width:150px;">
-  <% finish=Todo.where("(finishday = ?)", day) %>
-  <%= finish.count if day<=today %>
+  <% finish=Todo.where("(finishday = ?)", day).count %>
+  <% if finish>0 %>
+   <%= link_to finish, {controller: "todos", action: "finishindex", finishdate: day},method: :post %>
+  <% end %>
 </td>
 </tr>
 <% end %>

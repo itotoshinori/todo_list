@@ -1,4 +1,5 @@
 class TodosController < ApplicationController
+  protect_from_forgery :except => [:finishindex]
   before_action :userid_set
   before_action :timeselect,   only: [:new,:create,:edit,:update,:index]
   require 'date'
@@ -26,6 +27,10 @@ class TodosController < ApplicationController
       flash[:success]="#{todo.title}が完了登録取消されました"
     end
     redirect_to request.referer
+  end
+  def finishindex
+    date=params[:finishdate]
+    @todos=Todo.where(finished:true).where(user_id:@userid).where(finishday:date).order(finishday: "DESC").order(created_at: "DESC")
   end
   def new
       now = Time.current
