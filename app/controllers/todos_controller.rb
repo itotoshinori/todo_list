@@ -34,8 +34,8 @@ class TodosController < ApplicationController
   end
   def termindex
     date=params[:termdate]
-    @todos=Todo.where(finished:true).where(user_id:@userid).where(term:date).order(finishday: "DESC").order(created_at: "DESC")
-    render todos_finishindex_path
+    @todos=Todo.where(user_id:@userid).where(term:date).order(finishday: "DESC").order(created_at: "DESC")
+    #render todos_finishindex_path
   end
   def new
       now = Time.current
