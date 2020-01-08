@@ -17,7 +17,7 @@
   出費額合計：<%= Account.where("(registrationdate >= ?) and (registrationdate <= ?)", @first_day,@last_day).sum(:amount).to_s(:delimited, delimiter: ',') %>円
   完了件数：<%= Todo.where("(finishday >= ?) and (finishday <= ?)", @first_day,@last_day).count %>件
   <table class="table1">
-<tr><th>月日</th><th>出費額</th><th>完了件数</th></tr> 
+<tr><th>月日</th><th>出費額</th><th>期限件数</th><th>完了件数</th></tr> 
 <% (@first_day..@last_day).each do |day| %>
 <% if day==today %>
   <tr style="background: #D7EEFF;">
@@ -41,7 +41,13 @@
 <%= link_to kei, {controller: "accounts", action: "index", registrationdate: day},method: :post %>
 <% end %>
 </td>
-<td style="text-align:right; width:150px;">
+<td style="text-align:right; width:60px;">
+  <% term=Todo.where("(term = ?)", day).count %>
+  <% if term>0 %>
+   <%= link_to term, {controller: "todos", action: "termindex", termdate: day},method: :post %>
+  <% end %>
+</td>
+<td style="text-align:right; width:60px;">
   <% finish=Todo.where("(finishday = ?)", day).count %>
   <% if finish>0 %>
    <%= link_to finish, {controller: "todos", action: "finishindex", finishdate: day},method: :post %>

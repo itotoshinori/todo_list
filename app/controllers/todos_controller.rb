@@ -1,5 +1,5 @@
 class TodosController < ApplicationController
-  protect_from_forgery :except => [:finishindex]
+  protect_from_forgery :except => [:finishindex,:termindex]
   before_action :userid_set
   before_action :timeselect,   only: [:new,:create,:edit,:update,:index]
   require 'date'
@@ -31,6 +31,11 @@ class TodosController < ApplicationController
   def finishindex
     date=params[:finishdate]
     @todos=Todo.where(finished:true).where(user_id:@userid).where(finishday:date).order(finishday: "DESC").order(created_at: "DESC")
+  end
+  def termindex
+    date=params[:termdate]
+    @todos=Todo.where(finished:true).where(user_id:@userid).where(term:date).order(finishday: "DESC").order(created_at: "DESC")
+    render todos_finishindex_path
   end
   def new
       now = Time.current

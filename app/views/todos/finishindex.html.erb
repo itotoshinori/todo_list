@@ -3,10 +3,10 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <% require 'date' %>
 <% @today=Date.today %>
-<% account=Account.where(registrationdate:@today) %>
+<%# account=Account.where(registrationdate:@today) %>
 <% finish=Todo.where(finishday:@today) %>
 <%= link_to "仕掛一覧", "index", {class: "btn btn-primary"} %> <%= link_to "完了一覧", "indexfinished", {class: "btn btn-primary"} %>
-<br>終了タスク：<%= finish.count(:finishday) %>件</b>
+<br>終了タスク：<%= @todos.count %>件</b>
     <% statusname="完了" %>
 <div>
 <table class="table1" align="left">
@@ -40,7 +40,6 @@
         </tbody>
     </table>
 </div>
-<% session[:url]=request.url %>
 
 
 

@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get 'todos/indexfinished'
   get 'todos/finished'
   post 'todos/finishindex'
+  post 'todos/termindex'
   get 'todos/index'
   get 'todos/edit'
   get 'todos/schedule'
