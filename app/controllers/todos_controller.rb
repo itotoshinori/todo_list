@@ -26,7 +26,8 @@ class TodosController < ApplicationController
       todo.save
       flash[:success]="#{todo.title}が完了登録取消されました"
     end
-    redirect_to request.referer
+    redirect_to "/todos/index"
+    #redirect_to request.referer
   end
   def finishindex
     date=params[:finishdate]
