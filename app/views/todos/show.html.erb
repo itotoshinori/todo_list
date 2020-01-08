@@ -55,15 +55,23 @@
     <%= f.submit "会計登録", class: "btn btn-primary",data: { disable_with: '送信中...' },style:"width:100px;height:50px" %>
     </p>
 <% end %>
-<hr class="line">
-  <%= link_to("一覧に戻る",session[:url]) if session[:url]%>
-<div>
+
 <%= link_to "編集","/todos/#{@todo.id}/edit", {class: "btn btn-primary"} %>
 <% if Account.where(todo_id:@todo.id).count >0 %>
 <button class="btn btn-primary"  data-toggle="modal" data-target="#modal-sa">
         会計編集
 </button>
 <% end %>
+<p>
+<% if @todo.finishday.blank? %>
+  <%= button_to "完了登録", todos_finished_path, { method: :get, params: {id: @todo.id,baction:1} } %>
+<% else %>
+  <%= button_to "完了取消", todos_finished_path, { method: :get, params: {id: @todo.id,baction:2} } %>
+<% end %>
+</p>
+<hr class="line">
+  <%= link_to("一覧に戻る",session[:url]) if session[:url]%>
+<div>
 </div>
 
 
