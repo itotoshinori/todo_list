@@ -54,7 +54,7 @@ body {
 
 #header #header_inner {
   width: 900px;
-  height: 110px;  /*-- 高さ --*/
+  height: 60px;  /*-- 高さ --*/
   margin: 0 auto 0 auto;
   background-color: #f0fbfe;
 }
@@ -74,7 +74,7 @@ body {
 
 #h_logo h2 {
   margin: 0;
-  padding: 38px 0 0 22px;  /*-- logo 位置 --*/
+  padding: 20px 0 0 22px;  /*-- logo 位置 --*/
   text-align: left;
   font-size: 22px;
   color: #555555;
