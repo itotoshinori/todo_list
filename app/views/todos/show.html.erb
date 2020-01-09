@@ -40,6 +40,14 @@
 ■詳　細<br><%=simple_format(@todo.body) %>
 </td></tr>
 </table>
+<%= link_to "編集","/todos/#{@todo.id}/edit", {class: "btn btn-primary button2"} %>
+<P>
+<% if @todo.finishday.blank? %>
+  <%= button_to "完了登録", todos_finished_path, { method: :get, params: {id: @todo.id,baction:1},class: "btn btn-primary button2" } %>
+<% else %>
+  <%= button_to "完了取消", todos_finished_path, { method: :get, params: {id: @todo.id,baction:2},class: "btn btn-primary button2" } %>
+<% end %>
+</P>
 <hr class="line">
 ■会計新規
 <% @account=Account.new %>
@@ -51,23 +59,16 @@
     会計備考：
     <%= f.text_field :remark,value:remark %><br>
     <%= f.hidden_field :id ,value:@todo.id %>
-    <p>
-    <%= f.submit "会計登録", class: "btn btn-primary",data: { disable_with: '送信中...' },style:"width:100px;height:50px" %>
-    </p>
-<% end %>
-
-<%= link_to "編集","/todos/#{@todo.id}/edit", {class: "btn btn-primary"} %>
-<% if Account.where(todo_id:@todo.id).count >0 %>
-<button class="btn btn-primary"  data-toggle="modal" data-target="#modal-sa">
-        会計編集
-</button>
+    <p><%= f.submit "会計登録", class: "btn btn-primary button2",data: { disable_with: '送信中...' } %></p>
 <% end %>
 <p>
-<% if @todo.finishday.blank? %>
-  <%= button_to "完了登録", todos_finished_path, { method: :get, params: {id: @todo.id,baction:1} } %>
-<% else %>
-  <%= button_to "完了取消", todos_finished_path, { method: :get, params: {id: @todo.id,baction:2} } %>
+<% if Account.where(todo_id:@todo.id).count >0 %>
+<button class="btn btn-primary button2"  data-toggle="modal" data-target="#modal-sa"%>
+        会計編集
+</button></p>
 <% end %>
+<p>
+
 </p>
 <hr class="line">
   <%= link_to("一覧に戻る",session[:url]) if session[:url]%>
