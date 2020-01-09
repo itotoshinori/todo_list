@@ -1,0 +1,46 @@
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<% require 'date' %>
+<% @today=Date.today %>
+<div class="lead">出費額明細<%=@id %></div>
+<div>
+<table class="table1" align="left">
+        <thead>
+            <tr>
+                <th scope="col" style="width:150px">内容</th>
+                <th>費用</th>
+                <th style="width:10px">種別</th>
+                <th style="width:10px">完了日</th>
+            </tr>
+        </thead>
+        <tbody>
+        <% @accounts.each do |form|%>
+        <% kei=form.amount.to_s(:delimited, delimiter: ',') %>
+            <% if @today==form.todo.term  or @today==form.todo.finishday %>
+                <tr style="background-color: #DDFFFF;">
+            <% else %>
+                <tr>
+            <% end %>
+                <td data-label="内容" style="text-align: left;">
+                <% title=mojiseigen(form.todo.title,10) %>
+                <%= link_to title, "/todos/#{form.todo_id}" %></td>
+                <td style="text-align: right; width:100px;"><%=kei %></td>
+                <td><%= Item.find(form.item.to_i).name %></td>
+                <td>
+                  <% if form.todo.finishday.present? %>
+                    <%= dateweekday(form.todo.finishday) %>
+                  <% else %>
+                  未完了
+                  <% end %>
+                  </td>
+              </tr>
+        <% end %>
+        </tbody>
+    </table>
+</div>
+<%= link_to "Todolistに戻る","/todos/index" %>
+<% session[:url]=request.url %>
+
+
+

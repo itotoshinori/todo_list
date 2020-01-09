@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  post 'accounts/itemindex'
   get 'accounts/index'
   post 'accounts/index'
   get 'accounts/new'
