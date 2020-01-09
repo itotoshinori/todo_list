@@ -1,0 +1,35 @@
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<% provide(:title, "品目別集計表") %>
+  <% @first_day = @date.beginning_of_month %>
+  <% @last_day = @date.end_of_month %>
+  <% today = Date.today %>
+  <table >
+  <% @datedown=(@first_day-1).beginning_of_month %>
+  <tr>
+  <td><%= button_to"←", {controller: 'accounts', action: 'itemaggregate'}, {method: :get, params: {lday:@datedown,kubun:"1"}} %></td>
+  <td><div style="padding : 10px ;"><strong><%= nengetu(@first_day) %>分集計表</strong></div></td>
+  <% @dateup=(@last_day+1).beginning_of_month %>
+  <td><%= button_to"→", {controller: 'accounts', action: 'itemaggregate'}, {method: :get, params: {lday:@dateup,kubun:"2"}} %></td>
+  </tr></table>
+  
+  <% accounts=@accounts.where("registrationdate >= ?", @first_day).where("registrationdate <= ?", @last_day) %>
+  <% if accounts.present? %>
+  <% kei=accounts.sum(:amount) %>
+合計出費額:<%= kei.to_s(:delimited, delimiter: ',') %>
+<table class="table1">
+<tr><th>品目名</th><th>出費額</th><th>占有率</th></tr>
+<% (1..14).each do |counta| %>
+<tr><td style="text-align: left;"><%= Item.find(counta).name %></td>
+<td style="text-align: right;">
+  <% ac=accounts.where(item:counta).sum(:amount) %>
+  <%= ac.to_s(:delimited, delimiter: ',')  %></td>
+  <td style="text-align: right;"><%= (ac*100)/kei %>%</td></tr> 
+<% end %>
+</table>
+<% else %>
+対象はありません
+<% end %>
+  
+<% session[:url]=request.url %>

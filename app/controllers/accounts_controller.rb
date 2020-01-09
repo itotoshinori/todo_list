@@ -2,13 +2,10 @@ class AccountsController < ApplicationController
   #protect_from_forgery
   protect_from_forgery :except => [:index]
   require 'date'
-  #before_action :current_user
+  before_action :user_set,   only: [:index,:itemaggregate]
   def index
-    #userid=params[:id]
-    userid=cookies[:userid]
     date=params[:registrationdate]
-    @accounts=Account.joins(:todo).where('todos.user_id = ?', userid).where('registrationdate = ?',date)
-    #@id=@current_user.id
+    @accounts=Account.joins(:todo).where('todos.user_id = ?', @userid).where('registrationdate = ?',date)
   end
  
   def new
@@ -47,8 +44,20 @@ class AccountsController < ApplicationController
     flash[:success] = "会計データを更新しました"
     redirect_to "/todos/#{@account.todo_id}"
   end
+  def itemaggregate
+    kubun=params[:kubun]
+    if kubun.present?
+      @date=params[:lday].to_date
+    else
+      @date = Date.today
+    end
+    @accounts=Account.joins(:todo).where('todos.user_id = ?', @userid)
+  end
   private
   def accountsmanyedit_params
     params.permit(accountsmany: [:amount,:remark,:item,:deletecheck])[:accountsmany]
+  end
+  def user_set
+    @userid=cookies[:userid] if cookies[:userid].present?
   end
 end

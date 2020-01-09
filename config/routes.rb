@@ -2,10 +2,10 @@ Rails.application.routes.draw do
   get 'accounts/index'
   post 'accounts/index'
   get 'accounts/new'
-
+  get 'accounts/itemaggregate'
   post '/accounts/create'
   put '/accounts/editmany'
-
+  get 'todos/aggregate'
   get 'accounts/edit'
   post 'todos/createmany'
   #get 'todos/wshow'

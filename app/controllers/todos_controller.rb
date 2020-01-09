@@ -123,25 +123,21 @@ class TodosController < ApplicationController
   end
   
   def aggregate
-    require 'date'
-    @event=Todo.where('starttime IS NOT NULL')
+    #@event=Todo.where('starttime IS NOT NULL')
     kubun=params[:kubun]
-    if kubun=="1"
-      @date=params[:lday].to_date
-    elsif kubun=="2"
+    if kubun.present?
       @date=params[:lday].to_date
     else
       @date = Date.today
     end
   end
   def schedule
-    require 'date'
     @event=Todo.where('starttime IS NOT NULL')
     kubun=params[:kubun]
-    if kubun=="1"
+    if kubun.present?
       @date=params[:lday].to_date
-    elsif kubun=="2"
-      @date=params[:lday].to_date
+    #elsif kubun=="2"
+      #@date=params[:lday].to_date
     else
       @date = Date.today
     end
