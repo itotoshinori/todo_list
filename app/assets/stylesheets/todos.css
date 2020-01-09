@@ -50,5 +50,5 @@
 .button2{
   width:90px;
   height:40px;
-  text-align:center;
+  vertical-align: middle;
 }

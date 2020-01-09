@@ -40,14 +40,18 @@
 ■詳　細<br><%=simple_format(@todo.body) %>
 </td></tr>
 </table>
-<%= link_to "編集","/todos/#{@todo.id}/edit", {class: "btn btn-primary button2"} %>
-<P>
-<% if @todo.finishday.blank? %>
-  <%= button_to "完了登録", todos_finished_path, { method: :get, params: {id: @todo.id,baction:1},class: "btn btn-primary button2" } %>
-<% else %>
-  <%= button_to "完了取消", todos_finished_path, { method: :get, params: {id: @todo.id,baction:2},class: "btn btn-primary button2" } %>
-<% end %>
-</P>
+<div class="form-inline">
+  <div class="form-group">
+  <%= link_to "編集","/todos/#{@todo.id}/edit", {class: "btn btn-primary button2"} %>
+  </div>
+  <div class="form-group">
+    <% if @todo.finishday.blank? %>
+      <%= button_to "完了登録", todos_finished_path, { method: :get, params: {id: @todo.id,baction:1},class: "btn btn-primary button2" } %>
+    <% else %>
+      <%= button_to "完了取消", todos_finished_path, { method: :get, params: {id: @todo.id,baction:2},class: "btn btn-primary button2" } %>
+    <% end %>
+  </div>
+</div>
 <hr class="line">
 ■会計新規
 <% @account=Account.new %>
@@ -108,6 +112,7 @@
     </div>
   </div>
 </div>
+
 <!-- 2.編集モーダルの配置終了 -->
 <!-- 2.編集モーダルの配置 -->
 
