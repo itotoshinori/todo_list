@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Todoリストですること整理しましょう！</title>
+  <title>Todoリスト</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="keywords" content="キーワード">
   <meta name="description" content="紹介文">
@@ -27,7 +27,7 @@
     <div id="header">
       <div id="header_inner">
         <div id="h_logo">
-          <h2><a href="/">Todoリストですること整理しましょう！<%=cookies[:userid] %></a></h2>
+          <h2><a href="/">Todoリスト<%=cookies[:userid] %></a></h2>
         </div>
         <div id="h_info">
 
@@ -42,13 +42,13 @@
         <li><a href="/todos/index">Todo<br><span class="sub">todo</span></a></li>
         <li><a href="/todos/schedule">スケジュール<br><span class="sub">Schedule</span></a></li>
         <li><a href="/blogs/">ブログ<br><span class="sub">blog</span></a></li>
-        <li><a href="/blogs/1">リンク<br><span class="sub">link</span></a></li>
-        <% if cookies[:userid].present? %>
-        <li><a href="/login/logout">ログアウト<br><span class="sub">logout</span></a></li>
-        <% end %>
-        <li><a href="http://titonet384.sakura.ne.jp/linkmake/">リンク作成<br><span class="sub">linkmake</span></a></li>
-        <% if cookies[:userid].present? %>
-        <li><a href="/blogs/new">記事新規<br><span class="sub">blog new</span></a></li>
+          <li><a href="/blogs/1">リンク<br><span class="sub">link</span></a></li>
+          <% if cookies[:userid].present? %>
+          <li><a href="/login/logout">ログアウト<br><span class="sub">logout</span></a></li>
+          <% end %>
+          <li><a href="http://titonet384.sakura.ne.jp/linkmake/">リンク作成<br><span class="sub">linkmake</span></a></li>
+          <% if cookies[:userid].present? %>
+          <li><a href="/blogs/new">記事新規<br><span class="sub">blog new</span></a></li>
         <% end %>
       </ul>
     </div>
