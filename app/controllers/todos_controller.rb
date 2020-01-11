@@ -177,7 +177,6 @@ class TodosController < ApplicationController
     @finishdate=Date.new(fdate.year, fdate.month, fdate.day) if @finishdate.blank?
   end
   def searchresult
-    @today
     @title=params[:title]
     @startdate= params[:startdate][:id]
     @finishdate=params[:finishdate][:id]

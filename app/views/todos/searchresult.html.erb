@@ -26,6 +26,7 @@
                 <th scope="col" style="width:250px">内容</th>
                 <th>費用</th>
                 <th style="width:10px"></th>
+                <th style="width:50px">完了</th>
                 <th scope="col"><%= statusname %></th>
             </tr>
         </thead>
@@ -41,6 +42,11 @@
                       
                       <%= button_to "編集", todos_edit_path, { method: :get, params: {id: form.id,baction:1} } %></td>
                     </td>
+                    <td data-label="完了">
+                        <% if form.finishday.present? %>
+                         済
+                        <% end %>
+                        </td>
                     <td data-label="期限"><%= dateweekday(form.term) %>(<%=weekdate(form.term) %>)</td>
             </tr>
         <% end %>
