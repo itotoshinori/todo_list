@@ -1,3 +1,7 @@
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
 <b>検索結果</b>
 <p>検索件数：<%=@todos.count %>件 検索条件：<%= @title %>　期限:<%=@startdate %>～<%=@finishdate %></p>
 <p>
@@ -43,4 +47,5 @@
         </tbody>
     </table>
 </div>
+<%= will_paginate @todos, :previous_label => ' &lt 前へ', :next_label => '次へ &gt' %>
 <% session[:url]=request.url %>

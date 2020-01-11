@@ -177,6 +177,7 @@ class TodosController < ApplicationController
     @finishdate=Date.new(fdate.year, fdate.month, fdate.day) if @finishdate.blank?
   end
   def searchresult
+    @today
     @title=params[:title]
     @startdate= params[:startdate][:id]
     @finishdate=params[:finishdate][:id]
@@ -184,10 +185,7 @@ class TodosController < ApplicationController
       flash[:warning]="タイトルの入力をお願いします"
       render todos_search_path
     end
-    @todos=Todo.includes(:accounts).where(user_id:@userid).where('title LIKE ?', "%#{@title}%")
-    if @startdate.present? and @finishdate.present?
-      @todos=@todos.where("term >= ?", @startdate).where("term <= ?", @finishdate)
-    end
+    @todos=Todo.includes(:accounts).where(user_id:@userid).where('title LIKE ?', "%#{@title}%").where("term >= ?", @startdate).where("term <= ?", @finishdate).order(:term).paginate(page: params[:page], per_page: 20)
     @kubun=1
   end
   def research
