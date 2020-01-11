@@ -1,0 +1,50 @@
+<b>検索結果</b>
+<p>検索件数：<%=@todos.count %>件 検索条件：<%= @title %>　期限:<%=@startdate %>～<%=@finishdate %></p>
+<p>
+<%= form_with(url: todos_research_path, method: :post, local: true) do |f| %>
+      <%= f.hidden_field :title,value:@title %>
+      <%= f.hidden_field :startdate,value:@startdate %>
+      <%= f.hidden_field :finishdate,value:@finishdate %>
+      <%= f.submit "再検索", class: "btn btn-primary",data: { disable_with: '送信中...' },style:"width:100px;height:50px" %>
+<% end %>
+</p>
+<% if @kubun==1 %>
+    <% statusname="期限" %>
+<% else %>
+    <% statusname="完了" %>
+<% end %>
+
+
+<div>
+<table class="table1" align="left">
+        <thead>
+            <tr>
+                <th scope="col" style="width:250px">内容</th>
+                <th>費用</th>
+                <th style="width:10px"></th>
+                <th scope="col"><%= statusname %></th>
+            </tr>
+        </thead>
+        <tbody>
+        <% @todos.each do |form|%>
+        <% kei=form.accounts.sum(:amount).to_s(:delimited, delimiter: ',') %>
+            <% if @today==form.term  or @today==form.finishday %>
+                <tr style="background-color: #DDFFFF;">
+            <% else %>
+                <tr>
+            <% end %>
+                <td data-label="内容" style="text-align: left;">
+                <% title=mojiseigen(form.title,10) %>
+                <%= link_to title, "/todos/#{form.id}" %></td>
+                <td style="text-align: right; width:100px;"><%=kei %></td>
+                    <td>
+                      
+                      <%= button_to "編集", todos_edit_path, { method: :get, params: {id: form.id,baction:1} } %></td>
+                    </td>
+                    <td data-label="期限"><%= dateweekday(form.term) %>(<%=weekdate(form.term) %>)</td>
+            </tr>
+        <% end %>
+        </tbody>
+    </table>
+</div>
+<% session[:url]=request.url %>

@@ -5,7 +5,7 @@
   <% @first_day = @date.beginning_of_month %>
   <% @last_day = @date.end_of_month %>
   <% today = Date.today %>
-  <table >
+  <table>
   <% @datedown=(@first_day-1).beginning_of_month %>
   <tr>
   <td><%= button_to"←", {controller: 'accounts', action: 'itemaggregate'}, {method: :get, params: {lday:@datedown,kubun:"1"}} %></td>

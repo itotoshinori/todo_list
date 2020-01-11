@@ -1,7 +1,7 @@
 class TodosController < ApplicationController
   protect_from_forgery :except => [:finishindex,:termindex]
   before_action :userid_set
-  before_action :timeselect,   only: [:new,:create,:edit,:update,:index]
+  before_action :timeselect,   only: [:new,:create,:edit,:update,:index,:search,:searchresult,:research]
   require 'date'
   require 'active_support/core_ext/date'
   def index
@@ -131,6 +131,7 @@ class TodosController < ApplicationController
       @date = Date.today
     end
   end
+  
   def schedule
     @event=Todo.where('starttime IS NOT NULL')
     kubun=params[:kubun]
@@ -167,6 +168,33 @@ class TodosController < ApplicationController
       flash[:warning]="登録に失敗しました。日付や必須項目等確認し再登録下さい。"
     end
     redirect_to request.referer 
+  end
+  def search
+    now = Time.current
+    sdate=now.prev_month
+    fdate=now.next_year
+    @startdate=Date.new(sdate.year, sdate.month, sdate.day) if @startdate.blank?
+    @finishdate=Date.new(fdate.year, fdate.month, fdate.day) if @finishdate.blank?
+  end
+  def searchresult
+    @title=params[:title]
+    @startdate= params[:startdate][:id]
+    @finishdate=params[:finishdate][:id]
+    if @title.blank?
+      flash[:warning]="タイトルの入力をお願いします"
+      render todos_search_path
+    end
+    @todos=Todo.includes(:accounts).where(user_id:@userid).where('title LIKE ?', "%#{@title}%")
+    if @startdate.present? and @finishdate.present?
+      @todos=@todos.where("term >= ?", @startdate).where("term <= ?", @finishdate)
+    end
+    @kubun=1
+  end
+  def research
+    @title=params[:title]
+    @startdate= params[:startdate]
+    @finishdate=params[:finishdate]
+    render todos_search_path
   end
   private
   def todo_params
