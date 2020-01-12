@@ -1,7 +1,7 @@
 class TodosController < ApplicationController
   protect_from_forgery :except => [:finishindex,:termindex]
   before_action :userid_set
-  before_action :timeselect,   only: [:new,:create,:edit,:update,:index,:search,:searchresult,:research]
+  before_action :timeselect,   only: [:new,:create,:edit,:update,:index,:searchresult,:research]
   require 'date'
   require 'active_support/core_ext/date'
   def index
@@ -175,6 +175,8 @@ class TodosController < ApplicationController
     fdate=now.next_year
     @startdate=Date.new(sdate.year, sdate.month, sdate.day) if @startdate.blank?
     @finishdate=Date.new(fdate.year, fdate.month, fdate.day) if @finishdate.blank?
+    @idate=Todo.minimum(:term)
+    timeselect
   end
   def searchresult
     @title=params[:title]
@@ -203,8 +205,9 @@ class TodosController < ApplicationController
     @interval=[*1..90]
     now = Time.current
     @dates=Array.new()
-    @idate=now.last_year
-    (@idate.to_datetime..now.next_year).each do|c|
+    @idate=now.last_year if @idate.blank?
+    @ldate=now.next_year 
+    (@idate.to_datetime..@ldate).each do|c|
       date = Date.new(c.year, c.month, c.day)
       wd = ["日","月", "火", "水", "木", "金", "土"]
       iw=c.strftime("%Y/%m/%d(#{wd[c.wday]})")
