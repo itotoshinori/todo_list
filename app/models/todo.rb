@@ -4,5 +4,6 @@ class Todo < ApplicationRecord
     attr_accessor :starttimemin
     attr_accessor :item
     attr_accessor :itemmoney
+    attr_accessor :remark
     has_many :accounts, dependent: :destroy
 end

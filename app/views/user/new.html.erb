@@ -1,5 +1,5 @@
 ユーザー新規登録
-<%= form_with url: user_create_path do |f| %>
+<%= form_with(url: user_create_path, local: true) do |f| %>
   <div class="field">
     <%= f.label :名前 %><br>
     <%= f.text_field :name %>

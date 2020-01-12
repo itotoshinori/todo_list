@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>課題管理統合システム</title>
+  <title>Todo管理統合システム</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="keywords" content="キーワード">
   <meta name="description" content="紹介文">
@@ -27,7 +27,7 @@
     <div id="header">
       <div id="header_inner">
         <div id="h_logo">
-          <h2><a href="/">課題管理統合システム<%#=cookies[:userid] %></a></h2>
+          <h2><a href="/">Todo管理統合システム<%#=cookies[:userid] %></a></h2>
         </div>
         <div id="h_info">
 
@@ -104,6 +104,7 @@
               <li><a href="/todos/aggregate">Todo会計集計表</a></li>
               <li><a href="/accounts/itemaggregate">会計品目別集計表</a></li>
               <li><a href="/todos/search">タイトル検索</a></li>
+              <li><a href="/todos/toexport">エクスポート</a></li>
               <li><a href="/blogs/1">リンク</a></li>
               <li><a href="http://titonet384.sakura.ne.jp/linkmake/">リンクタグ作成</a></li>
               <li><a href="http://titonet384.sakura.ne.jp/imagelink/">画像表示作成タグ</a></li>

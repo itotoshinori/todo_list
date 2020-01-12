@@ -20,7 +20,7 @@ class UserController < ApplicationController
     else
       flash[:success]="ユーザーに失敗しました。再度登録して下さい"
     end
-    redirect_to '/todos/index'
+    redirect_to '/'
   end
 
   def index

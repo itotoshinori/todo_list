@@ -66,7 +66,7 @@ class TodosController < ApplicationController
   end
   def accountcreate
     today=Date.today
-    @account=Account.new(todo_id:@todo.id,item:@todo.item,amount:@todo.itemmoney,expense:false,registrationdate:today)
+    @account=Account.new(todo_id:@todo.id,item:@todo.item,amount:@todo.itemmoney,remark:@todo.remark,expense:false,registrationdate:today)
     @account.save
     flash[:success]="#{@todo.title}が会計も含め新規登録されました"
     redirect_to "/todos/#{@todo.id}"
@@ -130,10 +130,12 @@ class TodosController < ApplicationController
     else
       @date = Date.today
     end
+    @todos=Todo.where(user_id:@userid)
+    @accounts=Account.joins(:todo).where('todos.user_id = ?', @userid)
   end
   
   def schedule
-    @event=Todo.where('starttime IS NOT NULL')
+    @event=Todo.where('starttime IS NOT NULL').where(user_id:@userid)
     kubun=params[:kubun]
     if kubun.present?
       @date=params[:lday].to_date
@@ -178,6 +180,21 @@ class TodosController < ApplicationController
     @idate=Todo.minimum(:term)
     timeselect
   end
+  def toexport
+    now = Time.current
+    sdate=now.prev_month
+    fdate=now.next_year
+    @startdate=Date.new(sdate.year, sdate.month, sdate.day) if @startdate.blank?
+    @finishdate=Date.new(fdate.year, fdate.month, fdate.day) if @finishdate.blank?
+    @idate=Todo.minimum(:term)
+    timeselect
+  end
+  def csvexport
+    @startdate= params[:startdate][:id]
+    @finishdate=params[:finishdate][:id]
+    @todos=Todo.includes(:accounts).where(user_id:@userid).where("term >= ?", @startdate).where("term <= ?", @finishdate)
+    flash[:success]="エクスポートしました"
+  end
   def searchresult
     @title=params[:title]
     @startdate= params[:startdate][:id]
@@ -197,7 +214,7 @@ class TodosController < ApplicationController
   end
   private
   def todo_params
-     params.require(:todo).permit(:title, :body,:term,:starttimehour,:starttimemin,:item,:itemmoney)
+     params.require(:todo).permit(:title, :body,:term,:starttimehour,:starttimemin,:item,:itemmoney,:remark)
   end
   def timeselect
     @hourselect=[*0..23]

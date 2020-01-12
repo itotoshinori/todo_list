@@ -22,10 +22,12 @@ Rails.application.routes.draw do
   get 'todos/edit'
   get 'todos/schedule'
   get 'todos/aggregate' 
-  
+  get 'todos/toexport'
+  post 'todos/csvexport',to: 'todos#csvexport'
   get 'user/new'
   #get '/user/create'
   post '/user/create'
+  get 'login/new'
   get 'login/index'
   post 'login/login'
   get 'login/logout'

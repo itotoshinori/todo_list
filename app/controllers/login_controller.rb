@@ -14,7 +14,7 @@ class LoginController < ApplicationController
     if user and user.authenticate(password)
       cookies[:userid] = {:value => user.id, :expires => 5.days.from_now } 
       flash[:success]="ログインに成功しました"
-      redirect_to('/')
+      redirect_to '/'
     else
       flash[:success]="ログインに失敗しました"
       redirect_to('/login/index')

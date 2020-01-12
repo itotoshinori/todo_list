@@ -16,7 +16,9 @@
       <%= f.label :費用品目： %><br>
       <%= f.select :item,Item.all.collect { |i| [ i.name, i.id ] } %><br>
       <%= f.label :金額%><br>
-      <%= f.text_field :itemmoney %>円
+      <%= f.text_field :itemmoney %>円<br>
+      会計備考：<br>
+      <%= f.text_field :remark %><br>
       <p>
       <%= f.submit "登録", class: "btn btn-primary",data: { disable_with: '送信中...' },style:"width:100px;height:50px" %>
       </p>
