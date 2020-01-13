@@ -176,7 +176,7 @@ class TodosController < ApplicationController
     sdate=now.prev_month
     fdate=now.next_year
     @startdate=Date.new(sdate.year, sdate.month, sdate.day) if @startdate.blank?
-    @finishdate=Date.new(fdate.year, fdate.month, fdate.day) if @finishdate.blank?
+    @finishdate=Date.new(fdate.year, fdate.month, fdate.day) 
     @idate=Todo.minimum(:term)
     timeselect
   end
@@ -185,11 +185,11 @@ class TodosController < ApplicationController
     sdate=now.prev_month
     fdate=now.next_year
     @startdate=Date.new(sdate.year, sdate.month, sdate.day) if @startdate.blank?
-    @finishdate=Date.new(fdate.year, fdate.month, fdate.day) if @finishdate.blank?
+    @finishdate=Date.new(fdate.year, fdate.month, fdate.day) 
     @idate=Todo.minimum(:term)
     timeselect
   end
-  def csvexport
+  def todocsvexport
     @startdate= params[:startdate][:id]
     @finishdate=params[:finishdate][:id]
     @todos=Todo.includes(:accounts).where(user_id:@userid).where("term >= ?", @startdate).where("term <= ?", @finishdate)

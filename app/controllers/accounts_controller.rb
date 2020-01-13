@@ -2,7 +2,7 @@ class AccountsController < ApplicationController
   #protect_from_forgery
   protect_from_forgery :except => [:index,:itemindex]
   require 'date'
-  before_action :user_set,   only: [:index,:itemaggregate,:itemindex]
+  before_action :user_set,   only: [:index,:itemaggregate,:itemindex,:accountcsvexport]
   def index
     date=params[:registrationdate]
     @accounts=Account.joins(:todo).where('todos.user_id = ?', @userid).where('registrationdate = ?',date)
@@ -58,6 +58,12 @@ class AccountsController < ApplicationController
     first=params[:firstday]
     last=params[:lastday]
     @accounts=Account.joins(:todo).where('todos.user_id = ?', @userid).where("registrationdate >= ?", first).where("registrationdate <= ?", last).where(item:item)
+  end
+  def accountcsvexport
+    @startdate= params[:startdate][:id]
+    @finishdate=params[:finishdate][:id]
+    @accounts=Account.joins(:todo).where('todos.user_id = ?', @userid).where("registrationdate >= ?", @startdate).where("registrationdate <= ?", @finishdate)
+    flash[:success]="エクスポートしました"
   end
   private
   def accountsmanyedit_params

@@ -41,15 +41,10 @@
         <li class="home"><a href="/">ホーム<br><span class="sub">home</span></a></li>
         <li><a href="/todos/index">Todo<br><span class="sub">todo</span></a></li>
         <li><a href="/todos/schedule">スケジュール<br><span class="sub">Schedule</span></a></li>
-        <li><a href="/blogs/">ブログ<br><span class="sub">blog</span></a></li>
-          <li><a href="/blogs/1">リンク<br><span class="sub">link</span></a></li>
-          <% if cookies[:userid].present? %>
-          <li><a href="/login/logout">ログアウト<br><span class="sub">logout</span></a></li>
-          <% end %>
-          <li><a href="http://titonet384.sakura.ne.jp/linkmake/">リンク作成<br><span class="sub">linkmake</span></a></li>
-          <% if cookies[:userid].present? %>
-          <li><a href="/blogs/new">記事新規<br><span class="sub">blog new</span></a></li>
-        <% end %>
+        <li><a href="/todos/aggregate">Todo会計集計表<br><span class="sub">account</span></a></li>
+        <li><a href="/accounts/itemaggregate">会計品目別集計表<br><span class="sub">account-item</span></a></li>
+        <li><a href="/todos/search">タイトル検索<br><span class="sub">serch</span></a></li>
+        <li><a href="/todos/toexport">エクスポート<br><span class="sub">export</span></a></li>
       </ul>
     </div>
 
@@ -106,6 +101,12 @@
               <li><a href="/todos/search">タイトル検索</a></li>
               <li><a href="/todos/toexport">エクスポート</a></li>
               <li><a href="/blogs/1">リンク</a></li>
+              <% if cookies[:userid].present? %>
+                <li><a href="/login/logout">ログアウト</a></li>
+              <% end %>
+               <% if cookies[:userid].present? %>
+                  <li><a href="/blogs/new">ブログ新規</a></li>
+              <% end %>
               <li><a href="http://titonet384.sakura.ne.jp/linkmake/">リンクタグ作成</a></li>
               <li><a href="http://titonet384.sakura.ne.jp/imagelink/">画像表示作成タグ</a></li>
               <li><a href="http://titonet384.sakura.ne.jp/uploads/pwd.php">画像アップロード</a></li>

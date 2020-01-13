@@ -1,5 +1,5 @@
 TodolistCSV出力
-<%= form_with(url: todos_csvexport_path(format: :csv), method: :post, local: true) do |f| %>
+<%= form_with(url: todos_todocsvexport_path(format: :csv), method: :post, local: true) do |f| %>
       <p>      
       <%= f.label :期限 %><br> 
        <%= collection_select(:startdate,:id,@dates,:id, :dateweek , :selected=>@startdate) %>-<%= collection_select(:finishdate,:id,@dates,:id, :dateweek , :selected=>@finishdate) %>
@@ -10,7 +10,7 @@ TodolistCSV出力
 <% end %>
 <hr class="line">
 会計CSV出力
-<%= form_with(url: todos_csvexport_path(format: :csv), method: :post, local: true) do |f| %>
+<%= form_with(url: accounts_accountcsvexport_path(format: :csv), method: :post, local: true) do |f| %>
       <p>      
       <%= f.label :登録 %><br> 
        <%= collection_select(:startdate,:id,@dates,:id, :dateweek , :selected=>@startdate) %>-<%= collection_select(:finishdate,:id,@dates,:id, :dateweek , :selected=>@finishdate) %>

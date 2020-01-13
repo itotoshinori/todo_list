@@ -1,5 +1,4 @@
 require 'csv'
-
 # bomを作成
 bom = %w(EF BB BF).map { |e| e.hex.chr }.join
 # generateで引数にbomを渡してあげる

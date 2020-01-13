@@ -6,7 +6,6 @@
 <% account=Account.where(registrationdate:@today) %>
 <% finish=Todo.where(finishday:@today) %>
 <%= link_to "仕掛一覧", "index", {class: "btn btn-primary"} %> <%= link_to "完了一覧", "indexfinished", {class: "btn btn-primary"} %>
-<%= link_to "品目別集計表",accounts_itemaggregate_path %>
 <br>本日使用額：<%= account.sum(:amount).to_s(:delimited, delimiter: ',') %>円 終了タスク：<%= finish.count(:finishday) %>件</b>
 <% if @kubun==1 %>
     <% statusname="期限" %>
