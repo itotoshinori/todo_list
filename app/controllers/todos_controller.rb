@@ -123,7 +123,6 @@ class TodosController < ApplicationController
   end
   
   def aggregate
-    #@event=Todo.where('starttime IS NOT NULL')
     kubun=params[:kubun]
     if kubun.present?
       @date=params[:lday].to_date
