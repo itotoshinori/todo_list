@@ -18,6 +18,7 @@
   <% if accounts.present? %>
   <% kei=accounts.sum(:amount) %>
 合計出費額:<%= kei.to_s(:delimited, delimiter: ',') %>
+<%=link_to "日別集計表","/todos/aggregate",{class:"btn btn-primary"} %><p></p>
 <table class="table1">
 <tr><th>品目名</th><th>出費額</th><th>占有率</th></tr>
 <% (1..14).each do |counta| %>

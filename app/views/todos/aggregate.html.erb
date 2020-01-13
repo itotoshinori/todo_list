@@ -5,7 +5,7 @@
   <% @first_day = @date.beginning_of_month %>
   <% @last_day = @date.end_of_month %>
   <% today = Date.today %>
-  <table >
+  <table width="300px">
   <% @datedown=(@first_day-1).beginning_of_month %>
   <tr>
   <td><%= button_to"←", {controller: 'todos', action: 'aggregate'}, {method: :get, params: {lday:@datedown,kubun:"1"}} %></td>
@@ -13,9 +13,11 @@
   <% @dateup=(@last_day+1).beginning_of_month %>
   <td><%= button_to"→", {controller: 'todos', action: 'aggregate'}, {method: :get, params: {lday:@dateup,kubun:"2"}} %></td>
   </tr></table>
-  <%# agg=Account.where("registrationdate>=@first_day") %>
   出費額合計：<%= @accounts.where("(registrationdate >= ?) and (registrationdate <= ?)", @first_day,@last_day).sum(:amount).to_s(:delimited, delimiter: ',') %>円
   完了件数：<%= @todos.where("(finishday >= ?) and (finishday <= ?)", @first_day,@last_day).count %>件
+  <%=link_to "品目別集計表","/accounts/itemaggregate",{class:"btn btn-primary"} %>
+  <p></p>
+  
   <table class="table1">
 <tr><th>月日</th><th>出費額</th><th>期限件数</th><th>完了件数</th></tr> 
 <% (@first_day..@last_day).each do |day| %>
