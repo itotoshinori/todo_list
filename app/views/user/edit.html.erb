@@ -1,2 +1,18 @@
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
+パスワード編集
+<%= form_with(url: user_update_path, local: true) do |f| %>
+  <div class="field">
+    <%= f.label :現在のパスワード %><br>
+    <%= f.password_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :新パスワード %><br>
+    <%= f.password_field :newpassword %>
+  </div>
+  <div class="field">
+    <%= f.label :パスワード確認 %><br>
+    <%= f.password_field :password_confirmation %>
+  </div>
+  <div class="actions">
+    <%= f.submit value:"変更" %>
+  </div>
+<% end %>

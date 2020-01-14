@@ -175,7 +175,7 @@ class TodosController < ApplicationController
     sdate=now.prev_month
     fdate=now.next_year
     @startdate=Date.new(sdate.year, sdate.month, sdate.day) if @startdate.blank?
-    @finishdate=Date.new(fdate.year, fdate.month, fdate.day) 
+    @finishdate=Date.new(fdate.year, fdate.month, fdate.day) if @finishdate.blank?
     @idate=Todo.minimum(:term)
     timeselect
   end
@@ -184,7 +184,7 @@ class TodosController < ApplicationController
     sdate=now.prev_month
     fdate=now.next_year
     @startdate=Date.new(sdate.year, sdate.month, sdate.day) if @startdate.blank?
-    @finishdate=Date.new(fdate.year, fdate.month, fdate.day) 
+    @finishdate=Date.new(fdate.year, fdate.month, fdate.day) if @finishdate.blank?
     @idate=Todo.minimum(:term)
     timeselect
   end

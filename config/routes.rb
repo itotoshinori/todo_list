@@ -26,6 +26,8 @@ Rails.application.routes.draw do
   get 'todos/toexport'
   post 'todos/todocsvexport'
   get 'user/new'
+  get 'user/edit'
+  post 'user/update'
   #get '/user/create'
   post '/user/create'
   get 'login/new'

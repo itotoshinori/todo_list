@@ -40,11 +40,12 @@
       <ul class="clearfix">
         <li class="home"><a href="/">ホーム<br><span class="sub">home</span></a></li>
         <li><a href="/todos/index">Todo<br><span class="sub">todo</span></a></li>
+        <% if cookies[:userid].present? %>
         <li><a href="/todos/schedule">スケジュール<br><span class="sub">Schedule</span></a></li>
-        <li><a href="/todos/aggregate">Todo会計集計表<br><span class="sub">account</span></a></li>
-        <li><a href="/accounts/itemaggregate">会計品目別集計表<br><span class="sub">account-item</span></a></li>
+        <li><a href="/todos/aggregate">集計表<br><span class="sub">account</span></a></li>
         <li><a href="/todos/search">タイトル検索<br><span class="sub">serch</span></a></li>
         <li><a href="/todos/toexport">エクスポート<br><span class="sub">export</span></a></li>
+        <% end %>
       </ul>
     </div>
 
@@ -94,19 +95,18 @@
           <div class="menulist">
             <ul>
               <li><a href="/">ホーム</a></li>
-              <% if cookies[:userid].present? %>
               <li><a href="/todos/index">Todo</a></li>
+              <% if cookies[:userid].present? %>
               <li><a href="/todos/schedule">スケジュール</a></li>
               <li><a href="/todos/aggregate">集計表</a></li>
               <li><a href="/todos/search">タイトル検索</a></li>
               <li><a href="/todos/toexport">エクスポート</a></li>
               <li><a href="/login/logout">ログアウト</a></li>
+              <li><a href="/user/edit">パスワードの変更</a></li>
+              <li><a href="/blogs/new">ブログ新規</a></li>
               <% end %>
-               <% if cookies[:userid].present? %>
-                  <li><a href="/blogs/new">ブログ新規</a></li>
-                  <li><a href="/blogs/1">リンク</a></li>
-                <li><a href="/blogs/">ブログ</a></li>
-              <% end %>
+              <li><a href="/blogs/1">リンク</a></li>
+              <li><a href="/blogs/">ブログ</a></li>
               <li><a href="http://titonet384.sakura.ne.jp/linkmake/">リンクタグ作成</a></li>
               <li><a href="http://titonet384.sakura.ne.jp/imagelink/">画像表示作成タグ</a></li>
               <li><a href="http://titonet384.sakura.ne.jp/uploads/pwd.php">画像アップロード</a></li>
