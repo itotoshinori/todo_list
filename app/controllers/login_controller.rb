@@ -16,7 +16,7 @@ class LoginController < ApplicationController
       flash[:success]="ログインに成功しました"
       redirect_to '/'
     else
-      flash[:success]="ログインに失敗しました"
+      flash[:warning]="ログインに失敗しました"
       redirect_to('/login/index')
     end
   end
