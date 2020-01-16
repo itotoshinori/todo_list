@@ -171,9 +171,10 @@ class TodosController < ApplicationController
     redirect_to request.referer 
   end
   def search
+    @now = Time.current
     now = Time.current
-    sdate=now.prev_month
-    fdate=now.next_year
+    sdate=now.prev_year
+    fdate=now.since(3.month)
     @startdate=Date.new(sdate.year, sdate.month, sdate.day) if @startdate.blank?
     @finishdate=Date.new(fdate.year, fdate.month, fdate.day) if @finishdate.blank?
     @idate=Todo.minimum(:term)
