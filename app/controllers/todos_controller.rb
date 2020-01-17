@@ -183,7 +183,7 @@ class TodosController < ApplicationController
   def toexport
     now = Time.current
     sdate=now.prev_month
-    fdate=now.next_year
+    fdate=now.since(3.month)
     @startdate=Date.new(sdate.year, sdate.month, sdate.day) if @startdate.blank?
     @finishdate=Date.new(fdate.year, fdate.month, fdate.day) if @finishdate.blank?
     @idate=Todo.minimum(:term)
