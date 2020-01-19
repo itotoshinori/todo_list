@@ -11,7 +11,7 @@
   <td><%= button_to"←", {controller: 'accounts', action: 'itemaggregateyear'}, {method: :get, params: {lday:@datedown,kubun:"1"}} %></td>
   <td><div style="padding : 10px ;"><strong><%= @first_day.year %>年分集計表</strong></div></td>
   <% @dateup=(@last_day+1).beginning_of_month %>
-  <td><%= button_to"→", {controller: 'accounts', action: 'itemaggregate'}, {method: :get, params: {lday:@dateup,kubun:"2"}} %></td>
+  <td><%= button_to"→", {controller: 'accounts', action: 'itemaggregateyear'}, {method: :get, params: {lday:@dateup,kubun:"2"}} %></td>
   </tr></table>
   <% accounts=@accounts.where("registrationdate >= ?", @first_day).where("registrationdate <= ?", @last_day) %>
   <% if accounts.present? %>
