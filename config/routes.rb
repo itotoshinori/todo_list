@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   post 'accounts/index'
   get 'accounts/new'
   get 'accounts/itemaggregate'
+  get 'accounts/itemaggregateyear'
   post 'accounts/accountcsvexport'
   post '/accounts/create'
   put '/accounts/editmany'

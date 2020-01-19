@@ -2,26 +2,22 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <% provide(:title, "品目別集計表") %>
-  <% @first_day = @date.beginning_of_month %>
-  <% @last_day = @date.end_of_month %>
+  <% @first_day = @date.beginning_of_year %>
+  <% @last_day = @date.end_of_year %>
   <% today = Date.today %>
   <table>
-  <% @datedown=(@first_day-1).beginning_of_month %>
+  <% @datedown=(@first_day-1).beginning_of_year %>
   <tr>
-  <td><%= button_to"←", {controller: 'accounts', action: 'itemaggregate'}, {method: :get, params: {lday:@datedown,kubun:"1"}} %></td>
-  <td><div style="padding : 10px ;"><strong><%= nengetu(@first_day) %>分集計表</strong></div></td>
+  <td><%= button_to"←", {controller: 'accounts', action: 'itemaggregateyear'}, {method: :get, params: {lday:@datedown,kubun:"1"}} %></td>
+  <td><div style="padding : 10px ;"><strong><%= @first_day.year %>年分集計表</strong></div></td>
   <% @dateup=(@last_day+1).beginning_of_month %>
   <td><%= button_to"→", {controller: 'accounts', action: 'itemaggregate'}, {method: :get, params: {lday:@dateup,kubun:"2"}} %></td>
   </tr></table>
-  <% @first_day = @date.beginning_of_year %>
   <% accounts=@accounts.where("registrationdate >= ?", @first_day).where("registrationdate <= ?", @last_day) %>
   <% if accounts.present? %>
-  <% kei=accounts.sum(:amount) %>　
-    合計出費額:<%= kei.to_s(:delimited, delimiter: ',') %><br>
-  <div style="display:inline-flex">
-<%= button_to "日別集計", {controller: 'todos', action: 'aggregate'}, {method: :get, params: {lday:@first_day,kubun:"2"},class:"btn btn-primary inline_block"} %>　
-<%= button_to "年度別集計", {controller: 'accounts', action: 'itemaggregateyear'}, {method: :get, params: {lday:@first_day,kubun:"2"},class:"btn btn-primary inline_block"} %>
-</div>
+  <% kei=accounts.sum(:amount) %>
+合計出費額:<%= kei.to_s(:delimited, delimiter: ',') %>
+<%= button_to "日別集計", {controller: 'todos', action: 'aggregate'}, {method: :get, params: {lday:@first_day,kubun:"2"},class:"btn btn-primary"} %>
 <p></p>
 <table class="table1">
 <tr><th>品目名</th><th>出費額</th><th>占有率</th></tr>

@@ -1,8 +1,8 @@
 class AccountsController < ApplicationController
   #protect_from_forgery
-  protect_from_forgery :except => [:index,:itemindex]
+  protect_from_forgery :except => [:index,:itemindex,:itemaggregateyear]
   require 'date'
-  before_action :user_set,   only: [:index,:itemaggregate,:itemindex,:accountcsvexport]
+  before_action :user_set,   only: [:index,:itemaggregate,:itemindex,:accountcsvexport,:itemaggregateyear]
   def index
     date=params[:registrationdate]
     @accounts=Account.joins(:todo).where('todos.user_id = ?', @userid).where('registrationdate = ?',date)
@@ -52,6 +52,9 @@ class AccountsController < ApplicationController
       @date = Date.today
     end
     @accounts=Account.joins(:todo).where('todos.user_id = ?', @userid)
+  end
+  def itemaggregateyear
+    itemaggregate
   end
   def itemindex
     item=params[:item]
