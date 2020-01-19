@@ -13,15 +13,15 @@
   <% @dateup=(@last_day+1).beginning_of_month %>
   <td><%= button_to"→", {controller: 'accounts', action: 'itemaggregate'}, {method: :get, params: {lday:@dateup,kubun:"2"}} %></td>
   </tr></table>
-  <% @first_day = @date.beginning_of_year %>
+  
   <% accounts=@accounts.where("registrationdate >= ?", @first_day).where("registrationdate <= ?", @last_day) %>
   <% if accounts.present? %>
-  <% kei=accounts.sum(:amount) %>　
-    合計出費額:<%= kei.to_s(:delimited, delimiter: ',') %><br>
-  <div style="display:inline-flex">
-<%= button_to "日別集計", {controller: 'todos', action: 'aggregate'}, {method: :get, params: {lday:@first_day,kubun:"2"},class:"btn btn-primary inline_block"} %>　
-<%= button_to "年度別集計", {controller: 'accounts', action: 'itemaggregateyear'}, {method: :get, params: {lday:@first_day,kubun:"2"},class:"btn btn-primary inline_block"} %>
-</div>
+  <% kei=accounts.sum(:amount) %>
+合計出費額:<%= kei.to_s(:delimited, delimiter: ',') %>
+<p><div style="display:inline-flex"><%= button_to "日別集計", {controller: 'todos', action: 'aggregate'}, {method: :get, params: {lday:@first_day,kubun:"2"},class:"btn btn-primary"} %>　
+<% @first_day = @date.beginning_of_year %>
+ <%= button_to "年度別集計", {controller: 'accounts', action: 'itemaggregateyear'}, {method: :get, params: {lday:@first_day,kubun:"2"},class:"btn btn-primary"} %>
+</p></div>
 <p></p>
 <table class="table1">
 <tr><th>品目名</th><th>出費額</th><th>占有率</th></tr>
