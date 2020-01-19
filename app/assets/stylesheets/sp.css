@@ -434,11 +434,10 @@ td.table_line {
   padding: 20px 0 0 0;
   background-color: #f0fbfe;
 }
-
 .menulist {
-  width: 100%;
+  width: 80%;
   text-decoration: none;
-  margin: 0 0 25px 0;
+  margin: 0 0 10px 0;
 }
 
 .menulist h2 {
