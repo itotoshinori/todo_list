@@ -433,11 +433,13 @@ td.table_line {
   margin : 0 0 20px 0;
   padding: 20px 0 0 0;
   background-color: #f0fbfe;
+  
 }
 .menulist {
   width: 80%;
   text-decoration: none;
-  margin: 0 0 10px 0;
+  margin: 0 0 0px 0;
+  
 }
 
 .menulist h2 {
@@ -456,14 +458,15 @@ td.table_line {
 
 .menulist ul {
   width: 100%;
-  border-top: solid 1px;
-  border-top-color: #cccccc;
+  /*border-top: solid 1px;
+  border-top-color: #cccccc;*/
 }
 
 .menulist li {
   width: 100%;
   list-style: none;
   text-align: center;
+  border-top: 0.5px solid #444444;
 }
 
 .menulist li a {
