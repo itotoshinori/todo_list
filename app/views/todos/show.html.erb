@@ -40,9 +40,9 @@
 ■詳　細<br><%=simple_format(@todo.body) %>
 </td></tr>
 </table>
-<div class="form-inline">
+<div style="display:inline-flex">
   <div class="form-group">
-  <%= link_to "編集","/todos/#{@todo.id}/edit", {class: "btn btn-primary button2"} %>
+  <%= link_to "編集","/todos/#{@todo.id}/edit", {class: "btn btn-primary button2"} %>　
   </div>
   <div class="form-group">
     <% if @todo.finishday.blank? %>
