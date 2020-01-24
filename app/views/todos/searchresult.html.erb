@@ -3,7 +3,8 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
 <b>検索結果</b>
-<p>検索件数：<%=@todos.count %>件 検索条件：<%= @title %>　期限:<%=@startdate %>～<%=@finishdate %></p>
+<p>検索件数：<%=@todos.count %>件　使用額：<%= @todos.sum(:amount).to_s(:delimited, delimiter: ',') %>円<br>
+検索条件：<%= @title %>　期限:<%=@startdate %>～<%=@finishdate %></p>
 <p>
 <%= form_with(url: todos_research_path, method: :post, local: true) do |f| %>
      <%= f.hidden_field :title,value:@title %>

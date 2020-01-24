@@ -199,12 +199,15 @@ class TodosController < ApplicationController
     @title=params[:title]
     @startdate= params[:startdate][:id]
     @finishdate=params[:finishdate][:id]
-    if @title.blank?
-      flash[:warning]="タイトルの入力をお願いします"
-      render todos_search_path
-    end
     @todos=Todo.includes(:accounts).where(user_id:@userid).where('title LIKE ?', "%#{@title}%").where("term >= ?", @startdate).where("term <= ?", @finishdate).order(:term).paginate(page: params[:page], per_page: 20)
     @kubun=1
+    if @todos.count>=100
+      flash.now[:warning]="検索結果が100件を超えてます。絞り込みをお願いします"
+      render todos_search_path
+    elsif @todos.count==0
+      flash.now[:warning]="該当データがありません。再設定をお願いします"
+      render todos_search_path
+    end
   end
   def research
     @title=params[:title]

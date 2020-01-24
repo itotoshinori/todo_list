@@ -2,7 +2,7 @@
 <%= form_with(url: todos_searchresult_path, method: :get, local: true) do |f| %>
     <p></p>
       <%= f.label :タイトル %><br>
-      <%= f.text_field :title,value:@title,placeholder:"曖昧検索　必須です" %>
+      <%= f.text_field :title,value:@title,placeholder:"曖昧検索" %>
       <p>      
       <%= f.label :期限 %><br> 
        <%= collection_select(:startdate,:id,@dates,:id, :dateweek , {:selected=>@startdate}) %>-<%= collection_select(:finishdate,:id,@dates,:id, :dateweek , {:selected=>@finishdate}) %>
