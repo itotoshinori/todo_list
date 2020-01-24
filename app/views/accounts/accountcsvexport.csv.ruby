@@ -5,7 +5,7 @@ bom = %w(EF BB BF).map { |e| e.hex.chr }.join
 csv_file = CSV.generate(bom) do |csv|
   csv << ["TodoList"]
   csv << ["タイトル", "期限","完了日", "備考","出費額"]
-  @todos.each do |b|
-      csv << [b.title, b.term, b.finishday,b.body,b.accounts.sum(:amount).to_s]
+  @accounts.each do |b|
+      csv << [b.todo.title, b.todo.term, b.todo.finishday,b.registrationdate,b.amount,Item.find(b.item).name,b.remark]
   end
 end
