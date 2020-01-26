@@ -72,7 +72,4 @@ class AccountsController < ApplicationController
   def accountsmanyedit_params
     params.permit(accountsmany: [:amount,:remark,:item,:deletecheck])[:accountsmany]
   end
-  def user_set
-    @userid=cookies[:userid] if cookies[:userid].present?
-  end
 end
