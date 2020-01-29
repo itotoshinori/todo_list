@@ -40,7 +40,7 @@
 <% agg=@accounts.where("(registrationdate = ?)", day) %>
 <% kei=agg.sum(:amount).to_s(:delimited, delimiter: ',') %>
 <% if kei.to_i!=0 %>
-<%= link_to kei, {controller: "accounts", action: "index", registrationdate: day},method: :post %>
+<%= link_to kei, {controller: "accounts", action: "index", registrationdate: day},method: :get %>
 <% end %>
 </td>
 <td style="text-align:right; width:60px;">
