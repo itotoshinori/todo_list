@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'accounts/itemaggregate'
   get 'accounts/itemaggregateyear'
   post 'accounts/accountcsvexport'
+  get 'accounts/monthlychangesaccount'
   post '/accounts/create'
   put '/accounts/editmany'
   get 'todos/aggregate'

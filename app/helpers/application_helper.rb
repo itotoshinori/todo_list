@@ -47,6 +47,18 @@ module ApplicationHelper
     end
         kekka
   end
+  def yearmonth(d)
+    if d.present?
+      nen=d.year.to_s
+      if d.month<10
+        mon="0"+d.month.to_s
+      else
+        mon=d.month.to_s
+      end
+        kekka=nen[2,2]+"-"+mon
+    end
+        kekka
+  end
   def weekdate(d)
     if d.present?
       youbi = %w[日 月 火 水 木 金 土]

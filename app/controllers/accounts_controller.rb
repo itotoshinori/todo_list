@@ -3,6 +3,8 @@ class AccountsController < ApplicationController
   protect_from_forgery :except => [:itemindex,:itemaggregateyear]
   require 'date'
   before_action :userid_set,   only: [:index,:itemaggregate,:itemindex,:accountcsvexport,:itemaggregateyear]
+  include ApplicationHelper
+  
   def index
     date=params[:registrationdate]
     @accounts=Account.joins(:todo).where('todos.user_id = ?', @userid).where('registrationdate = ?',date)
@@ -67,6 +69,18 @@ class AccountsController < ApplicationController
     @finishdate=params[:finishdate][:id]
     @accounts=Account.joins(:todo).where('todos.user_id = ?', @userid).where("registrationdate >= ?", @startdate).where("registrationdate <= ?", @finishdate)
     flash[:success]="エクスポートしました"
+  end
+  def monthlychangesaccount
+    @accounts=Account.order(:registrationdate)
+    @acym=[]
+    @accounts.each do |f|
+     if f.registrationdate.present? 
+      ym=Date.new(f.registrationdate.year,f.registrationdate.month , 1) 
+      if @acym.count(ym)==0
+        @acym << ym
+      end
+     end
+    end
   end
   private
   def accountsmanyedit_params
