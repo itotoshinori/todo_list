@@ -71,7 +71,7 @@ class AccountsController < ApplicationController
     flash[:success]="エクスポートしました"
   end
   def monthlychangesaccount
-    @accounts=Account.order(:registrationdate)
+    @accounts=Account.order(registrationdate:"DESC")
     @acym=[]
     @accounts.each do |f|
      if f.registrationdate.present? 
