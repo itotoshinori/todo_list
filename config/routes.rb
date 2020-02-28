@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   put '/accounts/editmany'
   get 'todos/aggregate'
   get 'accounts/edit'
+  get '/todos/modal'
   post 'todos/createmany'
   get 'todos/search'
   get 'todos/searchresult'

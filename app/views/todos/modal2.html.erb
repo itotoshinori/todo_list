@@ -1,0 +1,58 @@
+ <style>
+    *{
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    .content{
+        margin: 0 auto;
+        padding: 40px;
+    }
+    .modal{
+        display: none;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        width: 100%;
+    }
+    .modal__bg{
+        background: rgba(0,0,255,0) ;
+        height: 100vh;
+        position: absolute;
+        width: 100%;
+    }
+    .modal__content{
+        background: rgba(0,0,255,0.1) ;
+        left: 20%;
+        padding: 40px;
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%,-50%);
+        width: 20%;
+    }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+    <script>
+    $(function(){
+        $('.js-modal-open').on('click',function(){
+            $('.js-modal').fadeIn();
+            return false;
+        });
+        $('.js-modal-close').on('click',function(){
+            $('.js-modal').fadeOut();
+            return false;
+        });
+    });
+    </script>
+    <h3>イベント管理システムへようこそ！</h3>
+    ログインしてイベントに参加しましょう！
+      
+      <br><a class="js-modal-open" href="">パスワードのリセット</a>
+      <div class="modal js-modal">
+            <div class="modal__bg js-modal-close"></div>
+            <div class="modal__content">
+                <b>パスワードのリセット</b><br>フェイスブック認証の方は対象外です<br><br>  
+                <a class="js-modal-close" href="">閉じる</a>
+                <br>
+            </div><!--modal__inner-->
+      </div><!--modal-->

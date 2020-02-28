@@ -23,7 +23,7 @@
         <div class="modal-body">
         <% sdate2=@today.next_day(10) %>
         <%= form_with(url: todos_createmany_path,local: true) do |f| %>
-          タイトル　：<%= f.text_field :title, placeholder: 'タイトル(必須)'  %><br>
+          タイトル　：<%= f.text_field :title, placeholder: '必須',required: true %><br>
           開始年月日：<br>
           <%= f.collection_select :openday, @dates, :id, :dateweek, :selected=>@today %>
           <br>

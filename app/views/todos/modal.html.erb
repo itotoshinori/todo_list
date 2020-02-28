@@ -1,0 +1,40 @@
+<script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+<script>
+ $(function(){
+    var winScrollTop;
+    $('.js-modal-open').each(function(){
+        $(this).on('click',function(){
+            //スクロール位置を取得
+            winScrollTop = $(window).scrollTop();
+            var target = $(this).data('target');
+            var modal = document.getElementById(target);
+            $(modal).fadeIn();
+            return false;
+        });
+    });
+    $('.js-modal-close').on('click',function(){
+        $('.js-modal').fadeOut();
+        $('body,html').stop().animate({scrollTop:winScrollTop}, 100);
+        return false;
+    }); 
+});
+</script>
+    <div class="content">
+        <a class="js-modal-open" href="" data-target="modal01">クリックでモーダル1を表示</a><br>
+        <a class="js-modal-open" href="" data-target="modal02">クリックでモーダル2を表示</a><br>
+        <br>
+    </div>
+    <div id="modal01" class="modal js-modal">
+        <div class="modal__bg js-modal-close"></div>
+        <div class="modal__content">
+            <p>1つ目モーダルウィンドウです。ここにモーダルウィンドウで表示したいコンテンツを入れます。モーダルウィンドウを閉じる場合は下の「閉じる」をクリックするか、背景の黒い部分をクリックしても閉じることができます。</p>
+            <a class="js-modal-close" href="">閉じる</a>
+        </div><!--modal__inner-->
+    </div><!--modal-->
+    <div id="modal02" class="modal js-modal">
+        <div class="modal__bg js-modal-close"></div>
+        <div class="modal__content">
+            <p>2つ目モーダルウィンドウです。ここにモーダルウィンドウで表示したいコンテンツを入れます。モーダルウィンドウを閉じる場合は下の「閉じる」をクリックするか、背景の黒い部分をクリックしても閉じることができます。</p>
+            <a class="js-modal-close" href="">閉じる</a>
+        </div><!--modal__inner-->
+    </div><!--modal-->

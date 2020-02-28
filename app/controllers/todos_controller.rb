@@ -4,6 +4,9 @@ class TodosController < ApplicationController
   before_action :timeselect,   only: [:new,:create,:edit,:update,:index,:searchresult,:research]
   require 'date'
   require 'active_support/core_ext/date'
+  def modal
+    
+  end
   def index
     @todos=Todo.includes(:accounts).where(finished:false).where(user_id:@userid).order(:term).paginate(page: params[:page], per_page: 20).order(created_at: "ASC")
     @kubun=1
@@ -215,6 +218,7 @@ class TodosController < ApplicationController
     @finishdate=params[:finishdate]
     render todos_search_path
   end
+  
   private
   def todo_params
      params.require(:todo).permit(:title, :body,:term,:starttimehour,:starttimemin,:item,:itemmoney,:remark)
