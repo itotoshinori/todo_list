@@ -17,7 +17,7 @@
 <table class="table1" align="left">
         <thead>
             <tr>
-                <th scope="col" style="width:250px">内容</th>
+                <th scope="col" style="width:280px">内容</th>
                 <th>費用</th>
                 <th style="width:10px"></th>
                 <th style="width:10px"></th>
@@ -38,14 +38,14 @@
                 <td style="text-align: right; width:100px;"><%=kei %></td>
                 <td>
                 <% if @kubun==1 %>
-                    <%= button_to "完", todos_finished_path, { method: :get, params: {id: form.id,baction:1}, class: "btn btn-success" } %></td>
-                    <td><%= button_to "編", todos_edit_path, { method: :get, params: {id: form.id,baction:1}, class: "btn btn-info" } %></td>
+                    <%= button_to "完", todos_finished_path, { method: :get, params: {id: form.id,baction:1},class:"btn btn-primary" } %></td>
+                    <td><%= button_to "編", todos_edit_path, { method: :get, params: {id: form.id,baction:1},class:"btn btn-success" } %></td>
                     </td>
-                    <td data-label="期限"><%= dateweekday(form.term) %>(<%=weekdate(form.term) %>)</td>
+                    <td data-label="期限"><%= monthdayyoubi(form.term) %></td>
                 <% else %>
-                    <%= button_to "仕", todos_finished_path, { method: :get,params: {id: form.id,baction:2} , class: "btn btn-warning"} %></td>
-                    <td><%= button_to "編", todos_edit_path, { method: :get, params: {id: form.id,baction:2}, class: "btn btn-info" } %></td>
-                    <td data-label="完了日"><%= dateweekday(form.finishday) %>(<%=weekdate(form.finishday) %>)</td>
+                    <%= button_to "仕", todos_finished_path, { method: :get,params: {id: form.id,baction:2},class:"btn btn-warning" } %></td>
+                    <td><%= button_to "編", todos_edit_path, { method: :get, params: {id: form.id,baction:2},class:"btn btn-success" } %></td>
+                    <td data-label="完了日"><%= monthdayyoubi(form.finishday) %></td>
                 <% end %>
             </tr>
         <% end %>

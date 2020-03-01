@@ -65,6 +65,13 @@ module ApplicationHelper
       youbi[d.wday]
     end
   end
+  def monthdayyoubi(d)
+    if d.present?
+        kekka=niketa(d.month)+"/"+niketa(d.day).to_s+"("+weekdate(d)+")"
+    end
+        kekka
+  end
+  
   def mojiseigen(moji,jisuu)
     kekka=moji
     if moji.length>jisuu.to_i
