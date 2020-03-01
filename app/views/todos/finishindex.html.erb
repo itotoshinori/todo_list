@@ -30,7 +30,7 @@
                 <% title=mojiseigen(form.title,10) %>
                 <%= link_to title, "/todos/#{form.id}" %></td>
                 <td style="text-align: right; width:100px;"><%=kei %></td>
-                <td><%= button_to "編", todos_edit_path, { method: :get, params: {id: form.id,baction:2} } %></td>
+                <td><%= button_to "編", todos_edit_path, { method: :get, params: {id: form.id,baction:2}, class: "btn btn-success" } %></td>
                 <td data-label="完了日"><%= dateweekday(form.finishday) %>(<%=weekdate(form.finishday) %>)</td>
             </tr>
         <% end %>
