@@ -1,7 +1,6 @@
 module ApplicationHelper
   class Datecollection
   attr_accessor :id,:dateweek
-   #require 'holiday_japan'
     def initialize(id,dateweek)
       @id=id
       @dateweek=dateweek

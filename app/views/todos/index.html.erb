@@ -10,7 +10,7 @@
 <%= render partial: "form" %>
 <%= will_paginate @todos, :previous_label => ' &lt 前へ', :next_label => '次へ &gt' %>
 <!-- 2.編集モーダルの配置 -->
-<div class="modal fade" id="modal-new" tabindex="-1">
+<div class="modal-dialog modal-lg" id="modal-new" tabindex="-1">
   <div class="modal-dialog modal-sm">
 <!-- 3.モーダルのコンテンツ -->
     <div class="modal-content">
