@@ -1,16 +1,17 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
 <div class="lead">仕掛一覧</div> 
 <%= link_to "新規", "new", {class: "btn btn-primary"} %> 
-<button class="btn btn-primary"  data-toggle="modal" data-target="#modal-new">
+<button class="btn btn-primary"  data-toggle="modal" data-target="#modal-sa">
 定期的
 </button>
 <%= stylesheet_link_tag "todoindexcss/todos", :media => "all" %>
 <%= render partial: "form" %>
 <%= will_paginate @todos, :previous_label => ' &lt 前へ', :next_label => '次へ &gt' %>
 <!-- 2.編集モーダルの配置 -->
-<div class="modal-dialog modal-lg" id="modal-new" tabindex="-1">
+<div class="modal fade" id="modal-sa" tabindex="-1">
   <div class="modal-dialog modal-sm">
 <!-- 3.モーダルのコンテンツ -->
     <div class="modal-content">

@@ -14,4 +14,10 @@ class ApplicationController < ActionController::Base
       redirect_to('/login/index') 
     end
   end
+  def unless_user
+    @todo=Todo.includes(:accounts).find(params[:id])
+    if cookies[:userid] != @todo.user_id
+      redirect_to('/login/index')
+    end
+  end
 end

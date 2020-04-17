@@ -1,6 +1,7 @@
 class TodosController < ApplicationController
   protect_from_forgery :except => [:finishindex,:termindex]
   before_action :userid_set
+  before_action :unless_user,  only: [:show,:edit]
   before_action :timeselect,   only: [:new,:create,:edit,:update,:index,:searchresult,:research]
   require 'date'
   require 'active_support/core_ext/date'
