@@ -1,6 +1,6 @@
 <% if @blog.present? %>
-        <h2 class="page_title">
-        <%= @blog.title %></h2>
+        <div class="content-title">
+        <%= @blog.title %></div>
         <%=simple_format(@blog.content) %>
         <%= @blog.created_at.strftime("%Y-%m-%d %H:%M") %><br>
         <%#= link_to "修正","/blogs/#{@blog.id.to_s}/edit" %>
