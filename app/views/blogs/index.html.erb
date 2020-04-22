@@ -1,7 +1,7 @@
     <% @blogs.each do |f| %>
         <% suu=f.comments.count %>
-        <h2 class="page_title"><%= f.title %></h2>
-        <%=simple_format(f.content) %>
+        <div class="content-title"><%= f.title %></div>
+        <%= simple_format(f.content) %>
         <%= f.created_at.strftime("%Y-%m-%d %H:%M") %>
         <%= link_to "コメント(#{suu})","/blogs/#{f.id.to_s}" %>
         <%= link_to "修正","/blogs/#{f.id.to_s}/edit" if cookies[:userid].present? %>
@@ -9,4 +9,3 @@
     <% end %>
     <hr class="line">
 <%= will_paginate %><p class="back"><a href="#header">
-
