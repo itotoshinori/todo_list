@@ -9,6 +9,7 @@ h1 {
   border-left: solid 5px #ffaf58;
   /*左線（実線 太さ 色）*/ }
   .content-title {
+    padding-left: 10px;
     color: #494949; /*文字色*/
     background: #f4f4f4; /*背景色*/
     border-left: solid 5px lawngreen; /*左線*/
