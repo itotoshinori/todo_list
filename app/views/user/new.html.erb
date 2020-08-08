@@ -1,4 +1,5 @@
 ユーザー新規登録
+<% if cookies[:userid].present? %>
 <%= form_with(url: user_create_path, local: true) do |f| %>
   <div class="field">
     <%= f.label :名前 %><br>
@@ -19,4 +20,7 @@
   <div class="actions">
     <%= f.submit value:"登録" %>
   </div>
+<% end %>
+<% else %>
+ログインが必要です
 <% end %>
