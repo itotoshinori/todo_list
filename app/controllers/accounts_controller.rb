@@ -32,6 +32,8 @@ class AccountsController < ApplicationController
     redirect_to "/todos/#{@account.todo_id}"
   end
   def editmany
+    #debugger
+  
     accountsmanyedit_params.each{|id,val|amount,remark,item,deletecheck = val.values_at("amount","remark","item","deletecheck")
       @account=Account.find(id)
       if deletecheck=="1"
