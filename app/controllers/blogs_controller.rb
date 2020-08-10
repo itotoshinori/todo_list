@@ -27,8 +27,17 @@ class BlogsController < ApplicationController
   def update
     @blog = Blog.find(params[:id])
     @blog.update(blog_params)
+    flash[:success]="正常に更新されました"
     redirect_to('/blogs/')
   end
+
+  def destroy
+    @blog = Blog.find(params[:id])
+    @blog.destroy
+    flash[:success]="正常に削除されました"
+    redirect_to('/blogs/')
+  end
+
   def show
     @blog=Blog.find(params[:id])
     @commentcontent=Comment.where(blog_id:@blog.id)
