@@ -39,7 +39,8 @@ Rails.application.routes.draw do
   get 'login/logout'
   #resources :accounts, only: [:show]
   resources :todos
-  resources :blogs
+  delete 'blog/:id/delete', to: 'blogs#destroy'
+  resources :blogs, except: [:delete]
   #get 'portals/:id/edit'
   get '/'=>'portals#index'
   #get '/comments/comment_error'
