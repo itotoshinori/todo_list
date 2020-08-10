@@ -1,3 +1,7 @@
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        
     <% @blogs.each do |f| %>
         <% suu=f.comments.count %>
         <div class="content-title"><%= f.title %></div>
@@ -8,5 +12,8 @@
         <br>
     <% end %>
     <hr class="line">
-<%= will_paginate %><p class="back"><a href="#header">
+    <%#= will_paginate @blogs %>
+    <%= will_paginate @blogs, :previous_label => ' < 前へ', :next_label => '次へ >', page_gap: '…' %>
+
+<%#= will_paginate %><p class="back"><a href="#header">
 
