@@ -1,4 +1,4 @@
-        <% @blogs.each do |f| %>
+    <% @blogs.each do |f| %>
         <% suu=f.comments.count %>
         <div class="content-title"><%= f.title %></div>
         <%= simple_format(f.content) %>
@@ -10,9 +10,6 @@
     <% end %>
     <hr class="line">
     <%= will_paginate @blogs, :previous_label => ' < 前へ', :next_label => '次へ >', page_gap: '…' %>
-<<<<<<< HEAD
-    <p class="back"><a href="#header">
-=======
 <p class="back"><a href="#header">
->>>>>>> 5fd92a7ee59781355b46689128ec20f236c68c6c
+
 
