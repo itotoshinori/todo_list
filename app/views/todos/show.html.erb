@@ -1,6 +1,3 @@
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <% if session[:item].present? %>
   <% item=session[:item] %>
   <% session.delete(:item) %>
@@ -58,7 +55,7 @@
   <%= form_with(url: accounts_create_path, local: true) do |f| %>
     費用品目：
     <%= f.select :item,Item.all.collect { |i| [ i.name, i.id ] }, :selected=>item %><br>
-    金　額　： 
+    金　額　：
     <%= f.text_field :amount , placeholder: '必須項目'%><br>
     会計備考：
     <%= f.text_field :remark,value:remark %><br>
@@ -92,7 +89,7 @@
         </button>
         <h4 class="modal-title" id="modal-label"><b>会計編集</b></h4>
         <div class="modal-body">
-        <% @items=Item.all %>    
+        <% @items=Item.all %>
         <% @account=Account.where(todo_id:@todo.id) %>
         <%= form_tag accounts_editmany_path, method: :put do %>
         <% @account.each do |account| %>
@@ -115,13 +112,3 @@
 
 <!-- 2.編集モーダルの配置終了 -->
 <!-- 2.編集モーダルの配置 -->
-
-
-
-
-
-
-
-            
-  
-
