@@ -1,6 +1,10 @@
-<h2 class="page_title"><%= @portal.title %></h2>
+<% if @portal.present? %>
+<h2 class="page_title">
+     <%= @portal.title %></h2>
      <%=simple_format(@portal.content) %>
-      <hr class="line">
+<% else %>
+     <h4>トップページです</h4>
+<% end %>
 
 
     
