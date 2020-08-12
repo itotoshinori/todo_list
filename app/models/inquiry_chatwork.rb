@@ -3,7 +3,7 @@ class InquiryChatwork
   require 'uri'
   require 'json'
 
-  def push_chatwork_message
+  def push_chatwork_message(comment_massage)
     chatwork_room_id = '197330662'
     chatwork_api_token = '74bfe242711fcf573a2379c183b250fb'
     uri = URI.parse("https://api.chatwork.com/v2/rooms/#{chatwork_room_id}/messages")
@@ -11,7 +11,7 @@ class InquiryChatwork
     http.use_ssl = true
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
-    message = "[To:3775224]ブログにコメントがありました"
+    message = "[To:3775224]#{comment_massage.name}さんからブログにコメントがありました。確認をお願いします。"
 
     http.start do
       req = Net::HTTP::Post.new(uri.path)
