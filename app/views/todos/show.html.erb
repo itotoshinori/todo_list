@@ -60,16 +60,13 @@
     会計備考：
     <%= f.text_field :remark,value:remark %><br>
     <%= f.hidden_field :id ,value:@todo.id %>
-    <p><%= f.submit "会計登録", class: "btn btn-primary button2",data: { disable_with: '送信中...' } %></p>
+    <p><%= f.submit "会計登録", class: "btn btn-primary button2",data: { disable_with: '送信中...' } %>
 <% end %>
-<p>
 <% if Account.where(todo_id:@todo.id).count >0 %>
 <button class="btn btn-primary button2"  data-toggle="modal" data-target="#modal-sa"%>
         会計編集
-</button></p>
+</button>
 <% end %>
-<p>
-
 </p>
 <hr class="line">
   <%= link_to("一覧に戻る",session[:url]) if session[:url]%>
@@ -111,4 +108,3 @@
 </div>
 
 <!-- 2.編集モーダルの配置終了 -->
-<!-- 2.編集モーダルの配置 -->
