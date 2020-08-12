@@ -11,7 +11,7 @@ class InquiryChatwork
     http.use_ssl = true
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
-    message = "[toall]ブログに投稿がありました"
+    message = "[To:3775224]ブログにコメントがありました"
 
     http.start do
       req = Net::HTTP::Post.new(uri.path)
