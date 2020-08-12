@@ -4,10 +4,12 @@ class CommentsController < ApplicationController
 
   def create
     @comment=Comment.new(comment_params)
-    blog_id=@comment.blog_id
+    blog_id = @comment.blog_id
     if @comment.save
-      @chatwork = InquiryChatwork.new
-      @chatwork.push_chatwork_message
+      if cookies[:userid].blank?
+        @chatwork = InquiryChatwork.new
+        @chatwork.push_chatwork_message
+      end
       redirect_to "/blogs/#{blog_id.to_s}"
     else
       @blog=Blog.find(blog_id)

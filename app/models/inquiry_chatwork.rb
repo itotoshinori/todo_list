@@ -1,24 +1,23 @@
 class InquiryChatwork
   require 'net/https'
+  require 'uri'
   require 'json'
 
   def push_chatwork_message
-    @uri = URI.parse('https://api.chatwork.com')
-    @client = Net::HTTP.new(@uri.host, 443)
-    @client.use_ssl = true
+    chatwork_room_id = '197330662'
+    chatwork_api_token = '74bfe242711fcf573a2379c183b250fb'
+    uri = URI.parse("https://api.chatwork.com/v2/rooms/#{chatwork_room_id}/messages")
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
-    ##### ChatWork APIトークン (~/.bashrcに追加した環境変数から取得する)
-    @chatwork_api_token = ENV["a6a5b6d8820cb530c155fbc1f96fa4c6"]
+    message = "[toall]ブログに投稿がありました"
 
-    ##### ChatWorkへメッセージを通知するルームID (~/.bashrcに追加した環境変数から取得する)
-    @message_room_id = ENV["143754092"]
-
-    ##### Chatworkへ通知するメッセージ内容
-    @message_text = "ブログに投稿がありました"
-    ##### ChetWorkへメッセージ送信
-    @res = @client.post( "/v2/rooms/#{@message_room_id}/messages", "body=#{@message_text}", {"X-ChatWorkToken" => "#{@chatwork_api_token}"} )
-
-    puts JSON.parse(@res.body)
+    http.start do
+      req = Net::HTTP::Post.new(uri.path)
+      req['X-ChatWorkToken'] = chatwork_api_token
+      req.set_form_data(body: message)
+      http.request(req)
+    end
   end
-
 end
