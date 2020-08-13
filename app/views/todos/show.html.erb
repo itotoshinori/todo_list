@@ -72,11 +72,8 @@
 <% title_convert = convert(@todo.title) %>
 <% convert_day = convert_day(@todo.term) %><br />
 <% convert_time = convert_time(@todo.starttime) %>
-<%= link_to image_tag("https://s.yimg.jp/images/calendar/yc_btn_01.gif"),"https://calendar.yahoo.co.jp/?V=60&TITLE=#{title_convert}&ST=#{convert_day}T#{convert_time}&DUR=0130&IN_LOC=%C5%EC%B5%FE&URL=http%3A%2F%2Fwww.yahoo.co.jp%2F&DESC=%BB%BB%BF%F4&ENC=EUC-JP", target: "_new" %>
+<%= link_to image_tag("https://s.yimg.jp/images/calendar/yc_btn_01.gif"),"https://calendar.yahoo.co.jp/?V=60&TITLE=#{title_convert}&ST=#{convert_day}T#{convert_time}&DUR=0130", target: "_new" %>
 <%= link_to("一覧に戻る",session[:url]) if session[:url]%>
-<div>
-</div>
-
 
 <!-- 2.編集モーダルの配置 -->
 <div class="modal fade" id="modal-sa" tabindex="-1">
