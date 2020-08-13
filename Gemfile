@@ -17,6 +17,7 @@ gem 'jbuilder',     '2.7.0'
 gem 'rails-i18n', '~> 5.1'
 gem 'holiday_japan'
 gem 'faraday'
+gem 'googleauth'
 
 group :development, :test do
   gem 'sqlite3', '1.3.13'
