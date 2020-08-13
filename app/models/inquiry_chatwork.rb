@@ -10,8 +10,7 @@ class InquiryChatwork
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-    timers = Timers::Group.new
-      message = "[To:3775224]#{comment_massage.name}さんからブログにコメントがありました。確認をお願いします。"
+    message = "[To:3775224]#{comment_massage.name}さんからブログにコメントがありました。確認をお願いします。"
     http.start do
       req = Net::HTTP::Post.new(uri.path)
       req['X-ChatWorkToken'] = chatwork_api_token
