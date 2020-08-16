@@ -2,7 +2,7 @@ module TodosHelper
 require "cgi"
 
   def convert(str)
-    converted = CGI.escape(str.encode("euc-jp"))
+    converted = CGI.escape(str.encode("UTF-8"))
   end
   def keta(intcount)
     if intcount >= 10
