@@ -4,12 +4,10 @@
         <%= simple_format(f.content) %>
         <%= f.created_at.strftime("%Y-%m-%d %H:%M") %>
         <%= link_to "コメント(#{suu})","/blogs/#{f.id.to_s}" %>
-        <%= link_to "修正","/blogs/#{f.id.to_s}/edit" if cookies[:userid].present? %>
-        <%= link_to "削除","/blog/#{f.id.to_s}/delete", method: :delete,  data: { confirm: '本当に削除しますか？' } if cookies[:userid].present? %>
+        <%= link_to "修正","/blogs/#{f.id.to_s}/edit" if cookies[:userid]=="1" %>
+        <%= link_to "削除","/blog/#{f.id.to_s}/delete", method: :delete,  data: { confirm: '本当に削除しますか？' } if cookies[:userid]=="1" %>
         <br>
     <% end %>
     <hr class="line">
     <%= will_paginate @blogs, :previous_label => ' < 前へ', :next_label => '次へ >', page_gap: '…' %>
 <p class="back"><a href="#header">
-
-
