@@ -75,7 +75,7 @@
 <% convert_time = convert_time(@todo.starttime) %>
 <% finishtime= @todo.starttime.since(5400.seconds) %>
 <% convert_finish_time = convert_time(finishtime) %>
-<span class="label label-warning"><%= link_to "googleカレンダー登録","https://www.google.com/calendar/render?action=TEMPLATE&text=#{title_convert}&&dates=#{convert_day}T#{convert_time}00/#{convert_day}T#{convert_finish_time}00&details=https://polar-lowlands-77201.herokuapp.com/todos/#{@todo.id}", target: "_new" %></span>
+<span class="label label-warning"><%= link_to "googleカレンダー登録","https://www.google.com/calendar/render?action=TEMPLATE&text=#{title_convert}&&dates=#{convert_day}T#{convert_time}00/#{convert_day}T#{convert_finish_time}00&details=#{request.url}", target: "_new" %></span>
   <%= link_to image_tag("https://s.yimg.jp/images/calendar/yc_btn_01.gif"),"https://calendar.yahoo.co.jp/?V=60&TITLE=#{title_convert}&ST=#{convert_day}T#{convert_time}&DUR=0130", target: "_new" %>
 <% end %>
 <p><%= link_to("一覧に戻る",session[:url]) if session[:url]%></p>
