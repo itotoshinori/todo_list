@@ -14,7 +14,7 @@
         <hr class="line">
         <% if @commentcontent.present? %>
           <% @commentcontent.each do |f| %>
-              <%= f.name %>さん　投稿日時：<%=f.created_at.strftime("%Y-%m-%d %H:%M") %><br>
+              <p><%= f.name %>さん　投稿日時：<%=f.created_at.strftime("%Y-%m-%d %H:%M") %></p>
               <table>
                 <tr><td width="610">
               <%=simple_format(f.body) %>
@@ -22,5 +22,5 @@
               </td></tr>
               </table>
           <% end %>
-        <% end %> 
+        <% end %>
 <% end %>

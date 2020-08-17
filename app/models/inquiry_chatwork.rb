@@ -11,7 +11,7 @@ class InquiryChatwork
     http.use_ssl = true
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
     title = comment_massage.blog.title
-    message = "[To:3775224]#{comment_massage.name}さんから#{title}のブログにコメントがありました。確認をお願いします。"
+    message = "[To:3775224]#{comment_massage.name}さんから「#{title}」のブログにコメントがありました。確認をお願いします。"
     http.start do
       req = Net::HTTP::Post.new(uri.path)
       req['X-ChatWorkToken'] = chatwork_api_token

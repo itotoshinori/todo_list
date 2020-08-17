@@ -166,7 +166,7 @@ body {
   content: "";
   display: block;
   clear: both;
-  height: 0; 
+  height: 0;
   visibility: hidden;
 }
 
@@ -412,7 +412,7 @@ td.table_line {
 
 .map {
   position: relative;
-  padding-bottom: 75%; 
+  padding-bottom: 75%;
   height: 0;
   overflow: hidden;
 }
@@ -433,13 +433,13 @@ td.table_line {
   margin : 0 0 20px 0;
   padding: 20px 0 0 0;
   background-color: #f0fbfe;
-  
+
 }
 .menulist {
-  width: 80%;
+  width: 100%;
   text-decoration: none;
   margin: 0 0 0px 0;
-  
+
 }
 
 .menulist h2 {
