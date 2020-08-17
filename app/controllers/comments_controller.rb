@@ -7,9 +7,8 @@ class CommentsController < ApplicationController
     blog_id = @comment.blog_id
     if @comment.save
       if cookies[:userid].blank?
-        @title = @comment.blog.title
         @chatwork = InquiryChatwork.new
-        @chatwork.push_chatwork_message(@comment,@title)
+        @chatwork.push_chatwork_message(@comment)
       end
       redirect_to "/blogs/#{blog_id.to_s}"
     else
@@ -19,7 +18,7 @@ class CommentsController < ApplicationController
       render comment_error_path
     end
   end
- 
+
   def comment_params
      params.require(:comment).permit(:name,:body,:blog_id)
   end
