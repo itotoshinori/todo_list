@@ -20,7 +20,6 @@
   <tr>
 <% end %>
   <td style="width:150px;">
-  
   <% if day.wday==0  or holiday(day) %>
     <div style="color: rgb(255,0,0);" >
   <% elsif day.wday==6 %>
@@ -28,7 +27,12 @@
   <% else %>
     <div>
   <% end %>
-  <div id=<%=convert_day(day) %>><%=monthday(day) %>(<%=weekdate(day) %>)</div>
+  <% if day.day ==1 %>
+    <% idday = convert_day(day) %>
+  <% else %>
+    <% idday = convert_day(day-1) %>
+  <% end  %>
+  <div id=<%= idday %>><%=monthday(day) %>(<%=weekdate(day) %>)</div>
   </td>
 <td style="text-align: left;">
   <% dayevent=@event.where(term:day).order(:starttime) %>
