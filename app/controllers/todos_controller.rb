@@ -146,6 +146,7 @@ class TodosController < ApplicationController
       #@date=params[:lday].to_date
     else
       @date = Date.today
+      @datekakuni = "true"
     end
   end
   def createmany
