@@ -30,7 +30,7 @@
   <% if day.day ==1 %>
     <% idday = convert_day(day) %>
   <% else %>
-    <% idday = convert_day(day-1) %>
+    <% idday = convert_day(day+1) %>
   <% end  %>
   <div id=<%= idday %>><%=monthday(day) %>(<%=weekdate(day) %>)</div>
   </td>
