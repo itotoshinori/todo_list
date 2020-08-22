@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
 <html lang="ja">
+<% today = Date.today %>
 
 <head>
   <meta charset="utf-8">
@@ -94,7 +95,7 @@
               <li><a href="/">ホーム</a></li>
               <li><a href="/todos/index">Todo</a></li>
               <% if cookies[:userid].present? %>
-                <li><a href="/todos/schedule">スケジュール</a></li>
+                <li><%= link_to "スケジュール","/todos/schedule#" + convert_day(today) %></li>
                 <li><a href="/todos/aggregate">集計表</a></li>
                 <li><a href="/accounts/monthlychangesaccount">年度別出費集計表</a></li>
                 <li><a href="/todos/search">タイトル検索</a></li>

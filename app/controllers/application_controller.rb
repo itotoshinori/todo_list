@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
   include ApplicationHelper
   helper_method :current_user
+  require 'date'
 
   def userid_set
     if cookies[:userid].present?
