@@ -1,12 +1,18 @@
 class PortalsController < ApplicationController
   def index
+<<<<<<< HEAD
     if Portal.count>0
       @portal=Portal.find(1)
     else
       @portal=nil  
+=======
+    if Portal.count > 0
+      @portal = Portal.find(1)
+    else
+      @portal = nil
+>>>>>>> 33fa1633e134c2010ce7077128c831f35b1d3701
     end
   end
-
   def new
     @portal=Portal.new
   end

@@ -1,9 +1,5 @@
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
 <div class="lead">仕掛一覧</div> 
-<%= link_to "新規", "new", {class: "btn btn-primary"} %> 
+<%= link_to "新規", "new", {class: "btn btn-primary"} %>
 <button class="btn btn-primary"  data-toggle="modal" data-target="#modal-sa">
 定期的
 </button>
@@ -35,13 +31,9 @@
           備　考　　：<%= f.text_field :body, placeholder: '本文'  %><br>
            <p>
           <%= f.submit "登録", class: "btn btn-primary",data: { disable_with: '送信中...' },style:"width:100px;height:50px" %></p>
-        <% end %>   
+        <% end %>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-
-
-
