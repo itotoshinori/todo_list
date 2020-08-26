@@ -14,7 +14,7 @@
 <table class="table1" align="left">
         <thead>
             <tr>
-                <th scope="col" style="width:280px">内容</th>
+                <th scope="col" style="width:250px">内容</th>
                 <th>費用</th>
                 <th style="width:10px"></th>
                 <th style="width:10px"></th>
@@ -30,7 +30,7 @@
                 <tr>
             <% end %>
                 <td data-label="内容" style="text-align: left;">
-                <% title=mojiseigen(form.title,10) %>
+                <% title=mojiseigen(form.title,8) %>
                 <%= link_to title, "/todos/#{form.id}" %></td>
                 <td style="text-align: right; width:100px;"><%=kei %></td>
                 <td>
