@@ -2,7 +2,7 @@
 <% @today=Date.today %>
 <% account=Account.joins(:todo).where(registrationdate:@today).where('todos.user_id = ?', @userid) %>
 <% finish=Todo.where(finishday:@today).where('todos.user_id = ?', @userid) %>
-<%= link_to "仕掛一覧", "index", {class: "btn btn-primary"} %> <%= link_to "完了一覧", "indexfinished", {class: "btn btn-primary"} %>
+<%= link_to "仕掛", "index", {class: "btn btn-primary"} %> <%= link_to "完了", "indexfinished", {class: "btn btn-primary"} %>
 <br>本日使用額：<%= account.sum(:amount).to_s(:delimited, delimiter: ',') %>円 終了タスク：<%= finish.count(:finishday) %>件</b>
 <% if @kubun==1 %>
     <% statusname="期限" %>
@@ -15,7 +15,7 @@
         <thead>
             <tr>
                 <th scope="col" style="width:250px">内容</th>
-                <th>費用</th>
+                <th style="width:16px">費用</th>
                 <th style="width:10px"></th>
                 <th style="width:10px"></th>
                 <th scope="col"><%= statusname %></th>
