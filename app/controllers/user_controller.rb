@@ -34,6 +34,7 @@ class UserController < ApplicationController
       redirect_to '/'
     end
   end
+  
   def update
     email=User.find(cookies[:userid].to_i).email
     pass=params[:password]
