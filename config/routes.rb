@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   get 'todos/aggregate' 
   get 'todos/toexport'
   post 'todos/todocsvexport'
+  get 'user/index'
   get 'user/new'
   get 'user/edit'
   post 'user/update'
@@ -49,6 +50,8 @@ Rails.application.routes.draw do
   get '/comments/test', as: :test
   #post 'blogs/commentcreate'
   resources :comments, only: [:create]
+  
+
   
   resources :portals
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

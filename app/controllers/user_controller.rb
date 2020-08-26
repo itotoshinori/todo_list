@@ -1,4 +1,5 @@
 class UserController < ApplicationController
+  before_action :userid_set
   def new
   end
   
@@ -24,7 +25,7 @@ class UserController < ApplicationController
   end
 
   def index
-    @users=User.all
+      @users=User.all
   end
 
   def edit
