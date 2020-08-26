@@ -3,10 +3,10 @@ class TodosController < ApplicationController
   before_action :userid_set
   before_action :unless_user,  only: [:show,:edit]
   before_action :timeselect,   only: [:new,:create,:edit,:update,:index,:searchresult,:research]
-  require 'date'
+  
   require 'active_support/core_ext/date'
   def modal
-    
+
   end
   def index
     @todos=Todo.includes(:accounts).where(finished:false).where(user_id:@userid).order(:term).paginate(page: params[:page], per_page: 20).order(created_at: "ASC")
@@ -75,7 +75,7 @@ class TodosController < ApplicationController
     flash[:success]="#{@todo.title}が会計も含め新規登録されました"
     redirect_to "/todos/#{@todo.id}"
   end
-  
+
   def edit
     @url=request.referer
     @todo = Todo.find(params[:id])
@@ -125,7 +125,7 @@ class TodosController < ApplicationController
     @todo=Todo.includes(:accounts).find(params[:id])
     @url=request.referer
   end
-  
+
   def aggregate
     kubun=params[:kubun]
     if kubun.present?
@@ -136,7 +136,7 @@ class TodosController < ApplicationController
     @todos=Todo.where(user_id:@userid)
     @accounts=Account.joins(:todo).where('todos.user_id = ?', @userid)
   end
-  
+
   def schedule
     @event=Todo.where('starttime IS NOT NULL').where(user_id:@userid)
     kubun=params[:kubun]
@@ -146,6 +146,7 @@ class TodosController < ApplicationController
       #@date=params[:lday].to_date
     else
       @date = Date.today
+      @datekakuni = "true"
     end
   end
   def createmany
@@ -172,7 +173,7 @@ class TodosController < ApplicationController
     else
       flash[:warning]="登録に失敗しました。日付や必須項目等確認し再登録下さい。"
     end
-    redirect_to request.referer 
+    redirect_to request.referer
   end
   def search
     @now = Time.current
@@ -219,7 +220,7 @@ class TodosController < ApplicationController
     @finishdate=params[:finishdate]
     render todos_search_path
   end
-  
+
   private
   def todo_params
      params.require(:todo).permit(:title, :body,:term,:starttimehour,:starttimemin,:item,:itemmoney,:remark)
@@ -231,7 +232,7 @@ class TodosController < ApplicationController
     now = Time.current
     @dates=Array.new()
     @idate=now.last_year if @idate.blank?
-    @ldate=now.next_year 
+    @ldate=now.next_year
     (@idate.to_datetime..@ldate).each do|c|
       date = Date.new(c.year, c.month, c.day)
       wd = ["日","月", "火", "水", "木", "金", "土"]
@@ -239,9 +240,9 @@ class TodosController < ApplicationController
       @dates << Datecollection.new(date,iw)
     end
   end
-  
+
   def newcreate
-    if @starttimehour.present? and @starttimemin.present?  
+    if @starttimehour.present? and @starttimemin.present?
       @todo.starttime="2000-01-01 #{@starttimehour}:#{@starttimemin}".to_datetime if @starttimehour.present? and @starttimemin.present?
       @todo.starttime=@todo.starttime-32400
     end

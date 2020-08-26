@@ -6,7 +6,7 @@
         <hr class="line">
         ■コメント投稿<br>
         <%= form_for(@comment) do |f| %>
-          <%= f.text_field :name, placeholder: 'enter お名前(必須)' ,value:@name %><p>
+          <p><%= f.text_field :name, placeholder: 'enter お名前(必須)' ,value:@name,style:"margin-bottom: 2px;" %></P>
           <%= f.text_area :body, placeholder: 'enter コメント(必須)',value:@body,cols:40,rows:5 %>
           <%= f.hidden_field :blog_id, value:@blog.id.to_i %><br>
        <%= f.submit "実行", class: "btn btn-primary",data: { disable_with: '送信中...' },style:"width:100px;height:50px" %>
@@ -14,13 +14,13 @@
         <hr class="line">
         <% if @commentcontent.present? %>
           <% @commentcontent.each do |f| %>
-              <%= f.name %>さん　投稿日時：<%=f.created_at.strftime("%Y-%m-%d %H:%M") %><br>
-              <table>
+              <p><%= f.name %>さん　投稿日時：<%=f.created_at.strftime("%Y-%m-%d %H:%M") %></p></ br>
+              <table >
                 <tr><td width="610">
               <%=simple_format(f.body) %>
               <hr class="line">
               </td></tr>
               </table>
           <% end %>
-        <% end %> 
+        <% end %>
 <% end %>

@@ -1,21 +1,13 @@
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-        
     <% @blogs.each do |f| %>
         <% suu=f.comments.count %>
         <div class="content-title"><%= f.title %></div>
         <%= simple_format(f.content) %>
         <%= f.created_at.strftime("%Y-%m-%d %H:%M") %>
         <%= link_to "コメント(#{suu})","/blogs/#{f.id.to_s}" %>
-        <%= link_to "修正","/blogs/#{f.id.to_s}/edit" if cookies[:userid].present? %>
-        <%#= link_to '削除', blog_path, method: :delete, data: { confirm: '削除しますか？' } if cookies[:userid].present? %>
-        <%= link_to "削除","/blog/#{f.id.to_s}/delete", method: :delete,  data: { confirm: '本当に削除しますか？' } if cookies[:userid].present? %>
+        <%= link_to "修正","/blogs/#{f.id.to_s}/edit" if cookies[:userid]=="1" %>
+        <%= link_to "削除","/blog/#{f.id.to_s}/delete", method: :delete,  data: { confirm: '本当に削除しますか？' } if cookies[:userid]=="1" %>
         <br>
     <% end %>
     <hr class="line">
-    <%#= will_paginate @blogs %>
     <%= will_paginate @blogs, :previous_label => ' < 前へ', :next_label => '次へ >', page_gap: '…' %>
-
-<%#= will_paginate %><p class="back"><a href="#header">
-
+<p class="back"><a href="#header">

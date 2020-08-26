@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
 <html lang="ja">
+<% today = Date.today %>
 
 <head>
   <meta charset="utf-8">
@@ -38,10 +39,10 @@
         <li class="home"><a href="/">ホーム<br><span class="sub">home</span></a></li>
         <li><a href="/todos/index">Todo<br><span class="sub">todo</span></a></li>
         <% if cookies[:userid].present? %>
-        <li><a href="/todos/schedule">スケジュール<br><span class="sub">Schedule</span></a></li>
-        <li><a href="/todos/aggregate">集計表<br><span class="sub">account</span></a></li>
-        <li><a href="/todos/search">タイトル検索<br><span class="sub">serch</span></a></li>
-        <li><a href="/todos/new">Todo新規<br><span class="sub">new</span></a></li>
+          <li><a href="https://calendar.google.com/calendar/" target="new">calendar<br><span class="sub">Schedule</span></a></li>
+          <li><a href="/todos/aggregate">集計表<br><span class="sub">account</span></a></li>
+          <li><a href="/todos/search">タイトル検索<br><span class="sub">serch</span></a></li>
+          <li><a href="/todos/new">Todo新規<br><span class="sub">new</span></a></li>
         <% end %>
       </ul>
     </div>
@@ -94,15 +95,18 @@
               <li><a href="/">ホーム</a></li>
               <li><a href="/todos/index">Todo</a></li>
               <% if cookies[:userid].present? %>
-              <li><a href="/todos/schedule">スケジュール</a></li>
-              <li><a href="/todos/aggregate">集計表</a></li>
-              <li><a href="/accounts/monthlychangesaccount">年度別出費集計表</a></li>
-              <li><a href="/todos/search">タイトル検索</a></li>
-              <li><a href="/todos/toexport">エクスポート</a></li>
-              <li><a href="/login/logout">ログアウト</a></li>
-              <li><a href="/user/edit">パスワードの変更</a></li>
-              <li><a href="/user/new">新規会員登録</a></li>
-              <li><a href="/blogs/new">ブログ新規</a></li>
+                <li><%= link_to "スケジュール","/todos/schedule#"+convert_day(today) %></li>
+                <li><a href="/todos/aggregate">集計表</a></li>
+                <li><a href="/accounts/monthlychangesaccount">年度別出費集計表</a></li>
+                <li><a href="/todos/search">タイトル検索</a></li>
+                <li><a href="/todos/toexport">エクスポート</a></li>
+                <li><a href="/login/logout">ログアウト</a></li>
+                <li><a href="/user/edit">パスワードの変更</a></li>
+                <li><a href="https://calendar.google.com/calendar/" target="new">google calendar</a></li>
+                <% if cookies[:userid] == "1" %>
+                  <li><a href="/user/new">新規会員登録</a></li>
+                  <li><a href="/blogs/new">ブログ新規</a></li>
+                <% end %>
               <% end %>
               <li><a href="/blogs/1">リンク</a></li>
               <li><a href="/blogs/">ブログ</a></li>
