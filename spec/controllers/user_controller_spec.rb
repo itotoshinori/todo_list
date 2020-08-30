@@ -6,5 +6,10 @@ RSpec.describe UserController, type: :controller do
             get :index
             expect(response.status).to eq 302
         end
+
+        it 'リクエストが成功すること' do
+            post :edit
+            expect(response.status).to eq 302
+        end
     end
 end
