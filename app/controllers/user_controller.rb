@@ -32,11 +32,14 @@ class UserController < ApplicationController
     if cookies[:userid].blank?
       flash[:warning]="ログインして下さい"
       redirect_to '/'
+    else
+      @user = User.find(@userid)
     end
   end
   
   def update
     email=User.find(cookies[:userid].to_i).email
+    name = params[:name]
     pass=params[:password]
     newpass=params[:newpassword]
     passcon=params[:password_confirmation]
@@ -46,15 +49,22 @@ class UserController < ApplicationController
       redirect_to '/user/edit'
     elsif @user and @user.authenticate(pass)
       @user.password=newpass
+      @user.name = name
       if @user.save
-        flash[:success]="パスワードの変更に成功しました"
+        flash[:success]="修正に成功しました"
       else
-        flash[:warning]="パスワードの変更にに失敗しました。再度処理方願います。"
+        flash[:warning]="修正に失敗しました。再度処理方願います。"
       end
       redirect_to '/'
     else
       flash[:warning]="パスワードの変更にに失敗しました。再度処理方願います。"
       redirect_to '/user/edit' 
     end
-  end 
+  end
+  def destroy
+    user = User.find(params[:id])
+      user.destroy
+      flash[:success]="削除に成功しました"
+      redirect_to '/'
+  end
 end
