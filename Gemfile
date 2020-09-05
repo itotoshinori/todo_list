@@ -19,7 +19,7 @@ gem 'holiday_japan'
 gem 'faraday'
 gem 'react-rails'
 gem 'webpacker'
-
+gem 'rspec-rails'
 
 group :development, :test do
   gem 'sqlite3', '1.3.13'
