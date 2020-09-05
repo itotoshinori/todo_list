@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  #get 'users/index'
   post 'accounts/itemindex'
   get 'accounts/index'
   post 'accounts/index'
@@ -28,11 +29,13 @@ Rails.application.routes.draw do
   get 'todos/aggregate' 
   get 'todos/toexport'
   post 'todos/todocsvexport'
+  get 'user/index'
   get 'user/new'
   get 'user/edit'
   post 'user/update'
+  delete 'user/:id' => 'user#destroy'
   #get '/user/create'
-  post '/user/create'
+  post '/user/create' 
   get 'login/new'
   get 'login/index'
   post 'login/login'
@@ -49,7 +52,7 @@ Rails.application.routes.draw do
   get '/comments/test', as: :test
   #post 'blogs/commentcreate'
   resources :comments, only: [:create]
-  
+  resources :users
   resources :portals
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

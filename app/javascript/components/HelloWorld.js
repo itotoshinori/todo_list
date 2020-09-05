@@ -15,13 +15,11 @@ class HelloWorld extends React.Component {
   }
 
   render () {
-    let author_name1 = "ヤマモト太郎"
     let thisday = today.getFullYear() + "年" + todayDay   + "月"+ today.getDate()  + "日"
-    let message = "みんなの合言葉！" + this.props.greeting
     return (
       <React.Fragment>
         
-        {message}<br />本日は{ thisday }({dayOfWeekStr})です
+        本日は{ thisday }({dayOfWeekStr})です
         
       </React.Fragment>
       

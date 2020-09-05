@@ -69,6 +69,7 @@ GEM
     concurrent-ruby (1.1.7)
     connection_pool (2.2.3)
     crass (1.0.6)
+    diff-lcs (1.4.4)
     erubi (1.9.0)
     execjs (2.7.0)
     faker (1.7.3)
@@ -190,6 +191,7 @@ GEM
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+
     react-rails (2.6.1)
       babel-transpiler (>= 0.7.0)
       connection_pool
@@ -277,7 +279,11 @@ DEPENDENCIES
   rails (= 5.2.3)
   rails-controller-testing (= 1.0.2)
   rails-i18n (~> 5.1)
+<<<<<<< HEAD
   react-rails
+=======
+  rspec-rails
+>>>>>>> d683ced90231628601eb2cd930db9851435201f8
   sass-rails (= 5.0.6)
   spring (= 2.0.2)
   spring-watcher-listen (= 2.0.1)
