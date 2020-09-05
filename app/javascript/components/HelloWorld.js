@@ -5,6 +5,8 @@ var today = new Date();
 var todayDay = today.getMonth() + 1
 var dayOfWeek = today.getDay() ;
 var dayOfWeekStr = [ "日", "月", "火", "水", "木", "金", "土" ][dayOfWeek] ;
+var asastu
+
 class HelloWorld extends React.Component {
     constructor( props )
   {
@@ -16,10 +18,18 @@ class HelloWorld extends React.Component {
 
   render () {
     let thisday = today.getFullYear() + "年" + todayDay   + "月"+ today.getDate()  + "日"
+    let time = today.getHours() 
+    let  aisatu = "おはようございます"
+    if(time >= 10){
+      aisatu = "こんにちは"
+    } else if(time >= 19){
+      aisatu = "こんばんは"
+    }
+    
     return (
       <React.Fragment>
         
-        本日は{ thisday }({dayOfWeekStr})です
+     {aisatu } 本日は{ thisday }({dayOfWeekStr})です
         
       </React.Fragment>
       
