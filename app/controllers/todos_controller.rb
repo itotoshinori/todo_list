@@ -11,6 +11,7 @@ class TodosController < ApplicationController
   def index
     @todos=Todo.includes(:accounts).where(finished:false).where(user_id:@userid).order(:term).paginate(page: params[:page], per_page: 20).order(created_at: "ASC")
     @kubun=1
+    @hello ="ハローワールド！"
   end
   def indexfinished
     @todos=Todo.where(finished:true).where(user_id:@userid).order(finishday: "DESC").paginate(page: params[:page], per_page: 20).order(created_at: "DESC")
