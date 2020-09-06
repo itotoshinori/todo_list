@@ -8,7 +8,7 @@ var dayOfWeekStr = [ "日", "月", "火", "水", "木", "金", "土" ][dayOfWeek
 class HelloWorld extends React.Component {
    constructor(props) {
     super(props);
-    this.state = {aisatu:"こんにちわ"}
+    this.state = {aisatu:"おはようございます"}
   }
   render () {
     let thisday = today.getFullYear() + "年" + todayDay   + "月"+ today.getDate()  + "日"
