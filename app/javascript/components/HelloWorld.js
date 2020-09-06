@@ -14,9 +14,9 @@ class HelloWorld extends React.Component {
     let thisday = today.getFullYear() + "年" + todayDay   + "月"+ today.getDate()  + "日"
     let greeting = this.state.aisatu
      if(today.getHours() >=19){
-      greeting = "こんばんわ"
+      greeting = "こんばんは"
     } else if ( today.getHours() >=10){
-      greeting =　"こんにちわ"
+      greeting =　"こんにちは"
     }
    
     return (
