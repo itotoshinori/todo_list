@@ -6,15 +6,23 @@
         <hr class="line">
         ■コメント投稿<br>
         <%= form_for(@comment) do |f| %>
-          <p><%= f.text_field :name, placeholder: 'enter お名前(必須)' ,value:@name,style:"margin-bottom: 2px;" %></P>
-          <%= f.text_area :body, placeholder: 'enter コメント(必須)',value:@body,cols:40,rows:5 %>
+          <p><%= f.text_field :name, placeholder: 'enter お名前(必須)' ,value:@name, required: true,style:"margin-bottom: 2px;" %></P>
+          <p><%= f.email_field :email, placeholder: 'enter メールアドレス(必須　非公開)' , required: true,style:"margin-bottom: 2px;" %></P>
+          <p><%= f.text_field :url, placeholder: 'enter URL' ,style:"margin-bottom: 2px;" %></P>
+          <%= f.text_area :body, placeholder: 'enter コメント(必須)',value:@body, required: true,cols:40,rows:5 %>
           <%= f.hidden_field :blog_id, value:@blog.id.to_i %><br>
        <%= f.submit "実行", class: "btn btn-primary",data: { disable_with: '送信中...' },style:"width:100px;height:50px" %>
         <% end %>
         <hr class="line">
         <% if @commentcontent.present? %>
           <% @commentcontent.each do |f| %>
-              <p><%= f.name %>さん　投稿日時：<%=f.created_at.strftime("%Y-%m-%d %H:%M") %></p></ br>
+              <p>
+              <% if f.url.present? %>
+                <%= link_to f.name,f.url %>
+              <% else %>
+                <%= f.name %>
+              <% end %>
+              さん　投稿日時：<%=f.created_at.strftime("%Y-%m-%d %H:%M") %></p></ br>
               <table >
                 <tr><td width="610">
               <%=simple_format(f.body) %>
