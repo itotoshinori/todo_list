@@ -47,6 +47,13 @@ ActiveRecord::Schema.define(version: 2020_09_07_123333) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "likes", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "blog_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "portals", force: :cascade do |t|
     t.string "title"
     t.string "content"

@@ -17,7 +17,8 @@ gem 'jbuilder',     '2.7.0'
 gem 'rails-i18n', '~> 5.1'
 gem 'holiday_japan'
 gem 'faraday'
-gem 'googleauth'
+gem 'react-rails'
+gem 'webpacker'
 gem 'rspec-rails'
 
 group :development, :test do
