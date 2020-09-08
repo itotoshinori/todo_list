@@ -14,6 +14,7 @@ class CommentsController < ApplicationController
     else
       @blog=Blog.find(blog_id)
       @name=@comment.name
+      @email=@comment.email
       @body=@comment.body
       render comment_error_path
     end

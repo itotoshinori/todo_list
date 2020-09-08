@@ -9,7 +9,7 @@
         ■コメント投稿<br>
         <%= form_for(@comment) do |f| %>
           <p><%= f.text_field :name, placeholder: 'お名前(必須)' ,value:@name, required: true,style:"margin-bottom: 2px;" %></P>
-          <p><%= f.email_field :email, placeholder: 'Emailアドレス(必須非公開)' , required: true,style:"margin-bottom: 2px;" %></P>
+          <p><%= f.email_field :email, placeholder: 'Emailアドレス(必須非公開)',value:@email , required: true,style:"margin-bottom: 2px;" %></P>
           <p><%= f.text_field :url, placeholder: 'URL' ,style:"margin-bottom: 2px;" %></P>
           <%= f.text_area :body, placeholder: 'コメント(必須)',value:@body, required: true,cols:40,rows:5 %>
           <%= f.hidden_field :blog_id, value:@blog.id.to_i %><br>
