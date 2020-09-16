@@ -10,16 +10,16 @@ class HelloWorld extends React.Component
   constructor( props )
   {
     super( props );
-    this.state = { aisatu: "おはようございます" }
+    this.state = { aisatu: "おはようございます!" }
   }
   render()
   {
     let thisday = today.getFullYear() + "年" + todayDay + "月" + today.getDate() + "日"
     let greeting = this.state.aisatu
-    if ( today.getHours() >= 19 ) {
-      greeting = "こんばんは"
+    if ( today.getHours() >= 19 || today.getHours() <= 3 ) {
+      greeting = "こんばんは!"
     } else if ( today.getHours() >= 10 ) {
-      greeting = "こんにちは"
+      greeting = "こんにちは!"
     }
 
     return (

@@ -11,7 +11,7 @@ class TodosController < ApplicationController
   def index
     @todos=Todo.includes(:accounts).where(finished:false).where(user_id:@userid).order(:term).paginate(page: params[:page], per_page: 20).order(created_at: "ASC")
     @kubun=1
-    @hello ="ハローワールド！"
+    #@hello ="ハローワールド！"
   end
   def indexfinished
     @todos=Todo.where(finished:true).where(user_id:@userid).order(finishday: "DESC").paginate(page: params[:page], per_page: 20).order(created_at: "DESC")
@@ -57,11 +57,16 @@ class TodosController < ApplicationController
       newcreate
     if  @todo.save
       flash[:success]="#{@todo.title}が新規登録されました"
-      if @todo.itemmoney.present?
-        accountcreate
-      else
-        redirect_to "/todos/#{@todo.id}"
+      accountcreate if @todo.itemmoney.present?
+      if @todo.category_id.present? or @todo.category_id2.present? or @todo.category_id3.present?
+        @categories = []
+        @categories << @todo.category_id if @todo.category_id.present?
+        @categories << @todo.category_id2 if @todo.category_id2.present?
+        @categories << @todo.category_id3 if @todo.category_id3.present?
+        @category = Category.new
+        @category.category_insert(@categories,@todo.id) 
       end
+      redirect_to "/todos/#{@todo.id}"
     else
       flash[:danger]="必須項目に入力がありません"
       @sdate=@todo.term
@@ -69,12 +74,13 @@ class TodosController < ApplicationController
       render 'new'
     end
   end
+  
   def accountcreate
     today=Date.today
     @account=Account.new(todo_id:@todo.id,item:@todo.item,amount:@todo.itemmoney,remark:@todo.remark,expense:false,registrationdate:today)
     @account.save
     flash[:success]="#{@todo.title}が会計も含め新規登録されました"
-    redirect_to "/todos/#{@todo.id}"
+    #redirect_to "/todos/#{@todo.id}"
   end
 
   def edit
@@ -224,7 +230,7 @@ class TodosController < ApplicationController
 
   private
   def todo_params
-     params.require(:todo).permit(:title, :body,:term,:starttimehour,:starttimemin,:item,:itemmoney,:remark)
+     params.require(:todo).permit(:title, :body,:term,:starttimehour,:starttimemin,:item,:itemmoney,:remark,:category_id,:category_id2,:category_id3)
   end
   def timeselect
     @hourselect=[*0..23]
