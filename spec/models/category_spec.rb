@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Category, type: :model do
-   before do
+  before do
     @category = Category.new(title:"テスト", todo_id:1,category_id:1)
   end
   describe 'バリデーション' do
@@ -20,5 +20,11 @@ RSpec.describe Category, type: :model do
       @category.category_id = ''
       expect(@category.valid?).to eq(false)
     end
+  end
+  describe 'バリデーション' do
+   it "メソッド結果確認" do
+    @category = Category.new
+    expect(@category.category_insert(1,1)).to eq(true) 
+   end
   end
 end
