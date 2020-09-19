@@ -1,0 +1,22 @@
+<h1>分類：<%= @category %></h1>
+<table class="table1" align="left">
+    <thead>
+      <tr>
+        <th scope="col" style="width:250px">内容</th>
+        <th style="width:15px">期限</th>
+        <th style="width:10px">詳細</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @index_details.each do |form| %>
+      <tr>
+        <% todo_title = mojiseigen(Todo.find(form.todo_id).title,8) %>
+        <% todo_term = monthdayyoubi(Todo.find(form.todo_id).term) %>
+        <td data-label = "内容" style="text-align: left;"><%= link_to todo_title, "/todos/#{form.todo_id}" %></td>
+        <td data-label = "期限"><%= todo_term %></td>
+        <td><%= button_to "編", todos_edit_path, { method: :get, params: {id: form.todo_id,baction:1},class:"btn btn-success" } %></td>
+      </tr>
+    <% end %>
+    </tbody>
+</table>
+<% session[:url]=request.url %>

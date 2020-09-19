@@ -13,11 +13,10 @@
       <%= f.label :内容 %><br>
       <%= f.text_area :body, placeholder: '内容',cols:65,rows:10,value:@body %></p>
       <p>
-     <%= f.label :分類： %><%= f.select :category_id, options_for_select(Category.category_ids), include_blank: true %><br>
-     <%= f.label :分類： %><%= f.select :category_id2, options_for_select(Category.category_ids), include_blank: true  %><br>
-     <%= f.label :分類： %><%= f.select :category_id3, options_for_select(Category.category_ids), include_blank: true  %>
+        <%= f.label :分類： %><%= f.select :category_id, Category.category_ids, include_blank: true %><br>
+        <%= f.label :分類： %><%= f.select :category_id2, Category.category_ids, include_blank: true %><br>
+        <%= f.label :分類： %><%= f.select :category_id3, Category.category_ids, include_blank: true %><br>
       </P>
-  
       <%= f.label :費用品目： %><br>
       <%= f.select :item,Item.all.collect { |i| [ i.name, i.id ] } %><br>
       <%= f.label :金額%><br>

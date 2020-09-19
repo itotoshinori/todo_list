@@ -6,12 +6,14 @@ module ApplicationHelper
       @dateweek=dateweek
     end
   end
+  
   class Hourcollection
   attr_accessor :hour
     def initialize(hour)
       @hour=hour
     end
   end
+  
   class Mincollection
   attr_accessor :min
     def initialize(min)
