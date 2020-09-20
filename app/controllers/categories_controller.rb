@@ -25,6 +25,6 @@ class CategoriesController < ApplicationController
 
   def index_detail
       @category =  params[:category]
-      @index_details = Category.where(category_id:@category)
+      @index_details = Category.where(category_id:@category).order(id: "DESC")
   end
 end
