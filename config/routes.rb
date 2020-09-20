@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'categories/index'
+  get 'categories/index_detail/' , to: 'categories#index_detail'
   #get 'users/index'
   post 'accounts/itemindex'
   get 'accounts/index'

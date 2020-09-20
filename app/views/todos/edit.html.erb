@@ -14,7 +14,18 @@
         <%= f.select:starttimehour,@hourselect,  :include_blank => true %>-
         <%= f.select :starttimemin,@minselect, :include_blank => true %>
       <% end %>
-
+      <% categiries = Category.where(todo_id:@todo.id) %>
+      <% category_ids = [] %>
+      <% categiries.each do |ctg| %>
+        <% category_id = Category.category_ids[ctg.category_id] %>
+        <% category_ids.push(category_id) %>
+      <% end %>
+        <%=  Category%>
+        <%= category_ids %>
+      <br>
+        <%= f.label :分類： %><%= f.select :category_id, Category.category_ids, :selected=>category_ids[0], include_blank: true %><br>
+        <%= f.label :分類： %><%= f.select :category_id2, Category.category_ids, :selected=>category_ids[1], include_blank: true %><br>
+        <%= f.label :分類： %><%= f.select :category_id3, Category.category_ids, :selected=>category_ids[2], include_blank: true %><br>
       <p>
       <%= f.label :内容 %><br>
       <%= f.text_area :body, placeholder: 'enter 内容',cols:65,rows:5 %><br>

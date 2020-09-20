@@ -12,18 +12,5 @@ class Category < ApplicationRecord
     end
     result
   end
-
-  def category_select_id(category_id)
-    categories = Category.order(:category_id)
-    @category_ids = []
-    category_id2 = nil
-    categories.each do |category|
-      if  category.category_id != category_id2
-        @category_ids << category.category_id
-      end
-      category_id2 = category.category_id
-    end
-    @category_ids
-  end  
 end
   

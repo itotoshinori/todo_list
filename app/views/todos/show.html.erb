@@ -33,7 +33,14 @@
 <tr><td>
 <% kei=Account.where(todo_id:@todo.id).sum(:amount) %>
 ■金　額　：</td><td><%= kei.to_s(:delimited, delimiter: ',') %></td></tr>
+<tr><td>■分　類　：</td>
+<td>
+<% @categories.each do |category| %>
+    <%= category.category_id %> 
+<% end %>
+</td></tr>
 <tr><td  colspan="2" width="610">
+
 ■詳　細<br><%=simple_format(@todo.body) %>
 </td></tr>
 </table>
@@ -48,7 +55,8 @@
       <%= button_to "完了取消", todos_finished_path, { method: :get, params: {id: @todo.id,baction:2},class: "btn btn-primary button2" } %>
     <% end %>
   </div>
-</div>
+</div><br />
+
 <hr class="line">
 ■会計新規
 <% @account=Account.new %>
@@ -70,19 +78,19 @@
 </p>
 <hr class="line">
 <% if @todo.starttime %>
-<% title_convert = convert(@todo.title) %>
-<% convert_day = convert_day(@todo.term) %><br />
-<% convert_time = convert_time(@todo.starttime) %>
-<% finishtime= @todo.starttime.since(5400.seconds) %>
-<% convert_finish_time = convert_time(finishtime) %>
-<span class="label label-warning">
-  <% if @todo.body.present? %>
-    <%= link_to "googleカレンダー登録","https://www.google.com/calendar/render?action=TEMPLATE&text=#{title_convert}&&dates=#{convert_day}T#{convert_time}00/#{convert_day}T#{convert_finish_time}00&details=#{request.url}", target: "_new" %>
-  <% else %>
-    <%= link_to "googleカレンダー登録","https://www.google.com/calendar/render?action=TEMPLATE&text=#{title_convert}&&dates=#{convert_day}T#{convert_time}00/#{convert_day}T#{convert_finish_time}00", target: "_new" %>
-  <% end %>
-</span>&nbsp;
-<%= link_to image_tag("https://s.yimg.jp/images/calendar/yc_btn_01.gif"),"https://calendar.yahoo.co.jp/?V=60&TITLE=#{title_convert}&ST=#{convert_day}T#{convert_time}&DUR=0130", target: "_new" %>
+  <% title_convert = convert(@todo.title) %>
+  <% convert_day = convert_day(@todo.term) %><br />
+  <% convert_time = convert_time(@todo.starttime) %>
+  <% finishtime= @todo.starttime.since(5400.seconds) %>
+  <% convert_finish_time = convert_time(finishtime) %>
+  <span class="label label-warning">
+    <% if @todo.body.present? %>
+      <%= link_to "googleカレンダー登録","https://www.google.com/calendar/render?action=TEMPLATE&text=#{title_convert}&&dates=#{convert_day}T#{convert_time}00/#{convert_day}T#{convert_finish_time}00&details=#{request.url}", target: "_new" %>
+    <% else %>
+      <%= link_to "googleカレンダー登録","https://www.google.com/calendar/render?action=TEMPLATE&text=#{title_convert}&&dates=#{convert_day}T#{convert_time}00/#{convert_day}T#{convert_finish_time}00", target: "_new" %>
+    <% end %>
+  </span>&nbsp;
+  <%= link_to image_tag("https://s.yimg.jp/images/calendar/yc_btn_01.gif"),"https://calendar.yahoo.co.jp/?V=60&TITLE=#{title_convert}&ST=#{convert_day}T#{convert_time}&DUR=0130", target: "_new" %>
 <% end %>
 
 <p><%= link_to("一覧に戻る",session[:url]) if session[:url]%></p>
