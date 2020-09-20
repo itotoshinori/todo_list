@@ -14,8 +14,7 @@ class CategoriesController < ApplicationController
         count = 0
         start = false
       end
-      category_id2 = category.catego
-      y_id
+      category_id2 = category.category_id
       count = count + 1
       total_count = total_count + 1
       if total_count == categories_count
