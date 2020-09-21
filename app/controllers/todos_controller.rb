@@ -58,14 +58,7 @@ class TodosController < ApplicationController
     if  @todo.save
       flash[:success]="#{@todo.title}が新規登録されました"
       accountcreate if @todo.itemmoney.present?
-      if @todo.category_id.present? or @todo.category_id2.present? or @todo.category_id3.present?
-        @categories = []
-        @categories << @todo.category_id if @todo.category_id.present?
-        @categories << @todo.category_id2 if @todo.category_id2.present?
-        @categories << @todo.category_id3 if @todo.category_id3.present?
-        @category = Category.new
-        @category.category_insert(@categories,@todo.id) 
-      end
+      category_create
       redirect_to "/todos/#{@todo.id}"
     else
       flash[:danger]="必須項目に入力がありません"
@@ -81,6 +74,17 @@ class TodosController < ApplicationController
     @account.save
     flash[:success]="#{@todo.title}が会計も含め新規登録されました"
     #redirect_to "/todos/#{@todo.id}"
+  end
+
+  def category_create
+    if @todo.category_id.present? or @todo.category_id2.present? or @todo.category_id3.present?
+        @categories = []
+        @categories << @todo.category_id if @todo.category_id.present?
+        @categories << @todo.category_id2 if @todo.category_id2.present?
+        @categories << @todo.category_id3 if @todo.category_id3.present?
+        @category = Category.new
+        @category.category_insert(@categories,@todo.id) 
+    end
   end
 
   def edit
@@ -114,6 +118,7 @@ class TodosController < ApplicationController
       newcreate
       if @todo.save
         flash[:success]="「#{@todo.title}」がコピー新規登録されました"
+        category_create
         redirect_to "/todos/#{@todo.id}"
       else
         flash[:danger]="新規登録に失敗しました"
