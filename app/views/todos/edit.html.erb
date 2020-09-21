@@ -20,8 +20,6 @@
         <% category_id = Category.category_ids[ctg.category_id] %>
         <% category_ids.push(category_id) %>
       <% end %>
-        <%=  Category%>
-        <%= category_ids %>
       <br>
         <%= f.label :分類： %><%= f.select :category_id, Category.category_ids, :selected=>category_ids[0], include_blank: true %><br>
         <%= f.label :分類： %><%= f.select :category_id2, Category.category_ids, :selected=>category_ids[1], include_blank: true %><br>
