@@ -1,5 +1,9 @@
 class CategoriesController < ApplicationController
+   before_action :userid_set
+   #before_action :unless_login
+
   def index
+    redirect_to('/login/index') if cookies[:userid].blank?
     @categories = Category.all.order(:category_id)
     @category_ids = []
     category_id2 = nil
