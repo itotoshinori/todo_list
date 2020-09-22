@@ -1,6 +1,5 @@
 <h1>分類別</h1>
 <% @category_ids.each do |category,count| %>
   <h2><%= link_to category, "/categories/index_detail/?category=#{category}" %>(<%= count %>)</h2>
-  <%#= category %>
 <% end %> 
 <hr />    

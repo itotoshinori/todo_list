@@ -9,4 +9,5 @@ class Todo < ApplicationRecord
     attr_accessor :category_id2
     attr_accessor :category_id3
     has_many :accounts, dependent: :destroy
+    has_many :categories, dependent: :destroy
 end

@@ -127,7 +127,7 @@ class TodosController < ApplicationController
     elsif params[:commit]=="削除"
       @todo=Todo.find(params[:id])
       if @todo.destroy
-        Category.where(todo_id:params[:id]).destroy_all
+        #Category.where(todo_id:params[:id]).destroy_all
         flash[:success]="「#{@todo.title}」が削除されました"
       else
         flash[:danger]="「#{@todo.title}」の削除に失敗しました"
