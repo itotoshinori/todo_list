@@ -9,6 +9,7 @@
     </thead>
     <tbody>
     <% @index_details.each do |form| %>
+      <% if Todo.find(form.todo_id).user_id == @userid %>
       <tr>
         <% if form.todo.finishday.present? %>
           <span class="badge badge-pill badge-info">完</span>
@@ -19,6 +20,7 @@
         <td data-label = "期限"><%= todo_term %></td>
         <td><%= button_to "編", todos_edit_path, { method: :get, params: {id: form.todo_id,baction:1},class:"btn btn-success" } %></td>
       </tr>
+      <% end %>
     <% end %>
     </tbody>
 </table>

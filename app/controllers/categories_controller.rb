@@ -1,13 +1,20 @@
 class CategoriesController < ApplicationController
+   before_action :userid_set
+
   def index
-    @categories = Category.all.order(:category_id)
+    categories = Category.all.order(:category_id)
     @category_ids = []
     category_id2 = nil
-    start = true
+    start = true  
     count = 0
     total_count = 0
-    categories_count = @categories.count
-    @categories.each do |category|
+    categories_count = 0
+    categories.each do |ca|
+      if ca.todo.user_id == @userid
+        categories_count = categories_count + 1
+      end
+    end
+    categories.each do |category|
       if  category.category_id != category_id2
         @category_ids.push([category_id2, count]) if start == false
         category_id2 = nil
