@@ -2,7 +2,7 @@ class CategoriesController < ApplicationController
    before_action :userid_set
 
   def index
-    categories = Category.joins(:todo).where('user_id = ?', @userid).order(:category_id)
+    categories = Category.joins(:todo).where('user_id = ?',@userid).order(:category_id)
     @category_ids = []
     category_id2 = nil
     start = true  
@@ -32,7 +32,7 @@ class CategoriesController < ApplicationController
 
   def index_detail
       @category =  params[:category]
-      @index_details = Category.joins(:todo).where('category_id = ? and user_id = ?',@category,@userid).order(term:"DESC")
+      @index_details = Category.joins(:todo).where(category_id: @category).order(term:"DESC")
       #@index_details = Category.where(category_id:@category).order(id: "DESC")
   end
 end
