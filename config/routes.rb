@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   get 'user/new'
   get 'user/edit'
   post 'user/update'
-  delete 'user/:id' => 'user#destroy'
+  #delete 'user/:id' => 'user#destroy'
   #get '/user/create'
   post '/user/create' 
   get 'login/new'
