@@ -61,10 +61,4 @@ class UserController < ApplicationController
       redirect_to '/user/edit' 
     end
   end
-  def destroy
-    user = User.find(params[:id])
-    user.destroy
-    flash[:success]="削除に成功しました"
-    redirect_to '/'
-  end
 end
