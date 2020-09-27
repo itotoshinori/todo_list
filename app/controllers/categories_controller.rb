@@ -7,25 +7,24 @@ class CategoriesController < ApplicationController
     category_id2 = nil
     start = true  
     count = 0
+    unfinish_count = 0
     total_count = 0
     categories_count = 0
-    categories.each do |ca|
-      if ca.todo.user_id == @userid
-        categories_count = categories_count + 1
-      end
-    end
+    
     categories.each do |category|
       if  category.category_id != category_id2
-        @category_ids.push([category_id2, count]) if start == false
+        @category_ids.push([category_id2, count,unfinish_count]) if start == false
         category_id2 = nil
         count = 0
+        unfinish_count = 0
         start = false
       end
       category_id2 = category.category_id
       count = count + 1
+      unfinish_count = unfinish_count + 1 if category.todo.finishday.present?
       total_count = total_count + 1
       if total_count == categories_count
-       @category_ids.push([category.category_id, count])
+       @category_ids.push([category.category_id, count,unfinish_count])
       end
     end
   end
