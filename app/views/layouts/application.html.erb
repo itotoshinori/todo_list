@@ -93,7 +93,7 @@
           </div>
           <div class="menulist">
             <ul>
-              <li><a href="/">ホーム</a></li>
+              <li style="border-top: solid 1px #bbbbbb;"><a href="/">ホーム</a></li>
               <li><a href="/todos/index">Todo</a></li>
               <% if cookies[:userid].present? %>
                 <% if today.day == 1 %>
@@ -101,7 +101,7 @@
                 <% else %>
                   <% convertday = convert_day(today) %>
                 <% end %>  
-                <li><%= link_to "スケジュール","/todos/schedule#"+ convertday %></li>
+                <li ><%= link_to "スケジュール","/todos/schedule#"+ convertday %></li>
                 <li><%= link_to "分類別","/categories/index" %></li>
                 <li><a href="/todos/aggregate">集計表</a></li>
                 <li><a href="/accounts/monthlychangesaccount">年度別出費集計表</a></li>
