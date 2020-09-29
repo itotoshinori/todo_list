@@ -9,7 +9,7 @@ class CategoriesController < ApplicationController
     count = 0
     unfinish_count = 0
     total_count = 0
-    categories_count = 0
+    categories_count = categories.count
     
     categories.each do |category|
       if  category.category_id != category_id2
