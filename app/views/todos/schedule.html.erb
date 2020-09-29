@@ -32,7 +32,9 @@
   <% else %>
     <% idday = convert_day(day+1) %>
   <% end  %>
-  <div id=<%= idday %>><%=monthday(day) %>(<%=weekdate(day) %>)</div>
+  <div id=<%= idday %>><%=monthday(day) %>(<%=weekdate(day) %>)
+  <%= link_to '+', controller: "todos", action: "new", gday:day,section:1  %>
+  <%#= link_to "+", "new", gday:day %></div>
   </td>
 <td style="text-align: left;">
   <% dayevent=@event.where(term:day).order(:starttime) %>

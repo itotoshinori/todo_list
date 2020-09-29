@@ -44,8 +44,9 @@ class TodosController < ApplicationController
     #render todos_finishindex_path
   end
   def new
-      now = Time.current
+      now = Time.current  
       sdate=now.since(1.days)
+      sdate=params[:gday].to_date if params[:section] == "1"
       @sdate=Date.new(sdate.year, sdate.month, sdate.day)
       @todo=Todo.new
   end
