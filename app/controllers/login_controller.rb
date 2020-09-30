@@ -13,7 +13,7 @@ class LoginController < ApplicationController
     @user=User.find_by(email:mail)
     if @user and @user.authenticate(password)
       cookies[:userid] = {:value => @user.id, :expires => 5.days.from_now } 
-      $password = password
+      session[:password] = password
       flash[:success]="ログインに成功しました"
       @chatwork = InquiryChatwork.new
       @chatwork.push_chatwork_message(@user,2)
