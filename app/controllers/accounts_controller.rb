@@ -2,7 +2,7 @@ class AccountsController < ApplicationController
   #protect_from_forgery
   protect_from_forgery :except => [:itemindex,:itemaggregateyear]
   require 'date'
-  before_action :userid_set,   only: [:index,:itemaggregate,:itemindex,:accountcsvexport,:itemaggregateyear]
+  before_action :userid_set,   only: [:index,:itemaggregate,:itemindex,:accountcsvexport,:itemaggregateyear,:monthlychangesaccount]
   include ApplicationHelper
   
   def index
@@ -73,7 +73,7 @@ class AccountsController < ApplicationController
     flash[:success]="エクスポートしました"
   end
   def monthlychangesaccount
-    @accounts=Account.joins(:todo).where('todos.user_id = ?', @userid).order(registrationdate:"DESC")
+    @accounts=Account.joins(:todo).where('user_id = ?', @userid).order(registrationdate:"DESC")
     @acym=[]
     @accounts.each do |f|
      if f.registrationdate.present? 
