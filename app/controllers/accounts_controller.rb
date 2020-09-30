@@ -73,7 +73,7 @@ class AccountsController < ApplicationController
     flash[:success]="エクスポートしました"
   end
   def monthlychangesaccount
-    @accounts=Account.order(registrationdate:"DESC")
+    @accounts=Account.joins(:todo).where('todos.user_id = ?', @userid).order(registrationdate:"DESC")
     @acym=[]
     @accounts.each do |f|
      if f.registrationdate.present? 
