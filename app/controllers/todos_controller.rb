@@ -74,7 +74,6 @@ class TodosController < ApplicationController
     @account=Account.new(todo_id:@todo.id,item:@todo.item,amount:@todo.itemmoney,remark:@todo.remark,expense:false,registrationdate:today)
     @account.save
     flash[:success]="#{@todo.title}が会計も含め新規登録されました"
-    #redirect_to "/todos/#{@todo.id}"
   end
 
   def category_create
