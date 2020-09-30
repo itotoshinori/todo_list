@@ -9,18 +9,22 @@ class ApplicationController < ActionController::Base
     if cookies[:userid].present?
       @userid=cookies[:userid].to_i
       cookies[:userid] = {:value => @userid, :expires => 5.days.from_now }
+      password = cookies.signed[:secret]
+      cookies.signed[:secret] = {
+      :value => password,
+      :expires => 5.days.from_now
+     }
     else
       redirect_to('/login/index')
     end
   end
 
   def unless_user
-    #@todo=Todo.includes(:accounts).find(params[:id])
     user = User.find(cookies[:userid].to_i)
-    #unless user.authenticate(session[:password])
-      #cookies.delete :userid
-      #redirect_to('/login/index')
-    #end
+    unless user.authenticate(cookies.signed[:secret])
+      cookies.delete :userid
+      redirect_to('/login/index')
+    end
   end
 
   def unless_admin_user
