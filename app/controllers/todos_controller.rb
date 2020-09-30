@@ -9,10 +9,10 @@ class TodosController < ApplicationController
 
   end
   def index
-    @todos=Todo.includes(:accounts).where(finished:false).where(user_id:@userid).order(:term).paginate(page: params[:page], per_page: 20).order(created_at: "ASC")
-    @kubun=1
-    #@hello ="ハローワールド！"
+    @todos = Todo.includes(:accounts).where(finished:false).where(user_id:@userid).order(:term).paginate(page: params[:page], per_page: 20).order(created_at: "ASC")
+    @kubun = 1
   end
+
   def indexfinished
     @todos=Todo.where(finished:true).where(user_id:@userid).order(finishday: "DESC").paginate(page: params[:page], per_page: 20).order(created_at: "DESC")
     @kubun=2
@@ -34,15 +34,18 @@ class TodosController < ApplicationController
     #redirect_to "/todos/index"
     redirect_to request.referer
   end
+  
   def finishindex
     date=params[:finishdate]
     @todos=Todo.where(finished:true).where(user_id:@userid).where(finishday:date).order(finishday: "DESC").order(created_at: "DESC")
   end
+
   def termindex
     date=params[:termdate]
     @todos=Todo.where(user_id:@userid).where(term:date).order(finishday: "DESC").order(created_at: "DESC")
     #render todos_finishindex_path
   end
+  
   def new
       now = Time.current  
       sdate=now.since(1.days)
@@ -50,6 +53,7 @@ class TodosController < ApplicationController
       @sdate=Date.new(sdate.year, sdate.month, sdate.day)
       @todo=Todo.new
   end
+  
   def create
       @todo = Todo.new(todo_params)
       @todo.user_id=@userid
