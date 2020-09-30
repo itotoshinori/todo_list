@@ -18,7 +18,8 @@ class ApplicationController < ActionController::Base
   def unless_user
     #@todo=Todo.includes(:accounts).find(params[:id])
     user = User.find(cookies[:userid].to_i)
-    unless user.authenticate(cookies[:password])
+    unless user.authenticate($password)
+      cookies.delete :userid
       redirect_to('/login/index')
     end
   end

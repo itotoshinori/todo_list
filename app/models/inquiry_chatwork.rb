@@ -15,7 +15,7 @@ class InquiryChatwork
         message = "[To:3775224]#{message.name}さんから「#{title}」のブログにコメントがありました。確認をお願いします。"
       elsif num == 2
         title ="ログインされました"
-        message = "ユーザー#{message.name}にログインがありました。心当たりがなければ、パスワードを変更して下さい。"
+        message = "[To:3775224]ユーザー#{message.name}にログインがありました。心当たりがなければ、パスワードを変更して下さい。"
       end
       http.start do
         req = Net::HTTP::Post.new(uri.path)
