@@ -92,7 +92,7 @@ module ApplicationHelper
   def mojiseigen(moji,jisuu)
     kekka=moji
     if moji.length > jisuu.to_i 
-      kekka = moji[0,mojiseigen_count(moji,jisuu)]+".."
+      kekka = moji[0,mojiseigen_count(moji,jisuu)] + ".."
     else
       kekka
     end
