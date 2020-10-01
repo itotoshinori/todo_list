@@ -70,15 +70,32 @@ module ApplicationHelper
     if d.present?
         kekka=niketa(d.month)+"/"+niketa(d.day).to_s+"("+weekdate(d)+")"
     end
-        kekka
+    kekka
   end
-  
+  def mojiseigen_count(moji,jisuu)
+    mojihairetu = []
+    mojihairetu = moji.chars
+    moji_count = 0
+    count = 0
+    mojihairetu.each do |mo|
+      if jisuu > count
+        if mo.bytesize == 3
+          moji_count = moji_count + 1
+        else
+          moji_count = moji_count + 2
+        end
+        count = count + 1
+      end
+    end
+    moji_count
+  end
   def mojiseigen(moji,jisuu)
     kekka=moji
-    if moji.length>jisuu.to_i
-      kekka=moji[0,jisuu.to_i]+".."
-    end
+    if moji.length > jisuu.to_i 
+      kekka = moji[0,mojiseigen_count(moji,jisuu)]+".."
+    else
       kekka
+    end
   end
   def nengetu(d)
         if d.present?
