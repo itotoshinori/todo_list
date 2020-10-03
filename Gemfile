@@ -19,7 +19,7 @@ gem 'holiday_japan'
 gem 'faraday'
 gem 'react-rails'
 gem 'webpacker'
-gem 'rspec-rails'
+#gem 'rspec-rails'
 
 group :development, :test do
   gem 'sqlite3', '1.3.13'
@@ -31,6 +31,7 @@ group :development do
   gem 'listen',                '3.0.8'
   gem 'spring',                '2.0.2'
   gem 'spring-watcher-listen', '2.0.1'
+  gem 'htmlbeautifier'
 end
 
 group :test do
@@ -38,6 +39,9 @@ group :test do
   gem 'minitest-reporters',       '1.1.14'
   gem 'guard',                    '2.13.0'
   gem 'guard-minitest',           '2.4.4'
+  gem "rspec-rails"
+  gem "factory_bot_rails"
+  gem "rails-controller-testing", '1.0.2'
 end
 
 group :production do

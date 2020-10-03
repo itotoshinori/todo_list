@@ -5,8 +5,10 @@ class LoginController < ApplicationController
   def new
     @user=User.new()
   end
+
   def create
   end
+
   def login
     mail=params[:mail]
     password=params[:password]
@@ -26,6 +28,7 @@ class LoginController < ApplicationController
       redirect_to('/login/index')
     end
   end
+  
   def logout
     cookies.delete :userid
     cookies.delete :passwd

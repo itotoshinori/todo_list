@@ -7,14 +7,14 @@ class AccountsController < ApplicationController
   
   def index
     date=params[:registrationdate]
-    @accounts=Account.joins(:todo).where('todos.user_id = ?', @userid).where('registrationdate = ?',date)
+    @accounts = Account.joins(:todo).where('todos.user_id = ?', @userid).where('registrationdate = ?',date)
   end
  
   def new
   
   end
+  
   def create
-    #@id=@current_user.id
     today=Date.today
     @account = Account.new(
       item:params[:item],
@@ -31,23 +31,23 @@ class AccountsController < ApplicationController
     end
     redirect_to "/todos/#{@account.todo_id}"
   end
+
   def editmany
-    #debugger
-  
     accountsmanyedit_params.each{|id,val|amount,remark,item,deletecheck = val.values_at("amount","remark","item","deletecheck")
-      @account=Account.find(id)
-      if deletecheck=="1"
-        @account.destroy
-      else
+    @account = Account.find(id)
+    if deletecheck == "1"
+      @account.destroy
+    else
       @account.update(
         amount:amount,
         remark:remark,
         item:item)
-      end
+    end
     }
     flash[:success] = "会計データを更新しました"
     redirect_to "/todos/#{@account.todo_id}"
   end
+
   def itemaggregate
     kubun=params[:kubun]
     if kubun.present?
@@ -57,21 +57,25 @@ class AccountsController < ApplicationController
     end
     @accounts=Account.joins(:todo).where('todos.user_id = ?', @userid)
   end
+
   def itemaggregateyear
     itemaggregate
   end
+
   def itemindex
     item=params[:item]
     first=params[:firstday]
     last=params[:lastday]
     @accounts=Account.joins(:todo).where('todos.user_id = ?', @userid).where("registrationdate >= ?", first).where("registrationdate <= ?", last).where(item:item)
   end
+
   def accountcsvexport
     @startdate= params[:startdate][:id]
     @finishdate=params[:finishdate][:id]
     @accounts=Account.joins(:todo).where('todos.user_id = ?', @userid).where("registrationdate >= ?", @startdate).where("registrationdate <= ?", @finishdate)
     flash[:success]="エクスポートしました"
   end
+
   def monthlychangesaccount
     @accounts=Account.joins(:todo).where('user_id = ?', @userid).order(registrationdate:"DESC")
     @acym=[]
@@ -84,7 +88,8 @@ class AccountsController < ApplicationController
      end
     end
   end
-  private
+
+private
   def accountsmanyedit_params
     params.permit(accountsmany: [:amount,:remark,:item,:deletecheck])[:accountsmany]
   end

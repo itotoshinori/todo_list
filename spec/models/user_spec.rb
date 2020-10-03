@@ -1,50 +1,33 @@
 require 'rails_helper'
-  
+
 RSpec.describe User, type: :model do
-  describe "#user" do
-    context "nameが空の場合" do
-      let(:user){User.new(name:"")} #nameが空文字のUserオブジェクトを生成
-      it "エラーを返す" do
-        user.valid? #バリデーションを実行
-        expect(user.errors[:name]).to be_present #期待結果：エラーメッセージが存在する
-      end
-      let(:user){User.new(email:"")} #emailが空文字のUserオブジェクトを生成
-      it "エラーを返す" do
-        user.valid? #バリデーションを実行
-        expect(user.errors[:email]).to be_present #期待結果：エラーメッセージが存在する
-      end
+ before do
+    @user = create(:user) #ここがリファクタリングされてます。
+  end
+
+  describe 'バリデーション１' do
+    it 'emailとpasswordと名前いずれも値が設定されていれば、OK' do
+      expect(@user.valid?).to eq(true)
     end
 
-    context "メールアドレス形式じゃない時の確認" do
-      let(:user){User.new(email:"abc")} 
-      it "エラーを返す" do
-        user.valid? #バリデーションを実行
-        expect(user.errors[:email]).to be_present #期待結果：エラーメッセージが存在する
-      end
+    it 'emailが空だとNG' do
+      @user.email = ''
+      expect(@user.valid?).to eq(false)
     end
 
-    context "メールアドレス形式の場合はエラーを返さない" do
-      let(:user){User.new(email:"abc@gmail.com")} 
-      it "エラーを返さない" do
-        user.valid? #バリデーションを実行
-        expect(user.errors[:email]).to be_blank #期待結果：エラーメッセージが存在する
-      end
+    it 'emailが形式が不正ならNG' do
+      @user.email = 'test'
+      expect(@user.valid?).to eq(false)
     end
 
-    context "パスワード長さ確認" do
-      let(:user){User.new(password:"a" * 5)} 
-      it "エラーを返す" do
-        user.valid? #バリデーションを実行
-        expect(user.errors[:password]).to be_present #期待結果：エラーメッセージが存在する
-      end
+    it 'nameが空だとNG' do
+      @user.name = ''
+      expect(@user.valid?).to eq(false)
     end
 
-    context "名前長さ確認" do
-      let(:user){User.new(name:"a" * 15)} 
-      it "エラーを返す" do
-        user.valid? #バリデーションを実行
-        expect(user.errors[:name]).to be_present #期待結果：エラーメッセージが存在する
-      end
+    it 'パスワードが６文字以下ならNG' do
+      @user.password = '123'
+      expect(@user.valid?).to eq(false)
     end
   end
 end
