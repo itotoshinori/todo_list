@@ -1,5 +1,5 @@
 class PortalsController < ApplicationController
-  before_action :userid_set,  only: [:edit,:new]
+  before_action :unless_admin_user,  only: [:edit,:new]
 
   def index
     if Portal.count>0
