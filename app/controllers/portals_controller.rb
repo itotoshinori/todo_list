@@ -1,4 +1,6 @@
 class PortalsController < ApplicationController
+  before_action :userid_set,  only: [:edit,:new]
+
   def index
     if Portal.count>0
       @portal=Portal.find(1)
