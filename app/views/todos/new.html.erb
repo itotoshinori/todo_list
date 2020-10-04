@@ -8,7 +8,7 @@
       <% Account.new %>
       <% itemselect=Item.all %>
       <%= f.select:starttimehour,@hourselect, :include_blank => true %>-
-      <%= f.select :starttimemin,@minselect, :include_blank => true %><br>
+      <%= f.select :starttimemin,@minselect %><br>
       <p>
       <%= f.label :内容 %><br>
       <%= f.text_area :body, placeholder: '内容',cols:65,rows:10,value:@body %></p>

@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   get 'categories/index'
   get 'categories/index_detail/' , to: 'categories#index_detail'
-  #get 'users/index'
   post 'accounts/itemindex'
   get 'accounts/index'
   post 'accounts/index'
@@ -20,7 +19,6 @@ Rails.application.routes.draw do
   get 'todos/searchresult'
   post 'todos/searchresult'
   post 'todos/research'
-  #post 'todos/wshow'
   get 'todos/indexfinished'
   get 'todos/finished'
   post 'todos/finishindex'
