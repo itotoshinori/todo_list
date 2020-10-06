@@ -40,6 +40,7 @@ Rails.application.routes.draw do
   get 'login/index'
   post 'login/login'
   get 'login/logout'
+  get 'error_display/index'
   #resources :accounts, only: [:show]
   resources :todos
   delete 'blog/:id/delete', to: 'blogs#destroy'

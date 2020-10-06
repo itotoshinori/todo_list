@@ -21,7 +21,11 @@ class BlogsController < ApplicationController
   end
 
   def edit
-    @blog = Blog.find(params[:id])
+    begin
+      @blog = Blog.find(params[:id])
+    rescue => exception
+      redirect_to error_display_index_path
+    end
   end
   
   def update
@@ -39,9 +43,13 @@ class BlogsController < ApplicationController
   end
 
   def show
-    @blog=Blog.find(params[:id])
-    @commentcontent=Comment.where(blog_id:@blog.id)
-    @comment=Comment.new
+    begin
+      @blog=Blog.find(params[:id])
+      @commentcontent=Comment.where(blog_id:@blog.id)
+      @comment=Comment.new
+    rescue => exception
+      redirect_to error_display_index_path
+    end
   end
   
 private

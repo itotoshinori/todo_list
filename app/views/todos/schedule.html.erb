@@ -2,7 +2,7 @@
   <% @first_day = @date.beginning_of_month %>
   <% @last_day = @date.end_of_month %>
   <% today = Date.today %>
-  
+  <div><%= react_component("HelloWorld", { greeting:"" }) %></div> 
   <table >
   <% @datedown=(@first_day-1).beginning_of_month %>
   <tr>

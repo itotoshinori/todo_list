@@ -90,8 +90,12 @@ class TodosController < ApplicationController
   end
 
   def edit
-    @url=request.referer
-    @todo = Todo.find(params[:id])
+    begin
+      @url=request.referer
+      @todo = Todo.find(params[:id])
+    rescue => exception
+      redirect_to error_display_index_path
+    end
   end
 
   def update
@@ -163,9 +167,12 @@ class TodosController < ApplicationController
   end
   
   def show
-    @todo = Todo.includes(:accounts).find(params[:id])
-    @categories = Category.where(todo_id:params[:id])
-    @url=request.referer
+    begin
+      @todo = Todo.includes(:accounts).find(params[:id])
+      @categories = Category.where(todo_id:params[:id])
+    rescue => exception
+      redirect_to error_display_index_path
+    end
   end
 
   def aggregate
