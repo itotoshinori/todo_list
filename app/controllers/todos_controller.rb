@@ -92,9 +92,14 @@ class TodosController < ApplicationController
   end
 
   def edit
-    @url=request.referer
-    @todo = Todo.find(params[:id])
+    begin
+      @url=request.referer
+      @todo = Todo.find(params[:id])
+    rescue => exception
+      redirect_to error_display_index_path
+    end
   end
+  
   def update
     if params[:commit]=="修正登録"
       @todo = Todo.find(params[:id])
@@ -166,9 +171,12 @@ class TodosController < ApplicationController
   end
   
   def show
-    @todo = Todo.includes(:accounts).find(params[:id])
-    @categories = Category.where(todo_id:params[:id])
-    @url=request.referer
+    begin
+      @todo = Todo.includes(:accounts).find(params[:id])
+      @categories = Category.where(todo_id:params[:id])
+    rescue => exception
+      redirect_to error_display_index_path
+    end
   end
 
   def aggregate
@@ -194,6 +202,7 @@ class TodosController < ApplicationController
       @datekakuni = "true"
     end
   end
+
   def createmany
     openday=params[:openday].to_date
     finishday=params[:finishday].to_date
@@ -220,6 +229,7 @@ class TodosController < ApplicationController
     end
     redirect_to request.referer
   end
+
   def search
     @now = Time.current
     now = Time.current
@@ -230,6 +240,7 @@ class TodosController < ApplicationController
     @idate=Todo.minimum(:term)
     timeselect
   end
+
   def toexport
     now = Time.current
     sdate=now.prev_month
@@ -239,12 +250,14 @@ class TodosController < ApplicationController
     @idate=Todo.minimum(:term)
     timeselect
   end
+
   def todocsvexport
     @startdate= params[:startdate][:id]
     @finishdate=params[:finishdate][:id]
     @todos=Todo.includes(:accounts).where(user_id:@userid).where("term >= ?", @startdate).where("term <= ?", @finishdate)
     flash[:success]="エクスポートしました"
   end
+
   def searchresult
     @title=params[:title]
     @startdate= params[:startdate][:id]
@@ -259,6 +272,7 @@ class TodosController < ApplicationController
       render todos_search_path
     end
   end
+
   def research
     @title=params[:title]
     @startdate= params[:startdate]
