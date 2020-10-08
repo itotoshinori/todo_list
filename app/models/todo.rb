@@ -10,4 +10,18 @@ class Todo < ApplicationRecord
     attr_accessor :category_id3
     has_many :accounts, dependent: :destroy
     has_many :categories, dependent: :destroy
+
+    def todo_delete_target(term, user_id)
+        todos = Todo.where('body = ? and term <= ? and user_id = ?' , "", term, user_id).order(:term)
+        #todos = Todo.where('term <= ? and body = ?',  term, "")
+        targets = []
+        todos.each do | todo |
+            if Account.where(todo_id:todo.id).blank?  
+                if Category.where(todo_id:todo.id).blank?
+                    targets.push(todo.id,todo.title,todo.term,todo.finishday)
+                end 
+            end
+        end
+        targets   
+    end
 end

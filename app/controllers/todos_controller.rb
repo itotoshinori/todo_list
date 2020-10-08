@@ -1,5 +1,5 @@
 class TodosController < ApplicationController
-  protect_from_forgery :except => [:finishindex,:termindex]
+  protect_from_forgery with: :exception
   before_action :userid_set
   before_action :unless_user,  only: [:index,:indexfinished,:show,:edit,:schedule]
   before_action :timeselect,   only: [:new,:create,:edit,:update,:index,:searchresult,:research]
@@ -9,6 +9,9 @@ class TodosController < ApplicationController
 
   end
   def index
+    @todo = Todo.new
+    @date = Date.today
+    @target = @todo.todo_delete_target(@date,@userid)
     @todos = Todo.includes(:accounts).where(finished:false).where(user_id:@userid).order(:term).paginate(page: params[:page], per_page: 20).order(created_at: "ASC")
     @kubun = 1
   end
