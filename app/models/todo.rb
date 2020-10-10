@@ -12,13 +12,12 @@ class Todo < ApplicationRecord
     has_many :categories, dependent: :destroy
 
     def todo_delete_target(term, user_id)
-        todos = Todo.where('body = ? and term <= ? and user_id = ?' , "", term, user_id).order(:term)
-        #todos = Todo.where('term <= ? and body = ?',  term, "")
-        targets = []
+        todos = Todo.where('body = ?  and term <= ? and user_id = ?' , "", term, user_id).where(starttime:nil).order(:term)
+        targets =  Array.new()
         todos.each do | todo |
             if Account.where(todo_id:todo.id).blank?  
                 if Category.where(todo_id:todo.id).blank?
-                    targets.push(todo.id,todo.title,todo.term,todo.finishday)
+                    targets.push([todo.id,todo.title,todo.term])
                 end 
             end
         end

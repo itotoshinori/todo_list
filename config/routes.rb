@@ -29,31 +29,35 @@ Rails.application.routes.draw do
   get 'todos/aggregate' 
   get 'todos/toexport'
   post 'todos/todocsvexport'
+  get 'todos/research'
   get 'user/index'
   get 'user/new'
   get 'user/edit'
   post 'user/update'
-  #delete 'user/:id' => 'user#destroy'
-  #get '/user/create'
   post '/user/create' 
   get 'login/new'
   get 'login/index'
   post 'login/login'
   get 'login/logout'
   get 'error_display/index'
-  #resources :accounts, only: [:show]
+  get 'todos/target_delete_condition'
+  resource :targets do
+    collection do
+      get :index
+      delete :delete_many 
+    end
+  end
   resources :todos
   delete 'blog/:id/delete', to: 'blogs#destroy'
   resources :blogs, except: [:delete]
-  #get 'portals/:id/edit'
+  #resources :targets, only: [:index,:delete]
   get '/'=>'portals#index'
-  #get '/comments/comment_error'
+  
   post '/comments/comment_error', as: :comment_error
-  #post '/comments/test'
+
   get '/comments/test', as: :test
-  #post 'blogs/commentcreate'
   resources :comments, only: [:create]
   resources :users
   resources :portals
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+ 
 end

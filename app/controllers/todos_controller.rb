@@ -9,9 +9,6 @@ class TodosController < ApplicationController
 
   end
   def index
-    @todo = Todo.new
-    @date = Date.today
-    @target = @todo.todo_delete_target(@date,@userid)
     @todos = Todo.includes(:accounts).where(finished:false).where(user_id:@userid).order(:term).paginate(page: params[:page], per_page: 20).order(created_at: "ASC")
     @kubun = 1
   end
@@ -281,6 +278,7 @@ class TodosController < ApplicationController
     def todo_params
       params.require(:todo).permit(:title, :body,:term,:starttimehour,:starttimemin,:item,:itemmoney,:remark,:category_id,:category_id2,:category_id3)
     end
+
     def timeselect
       @hourselect=[*0..23]
       @minselect=[*0..59]

@@ -1,0 +1,26 @@
+<h1>自動削除一覧</h1>
+<p>※6ケ以前のタイトル登録のみのデータが一括削除の対象となります</p>
+<p>※対象からはずしたければ、編集にて詳細・分類・時間いずれか登録下さい</p>
+<% if @targets.present? %>
+<%= button_to '一括削除', {controller: 'targets', action: 'delete_many'}, { method: :delete, class: "btn btn-danger" }%><br />
+<table class="table1" align="left">
+    <thead>
+        <tr>
+            <th scope="col" style="width:250px">内容</th>
+            <th scope="col">期限</th>
+            <th scope="col">編集</th>
+        </tr>
+    </thead>
+      <% @targets.each do | id,title,term | %>
+            <tr>
+                <td><% title_seigen = mojiseigen(title,8) %>
+                <%= link_to title_seigen, "/todos/#{id}" %></td>
+                <td><%=term %></td>
+                <td><%= button_to "編", todos_edit_path, { method: :get, params: {id: id,baction:2},class:"btn btn-success" } %></td>
+            </tr>
+        <% end %>
+    </table>
+<% else %>
+    <h3>該当データはありません</h3>
+<% end %>
+<% session[:url]=request.url %>
