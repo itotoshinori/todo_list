@@ -1,8 +1,14 @@
 <h1>自動削除一覧</h1>
 <p>※6ケ以前のタイトル登録のみのデータが一括削除の対象となります</p>
 <p>※対象からはずしたければ、編集にて詳細・分類・時間いずれか登録下さい</p>
+<table >
+  <tr>
+  <td><%= button_to"←", {controller: 'todos', action: 'schedule'}, {method: :get, params: {lday:@datedown,kubun:"1"}} %></td>
+  <td><div style="padding : 10px ;"><strong><%= @date %>以前の削除対象</strong></div></td>
+  <td></td>
+  </tr></table>
 <% if @targets.present? %>
-<%= button_to '一括削除', {controller: 'targets', action: 'delete_many'}, { method: :delete, class: "btn btn-danger", data: { confirm: '本当に削除しますか？' } }%><br />
+<%= button_to '一括削除', {controller: 'targets', action: 'delete_many'}, { method: :delete, params: {day:@date}, class: "btn btn-danger", data: { confirm: '本当に削除しますか？' } }%><br />
 <table class="table1" align="left">
     <thead>
         <tr>

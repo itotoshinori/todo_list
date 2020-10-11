@@ -5,6 +5,7 @@ class TargetsController < ApplicationController
 
   def index
     @todo = Todo.new
+    @date = params[:date] if params[:date].present?
     @targets = []
     @targets = @todo.todo_delete_target(@date,@userid)
   end
