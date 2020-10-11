@@ -238,6 +238,17 @@ class TodosController < ApplicationController
     timeselect
   end
 
+  def condition
+    @now = Time.current
+    now = Time.current
+    sdate=now.prev_year
+    fdate=now.since(3.month)
+    @startdate=Date.new(sdate.year, sdate.month, sdate.day) if @startdate.blank?
+    @finishdate=Date.new(fdate.year, fdate.month, fdate.day) if @finishdate.blank?
+    @idate=Todo.minimum(:term)
+    timeselect
+  end
+
   def toexport
     now = Time.current
     sdate=now.prev_month
@@ -281,6 +292,7 @@ class TodosController < ApplicationController
     def todo_params
       params.require(:todo).permit(:title, :body,:term,:starttimehour,:starttimemin,:item,:itemmoney,:remark,:category_id,:category_id2,:category_id3)
     end
+
     def timeselect
       @hourselect=[*0..23]
       @minselect=[*0..59]

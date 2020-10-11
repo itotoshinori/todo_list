@@ -1,0 +1,13 @@
+<p>
+  <b>一括削除</b>
+</p>
+<%= form_with(url: todos_searchresult_path, method: :get, local: true) do |f| %>
+  <p>
+    <%= f.label :期限 %><br>
+    <%= collection_select(:startdate,:id,@dates,:id, :dateweek , {:selected=>@startdate}) %>-<%= collection_select(:finishdate,:id,@dates,:id, :dateweek , {:selected=>@finishdate}) %>
+  <p>
+    <%= f.submit "検索", class: "btn btn-primary",data: { disable_with: '送信中...' },style:"width:100px;height:50px" %>
+  </p>
+<% end %>
+<%= link_to("一覧に戻る",session[:url]) if session[:url]%>
+<a href="/todos/search">リセット</a>
