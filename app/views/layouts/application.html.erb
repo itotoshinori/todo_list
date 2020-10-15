@@ -38,7 +38,7 @@
     <div id="header-menu">
       <ul class="clearfix">
         <li class="home"><a href="/">ホーム<br><span class="sub">home</span></a></li>
-        <li><a href="/todos/index">Todo<br><span class="sub">todo</span></a></li>
+        <li><a href="/todos/">Todo<br><span class="sub">todo</span></a></li>
         <% if cookies[:userid].present? %>
           <li><a href="https://calendar.google.com/calendar/" target="new">calendar<br><span class="sub">Schedule</span></a></li>
           <li><a href="/todos/aggregate">集計表<br><span class="sub">account</span></a></li>
@@ -94,7 +94,7 @@
           <div class="menulist">
             <ul>
               <li style="border-top: solid 1px #bbbbbb;"><a href="/">ホーム</a></li>
-              <li><a href="/todos/index">Todo</a></li>
+              <li><a href="/todos/">Todo</a></li>
               <% if cookies[:userid].present? %>
                 <% if today.day == 1 %>
                   <% convertday = "0000" %>

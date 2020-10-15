@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   post 'todos/finishindex'
   post 'todos/termindex'
   #get 'todos/index'
-  get 'todos/edit'
+  #get 'todos/edit'
   get 'todos/schedule'
   get 'todos/aggregate' 
   get 'todos/toexport'
