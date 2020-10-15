@@ -5,9 +5,7 @@ class TodosController < ApplicationController
   before_action :timeselect,   only: [:new,:create,:edit,:update,:index,:searchresult,:research]
   
   require 'active_support/core_ext/date'
-  def modal
 
-  end
   def index
     @todos = Todo.includes(:accounts).where(finished:false).where(user_id:@userid).order(:term).paginate(page: params[:page], per_page: 20).order(created_at: "ASC")
     @kubun = 1
@@ -61,7 +59,9 @@ class TodosController < ApplicationController
     if  @todo.save
       flash[:success]="#{@todo.title}が新規登録されました"
       accountcreate if @todo.itemmoney.present?
-      category_create
+      @category = Category.new
+      @categories = @category.category_array(@todo)
+      @category.category_insert(@categories,@todo.id)
       redirect_to "/todos/#{@todo.id}"
     else
       flash[:danger]="必須項目に入力がありません"
@@ -76,17 +76,6 @@ class TodosController < ApplicationController
     @account=Account.new(todo_id:@todo.id,item:@todo.item,amount:@todo.itemmoney,remark:@todo.remark,expense:false,registrationdate:today)
     @account.save
     flash[:success]="#{@todo.title}が会計も含め新規登録されました"
-  end
-
-  def category_create
-    if @todo.category_id.present? or @todo.category_id2.present? or @todo.category_id3.present?
-      @categories = []
-      @categories << @todo.category_id if @todo.category_id.present?
-      @categories << @todo.category_id2 if @todo.category_id2.present?
-      @categories << @todo.category_id3 if @todo.category_id3.present?
-      @category = Category.new
-      @category.category_insert(@categories,@todo.id) 
-    end
   end
 
   def edit
@@ -110,7 +99,12 @@ class TodosController < ApplicationController
         @todo.starttime=@todo.starttime-32400
       end
       if @todo.update(todo_params)
-        category_update
+        @category = Category.new
+        category_ids = Category.where(todo_id:@todo.id)
+        category1 = todo_params[:category_id]
+        category2 = todo_params[:category_id2]
+        category3 = todo_params[:category_id3]
+        @category.category_update(category_ids,category1,category2,category3,@todo.id)
         flash[:success]="「#{@todo.title}」が編集されました"
         redirect_to "/todos/#{@todo.id}"
       else
@@ -140,30 +134,6 @@ class TodosController < ApplicationController
       end
       redirect_to session[:url]
     end
-  end
-
-  def  category_update
-    @category_ids = Category.where(todo_id:@todo.id)
-    @category_edit_ids = [todo_params[:category_id],todo_params[:category_id2],todo_params[:category_id3]] 
-    count = 0
-    @category_ids.each do | category |
-      @category_edit_id = @category_edit_ids[count].to_i
-      if @category_edit_id == 0
-        category.destroy
-      else
-        category.category_id = @category_edit_id
-        category.save
-      end
-        count = count + 1 
-    end
-    if count < 3
-      for count in count..2 do
-        if @category_edit_ids[count] != ""
-          category = Category.new(category_id: @category_edit_ids[count].to_i,todo_id:@todo.id)
-          category.save
-        end
-      end
-    end 
   end
   
   def show

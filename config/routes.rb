@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  
   get 'categories/index'
   get 'categories/index_detail/' , to: 'categories#index_detail'
   post 'accounts/itemindex'
@@ -13,7 +14,7 @@ Rails.application.routes.draw do
   put '/accounts/editmany'
   get 'todos/aggregate'
   get 'accounts/edit'
-  get '/todos/modal'
+  #get '/todos/modal'
   post 'todos/createmany'
   get 'todos/search'
   get 'todos/searchresult'
@@ -23,17 +24,17 @@ Rails.application.routes.draw do
   get 'todos/finished'
   post 'todos/finishindex'
   post 'todos/termindex'
-  get 'todos/index'
+  #get 'todos/index'
   get 'todos/edit'
   get 'todos/schedule'
   get 'todos/aggregate' 
   get 'todos/toexport'
   post 'todos/todocsvexport'
   get 'todos/research'
-  get 'user/index'
-  get 'user/new'
-  get 'user/edit'
-  post 'user/update'
+  #get 'user/index'
+  #get 'user/new'
+  #get 'user/edit'
+  #post 'user/update'
   post '/user/create' 
   get 'login/new'
   get 'login/index'
@@ -48,17 +49,16 @@ Rails.application.routes.draw do
     end
   end
   resources :todos
-  delete 'blog/:id/delete', to: 'blogs#destroy'
-  resources :blogs, except: [:delete]
-  #resources :targets, only: [:index,:delete]
-  get '/'=>'portals#index'
-  
-  post '/comments/comment_error', as: :comment_error
-
-  get '/comments/test', as: :test
   resources :comments, only: [:create]
   resources :users
+  resources :user
   resources :portals
+  delete 'blog/:id/delete', to: 'blogs#destroy'
+  resources :blogs, except: [:delete]
+  get '/'=>'portals#index'
+  post '/comments/comment_error', as: :comment_error
+  get '/comments/test', as: :test
+  
   
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
