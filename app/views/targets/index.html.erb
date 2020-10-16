@@ -24,7 +24,7 @@
                 <td><% title_seigen = mojiseigen(title,8) %>
                 <%= link_to title_seigen, "/todos/#{id}" %></td>
                 <td><%=term %></td>
-                <td><%= button_to "編", todos_edit_path, { method: :get, params: {id: id,baction:2},class:"btn btn-success" } %></td>
+                <td><%= button_to "編", edit_todo_path(id), { method: :get, params: {id: id,baction:2},class:"btn btn-success" } %></td>
             </tr>
         <% end %>
     </table>

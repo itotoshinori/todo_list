@@ -32,7 +32,6 @@
 
         </div>
       </div>
-
     </div>
 
     <div id="header-menu">
@@ -48,23 +47,8 @@
       </ul>
     </div>
 
-    <!-- ヘッダー終わり -->
-
-
-    <!-- コンテンツ -->
-
-    <!-- メインコンテンツ -->
-
     <div id="container">
-      <div id="contents">
-
-        <!-- メイン画像 ここから
-<div id="header-img">
-<img src="/head_img.png" alt="head_img" class="main_photo">
-</div>
--->
-        <!-- メイン画像 ここまで -->
-
+    <div id="contents">
         <% flash.each do |name, msg| %>
         <% if name=="success" %>
         <div style="color:blue;">
@@ -101,7 +85,7 @@
                 <% else %>
                   <% convertday = convert_day(today) %>
                 <% end %>  
-                <li ><%= link_to "スケジュール","/todos/schedule#"+ convertday %></li>
+                <li ><%= link_to "スケジュール",schedules_path + "#" + convertday %></li>
                 <li><%= link_to "分類別","/categories/index" %></li>
                 <li><%= link_to "削除対象一覧",targets_path %></li>
                 <li><a href="/todos/aggregate">集計表</a></li>
@@ -111,7 +95,6 @@
                 <li><a href="/login/logout">ログアウト</a></li>
                 <li><a href="/user/edit">パスワードの変更</a></li>
                 <li><a href="https://calendar.google.com/calendar/" target="new">google calendar</a></li>
-                
                 <% if cookies[:userid] == "1" %>
                   <li><a href="/user/new">新規会員登録</a></li>
                   <li><a href="/blogs/new">ブログ新規</a></li>
@@ -129,28 +112,16 @@
           <div class="menu_btn_under">
             <a href="/blogs/" target="_blank"><img src="/ameblo_banner.jpg" alt="banner"></a>
           </div>
-
-          <!-- PC向け・非表示 -->
-
-          <!-- 非表示ここまで -->
         </div>
-
-        <!-- サイドエリア終わり -->
       </div>
-
-      <!-- コンテンツ終わり -->
-
       <!-- フッター -->
       <div id="footer">
         <br>
         <br>
         Copyright (C) 2020 T.Ito All Rights Reserved.　design by <a href="http://tempnate.com/" target="_blank">tempnate</a>
       </div>
-
       <!-- フッター終わり -->
     </div>
-
     <!-- メイン終わり -->
-</body>
-
+  </body>
 </html>

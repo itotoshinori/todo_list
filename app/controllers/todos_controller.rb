@@ -3,7 +3,6 @@ class TodosController < ApplicationController
   before_action :userid_set
   before_action :unless_user,  only: [:index,:indexfinished,:show,:edit,:schedule]
   before_action :timeselect,   only: [:new,:create,:edit,:update,:index,:searchresult,:research]
-  
   require 'active_support/core_ext/date'
 
   def index
@@ -13,7 +12,7 @@ class TodosController < ApplicationController
 
   def indexfinished
     @todos=Todo.where(finished:true).where(user_id:@userid).order(finishday: "DESC").paginate(page: params[:page], per_page: 20).order(created_at: "DESC")
-    @kubun=2
+    @kubun = 2
   end
 
   def finished
@@ -156,17 +155,6 @@ class TodosController < ApplicationController
     @accounts=Account.joins(:todo).where('todos.user_id = ?', @userid)
   end
 
-  def schedule
-    @event=Todo.where('starttime IS NOT NULL').where(user_id:@userid)
-    kubun=params[:kubun]
-    if kubun.present?
-      @date=params[:lday].to_date
-    else
-      @date = Date.today
-      @datekakuni = "true"
-    end
-  end
-
   def createmany
     openday=params[:openday].to_date
     finishday=params[:finishday].to_date
@@ -195,17 +183,6 @@ class TodosController < ApplicationController
   end
 
   def search
-    @now = Time.current
-    now = Time.current
-    sdate=now.prev_year
-    fdate=now.since(3.month)
-    @startdate=Date.new(sdate.year, sdate.month, sdate.day) if @startdate.blank?
-    @finishdate=Date.new(fdate.year, fdate.month, fdate.day) if @finishdate.blank?
-    @idate=Todo.minimum(:term)
-    timeselect
-  end
-
-  def condition
     @now = Time.current
     now = Time.current
     sdate=now.prev_year
