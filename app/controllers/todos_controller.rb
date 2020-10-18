@@ -57,10 +57,15 @@ class TodosController < ApplicationController
     newcreate
     if  @todo.save
       flash[:success]="#{@todo.title}が新規登録されました"
-      accountcreate if @todo.itemmoney.present?
+      if @todo.itemmoney.present?
+        today = Date.today
+        acoount = Account.new
+        result = acoount.accountcreate(today,@todo)
+        flash[:success] = "#{@todo.title}が会計含め登録されました" if result
+      end
       @category = Category.new
       @categories = @category.category_array(@todo)
-      @category.category_insert(@categories,@todo.id)
+      @category.category_insert(@categories,@todo.id) if @categories.present?
       redirect_to "/todos/#{@todo.id}"
     else
       flash[:danger]="必須項目に入力がありません"
@@ -68,13 +73,6 @@ class TodosController < ApplicationController
       @body=@todo.body
       render 'new'
     end
-  end
-  
-  def accountcreate
-    today=Date.today
-    @account=Account.new(todo_id:@todo.id,item:@todo.item,amount:@todo.itemmoney,remark:@todo.remark,expense:false,registrationdate:today)
-    @account.save
-    flash[:success]="#{@todo.title}が会計も含め新規登録されました"
   end
 
   def edit
@@ -100,10 +98,7 @@ class TodosController < ApplicationController
       if @todo.update(todo_params)
         @category = Category.new
         category_ids = Category.where(todo_id:@todo.id)
-        category1 = todo_params[:category_id]
-        category2 = todo_params[:category_id2]
-        category3 = todo_params[:category_id3]
-        @category.category_update(category_ids,category1,category2,category3,@todo.id)
+        @category.category_update(category_ids, todo_params[:category_id], todo_params[:category_id2], todo_params[:category_id3],@todo.id)
         flash[:success]="「#{@todo.title}」が編集されました"
         redirect_to "/todos/#{@todo.id}"
       else
@@ -182,17 +177,6 @@ class TodosController < ApplicationController
     redirect_to request.referer
   end
 
-  def search
-    @now = Time.current
-    now = Time.current
-    sdate=now.prev_year
-    fdate=now.since(3.month)
-    @startdate=Date.new(sdate.year, sdate.month, sdate.day) if @startdate.blank?
-    @finishdate=Date.new(fdate.year, fdate.month, fdate.day) if @finishdate.blank?
-    @idate=Todo.minimum(:term)
-    timeselect
-  end
-
   def toexport
     now = Time.current
     sdate=now.prev_month
@@ -210,47 +194,9 @@ class TodosController < ApplicationController
     flash[:success]="エクスポートしました"
   end
 
-  def searchresult
-    @title=params[:title]
-    @startdate= params[:startdate][:id]
-    @finishdate=params[:finishdate][:id]
-    @todos=Todo.includes(:accounts).where(user_id:@userid).where('title LIKE ?', "%#{@title}%").where("term >= ?", @startdate).where("term <= ?", @finishdate).order(:term).paginate(page: params[:page], per_page: 20)
-    @kubun=1
-    if @todos.count>=100
-      flash.now[:warning]="検索結果が100件を超えてます。絞り込みをお願いします"
-      render todos_search_path
-    elsif @todos.count==0
-      flash.now[:warning]="該当データがありません。再設定をお願いします"
-      render todos_search_path
-    end
-  end
-
-  def research
-    @title=params[:title]
-    @startdate= params[:startdate]
-    @finishdate=params[:finishdate]
-    render todos_search_path
-  end
-
   private
     def todo_params
       params.require(:todo).permit(:title, :body,:term,:starttimehour,:starttimemin,:item,:itemmoney,:remark,:category_id,:category_id2,:category_id3)
-    end
-
-    def timeselect
-      @hourselect=[*0..23]
-      @minselect=[*0..59]
-      @interval=[*1..90]
-      now = Time.current
-      @dates=Array.new()
-      @idate=now.last_year if @idate.blank?
-      @ldate=now.next_year
-      (@idate.to_datetime..@ldate).each do|c|
-        date = Date.new(c.year, c.month, c.day)
-        wd = ["日","月", "火", "水", "木", "金", "土"]
-        iw=c.strftime("%Y/%m/%d(#{wd[c.wday]})")
-        @dates << Datecollection.new(date,iw)
-      end
     end
 
     def newcreate

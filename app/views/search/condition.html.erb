@@ -1,7 +1,7 @@
 <p>
   <b>タイトル検索</b>
 </p>
-<%= form_with(url: todos_searchresult_path, method: :get, local: true) do |f| %>
+<%= form_with(url: search_index_path, method: :get, local: true) do |f| %>
   <p>
     <%= f.label :タイトル %><br>
     <%= f.text_field :title,value:@title,placeholder:"曖昧検索" , required: true %>
@@ -12,5 +12,5 @@
     <%= f.submit "検索", class: "btn btn-primary",data: { disable_with: '送信中...' },style:"width:100px;height:50px" %>
   </p>
 <% end %>
-<%= link_to("一覧に戻る",session[:url]) if session[:url]%>
-<a href="/todos/search">リセット</a>
+<a href="/search/condition">リセット</a>
+<% session[:url] = request.url %>
