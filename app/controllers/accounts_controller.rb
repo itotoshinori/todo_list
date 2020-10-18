@@ -1,5 +1,4 @@
 class AccountsController < ApplicationController
-  #protect_from_forgery
   protect_from_forgery :except => [:itemindex,:itemaggregateyear]
   require 'date'
   before_action :userid_set,   only: [:index,:itemaggregate,:itemindex,:accountcsvexport,:itemaggregateyear,:monthlychangesaccount]

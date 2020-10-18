@@ -1,12 +1,9 @@
-Rails.application.routes.draw do
+Rails.application.routes.draw do  
   post 'accounts/itemindex'
   get 'accounts/itemaggregate'
   get 'accounts/itemaggregateyear'
-  post 'accounts/accountcsvexport'
   get 'accounts/monthlychangesaccount'
   put '/accounts/editmany'
-  get 'todos/toexport'
-  post 'todos/todocsvexport'
   get 'user/index'
   get 'user/new'
   get 'user/edit'
@@ -43,6 +40,11 @@ Rails.application.routes.draw do
   end
   resources :user
   resources :portals
+  #エクスポート
+  get 'toexport/condition'
+  post 'toexport/todocsvexport'
+  post 'toexport/accountcsvexport'
+  #ブログ
   delete 'blog/:id/delete', to: 'blogs#destroy'
   resources :blogs, except: [:delete]
   get '/'=>'portals#index'

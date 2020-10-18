@@ -9,7 +9,7 @@ TodolistCSV出力
       </p>
 <% end %>
 <hr class="line">
-会計CSV出力1
+会計CSV出力
 <%= form_with(url: toexport_accountcsvexport_path(format: :csv), method: :post, local: true) do |f| %>
       <p>      
       <%= f.label :登録 %><br> 
@@ -19,8 +19,3 @@ TodolistCSV出力
       <%= f.submit "エクスポート", class: "btn btn-primary",style:"width:100px;height:50px" %>
       </p>
 <% end %>
-
-
-
-
-<a href="/todos/toexport" class="btn btn-primary">リセット</a>

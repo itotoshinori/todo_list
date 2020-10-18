@@ -169,29 +169,12 @@ class TodosController < ApplicationController
         count+=1
       end
     end
-    if count>0
-      flash[:success]="「#{title}」が#{count}件追加されました"
+    if count > 0
+      flash[:success] = "「#{title}」が#{count}件追加されました"
     else
-      flash[:warning]="登録に失敗しました。日付や必須項目等確認し再登録下さい。"
+      flash[:warning] = "登録に失敗しました。日付や必須項目等確認し再登録下さい。"
     end
     redirect_to request.referer
-  end
-
-  def toexport
-    now = Time.current
-    sdate=now.prev_month
-    fdate=now.since(3.month)
-    @startdate=Date.new(sdate.year, sdate.month, sdate.day) if @startdate.blank?
-    @finishdate=Date.new(fdate.year, fdate.month, fdate.day) if @finishdate.blank?
-    @idate=Todo.minimum(:term)
-    timeselect
-  end
-
-  def todocsvexport
-    @startdate= params[:startdate][:id]
-    @finishdate=params[:finishdate][:id]
-    @todos=Todo.includes(:accounts).where(user_id:@userid).where("term >= ?", @startdate).where("term <= ?", @finishdate)
-    flash[:success]="エクスポートしました"
   end
 
   private
