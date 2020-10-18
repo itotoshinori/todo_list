@@ -2,10 +2,10 @@ Rails.application.routes.draw do
   get 'categories/index'
   get 'categories/index_detail/' , to: 'categories#index_detail'
   post 'accounts/itemindex'
-  get 'accounts/index'
-  post '/accounts/create'
-  post 'accounts/index'
-  get 'accounts/new'
+  #get 'accounts/index'
+  #post '/accounts/create'
+  #post 'accounts/index'
+  #get 'accounts/new'
   get 'accounts/itemaggregate'
   get 'accounts/itemaggregateyear'
   post 'accounts/accountcsvexport'
@@ -37,7 +37,6 @@ Rails.application.routes.draw do
   post 'login/login'
   get 'login/logout'
   get 'error_display/index'
-  #get 'todos/target_delete_condition'
   resource :targets do
     collection do
       get :index
@@ -45,7 +44,7 @@ Rails.application.routes.draw do
     end
   end
   resources :schedules, only: [:index]
-  resources :accounts, only: [:index]
+  resources :accounts, only: [:index,:create]
   resources :todos
   resources :comments, only: [:create]
   resources :users

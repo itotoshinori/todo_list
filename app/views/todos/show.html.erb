@@ -60,7 +60,7 @@
 <hr class="line">
 ■会計新規
 <% @account=Account.new %>
-  <%= form_with(url: accounts_create_path, local: true) do |f| %>
+  <%= form_with(url: accounts_path, local: true) do |f| %>
     費用品目：
     <%= f.select :item,Item.all.collect { |i| [ i.name, i.id ] }, :selected=>item %><br>
     金　額　：

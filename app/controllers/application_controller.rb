@@ -40,4 +40,20 @@ class ApplicationController < ActionController::Base
   def data_set
     @date = Date.today
   end
+
+  def timeselect
+    @hourselect=[*0..23]
+    @minselect=[*0..59]
+    @interval=[*1..90]
+    now = Time.current
+    @dates=Array.new()
+    @idate=now.last_year if @idate.blank?
+    @ldate=now.next_year
+    (@idate.to_datetime..@ldate).each do|c|
+      date = Date.new(c.year, c.month, c.day)
+      wd = ["日","月", "火", "水", "木", "金", "土"]
+      iw=c.strftime("%Y/%m/%d(#{wd[c.wday]})")
+      @dates << Datecollection.new(date,iw)
+    end
+  end
 end
