@@ -2,6 +2,12 @@
 <p>検索件数：<%=@todos.count %>件　使用額：<%= @todos.sum(:amount).to_s(:delimited, delimiter: ',') %>円<br>
 検索条件：<%= @title %>　期限:<%=@startdate %>～<%=@finishdate %></p>
 <p>
+<%= form_with(url: search_condition_path, method: :post, local: true) do |f| %>
+     <%= f.hidden_field :title,value:@title %>
+     <%= f.hidden_field :startdate,value:@startdate %>
+     <%= f.hidden_field :finishdate,value:@finishdate %>
+     <%= f.submit "再検索", class: "btn btn-primary",data: { disable_with: '送信中...' },style:"width:100px;height:50px" %>
+<% end %>
 </p>
 <% if @kubun==1 %>
     <% statusname="期限" %>

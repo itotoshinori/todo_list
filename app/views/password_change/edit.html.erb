@@ -1,5 +1,5 @@
 パスワード編集
-<%= form_with(url: password_change_path(@user.id), local: true) do |f| %>
+<%= form_with(url: password_change_path(@userid),method: :put, local: true) do |f| %>
   <div class="field">
     <%= f.label :名前 %><br>
     <%= f.text_field :name ,value:@user.name, required: true %>
@@ -9,7 +9,7 @@
     <%= f.password_field :password %>
   </div>
   <div class="field">
-    <%= f.label :新パスワード %><br>
+    <%= f.label :新パスワード %>(7文字以上)<br>
     <%= f.password_field :newpassword %>
   </div>
   <div class="field">

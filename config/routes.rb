@@ -1,14 +1,10 @@
 Rails.application.routes.draw do  
+  get 'password_change/edit'
   post 'accounts/itemindex'
   get 'accounts/itemaggregate'
   get 'accounts/itemaggregateyear'
   get 'accounts/monthlychangesaccount'
   put '/accounts/editmany'
-  get 'user/index'
-  get 'user/new'
-  get 'user/edit'
-  post 'user/update'
-  post '/user/create' 
   get 'login/new'
   get 'login/index'
   post 'login/login'
@@ -32,6 +28,7 @@ Rails.application.routes.draw do
   resources :accounts, only: [:index,:create]
   resources :comments, only: [:create]
   resources :users
+  resources :password_change, only: [:edit,:update]
   resource :targets do
     collection do
       get :index

@@ -5,6 +5,9 @@ class SearchController < ApplicationController
   before_action :timeselect
   require 'active_support/core_ext/date'
   def condition
+    @title = params[:title]
+    @startdate = params[:startdate]
+    @finishdate = params[:finishdate]
     @now = Time.current
     now = Time.current
     sdate = now.prev_year
