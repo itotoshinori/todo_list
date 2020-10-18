@@ -58,9 +58,10 @@ class TodosController < ApplicationController
     if  @todo.save
       flash[:success]="#{@todo.title}が新規登録されました"
       if @todo.itemmoney.present?
-        account = Account.new
-        account_relsult = account.accountcreate(@todo)
-        flash[:success] = "#{@todo.title}が会計も含め新規登録されました"  if account_relsult
+        today = Date.today
+        acoount = Account.new
+        result = acoount.accountcreate(today,@todo)
+        flash[:success] = "#{@todo.title}が会計含め登録されました" if result
       end
       @category = Category.new
       @categories = @category.category_array(@todo)
@@ -176,17 +177,6 @@ class TodosController < ApplicationController
     redirect_to request.referer
   end
 
-  def search
-    @now = Time.current
-    now = Time.current
-    sdate=now.prev_year
-    fdate=now.since(3.month)
-    @startdate=Date.new(sdate.year, sdate.month, sdate.day) if @startdate.blank?
-    @finishdate=Date.new(fdate.year, fdate.month, fdate.day) if @finishdate.blank?
-    @idate=Todo.minimum(:term)
-    timeselect
-  end
-
   def toexport
     now = Time.current
     sdate=now.prev_month
@@ -202,28 +192,6 @@ class TodosController < ApplicationController
     @finishdate=params[:finishdate][:id]
     @todos=Todo.includes(:accounts).where(user_id:@userid).where("term >= ?", @startdate).where("term <= ?", @finishdate)
     flash[:success]="エクスポートしました"
-  end
-
-  def searchresult
-    @title=params[:title]
-    @startdate= params[:startdate][:id]
-    @finishdate=params[:finishdate][:id]
-    @todos=Todo.includes(:accounts).where(user_id:@userid).where('title LIKE ?', "%#{@title}%").where("term >= ?", @startdate).where("term <= ?", @finishdate).order(:term).paginate(page: params[:page], per_page: 20)
-    @kubun=1
-    if @todos.count>=100
-      flash.now[:warning]="検索結果が100件を超えてます。絞り込みをお願いします"
-      render todos_search_path
-    elsif @todos.count==0
-      flash.now[:warning]="該当データがありません。再設定をお願いします"
-      render todos_search_path
-    end
-  end
-
-  def research
-    @title=params[:title]
-    @startdate= params[:startdate]
-    @finishdate=params[:finishdate]
-    render todos_search_path
   end
 
   private

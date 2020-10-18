@@ -2,20 +2,12 @@
 <p>検索件数：<%=@todos.count %>件　使用額：<%= @todos.sum(:amount).to_s(:delimited, delimiter: ',') %>円<br>
 検索条件：<%= @title %>　期限:<%=@startdate %>～<%=@finishdate %></p>
 <p>
-<%= form_with(url: todos_research_path, method: :post, local: true) do |f| %>
-     <%= f.hidden_field :title,value:@title %>
-     <%= f.hidden_field :startdate,value:@startdate %>
-     <%= f.hidden_field :finishdate,value:@finishdate %>
-     <%= f.submit "再検索", class: "btn btn-primary",data: { disable_with: '送信中...' },style:"width:100px;height:50px" %>
-<% end %>
 </p>
 <% if @kubun==1 %>
     <% statusname="期限" %>
 <% else %>
     <% statusname="完了" %>
 <% end %>
-
-
 <div>
 <table class="table1" align="left">
         <thead>
@@ -36,19 +28,19 @@
                 <%= link_to title, "/todos/#{form.id}" %></td>
                 <td style="text-align: right; width:100px;"><%=kei %></td>
                     <td>
-
-                      <%= button_to "編集", todos_edit_path, { method: :get, params: {id: form.id,baction:1} } %></td>
+                      <%= button_to "編", edit_todo_path(form.id), { method: :get, params: {baction:1},class:"btn btn-success" } %>
                     </td>
                     <td data-label="完了">
                         <% if form.finishday.present? %>
                          済
                         <% end %>
-                        </td>
-                    <td data-label="期限"><%= dateweekday(form.term) %>(<%=weekdate(form.term) %>)</td>
+                    </td>
+                <td data-label="期限"><%= dateweekday(form.term) %>(<%=weekdate(form.term) %>)</td>
             </tr>
         <% end %>
         </tbody>
     </table>
 </div>
 <%= will_paginate @todos, :previous_label => ' &lt 前へ', :next_label => '次へ &gt' %>
-<% session[:url]=request.url %>
+<% session[:url] = request.url %>
+
