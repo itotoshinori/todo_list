@@ -12,7 +12,7 @@
   </tr></table>
   <%# agg=Account.where("registrationdate>=@first_day") %>
   出費額合計：<%= @accounts.where("(registrationdate >= ?) and (registrationdate <= ?)", @first_day,@last_day).sum(:amount).to_s(:delimited, delimiter: ',') %>円
-  完了件数：<%= @todos.where("(finishday >= ?) and (finishday <= ?)", @first_day,@last_day).count %>件
+  完了件数：<%#= @todos.where("(finishday >= ?) and (finishday <= ?)", @first_day,@last_day).count %>件
   <%= button_to "品目別集計", {controller: 'accounts', action: 'itemaggregate'}, {method: :get, params: {lday:@first_day,kubun:"2"},class:"btn btn-primary"} %>
   <p></p>
   <table class="table1">
@@ -49,7 +49,8 @@
 <td style="text-align:right; width:60px;">
   <% finish=@todos.where("(finishday = ?)", day).count %>
   <% if finish>0 %>
-   <%= link_to finish, {controller: "todos", action: "finishindex", finishdate: day},method: :post %>
+    <%= finish %>
+   <%#= link_to finish, {controller: "todos", action: "finishindex", finishdate: day},method: :post %>
   <% end %>
 </td>
 </tr>

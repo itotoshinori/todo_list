@@ -6,34 +6,13 @@ class TodosController < ApplicationController
   require 'active_support/core_ext/date'
 
   def index
-    @todos = Todo.includes(:accounts).where(finished:false).where(user_id:@userid).order(:term).paginate(page: params[:page], per_page: 20).order(created_at: "ASC")
-    @kubun = 1
-  end
-
-  def indexfinished
-    @todos=Todo.where(finished:true).where(user_id:@userid).order(finishday: "DESC").paginate(page: params[:page], per_page: 20).order(created_at: "DESC")
-    @kubun = 2
-  end
-
-  def finished
-    todo=Todo.find(params[:id])
-    if params[:baction]=="1"
-      todo.finished=true
-      todo.finishday=Date.today
-      todo.save
-      flash[:success]="#{todo.title}が完了登録されました"
+    if params[:finished] == "true"
+      @todos = Todo.where(finished:true).where(user_id:@userid).order(finishday: "DESC").paginate(page: params[:page], per_page: 20).order(created_at: "DESC")
+      @kubun = 2
     else
-      todo.finished=false
-      todo.finishday=nil
-      todo.save
-      flash[:success]="#{todo.title}が完了登録取消されました"
+      @todos = Todo.includes(:accounts).where(finished:false).where(user_id:@userid).order(:term).paginate(page: params[:page], per_page: 20).order(created_at: "ASC")
+      @kubun = 1
     end
-    redirect_to request.referer
-  end
-  
-  def finishindex
-    date=params[:finishdate]
-    @todos=Todo.where(finished:true).where(user_id:@userid).where(finishday:date).order(finishday: "DESC").order(created_at: "DESC")
   end
 
   def termindex
@@ -75,9 +54,36 @@ class TodosController < ApplicationController
     end
   end
 
+  def createmany
+    openday=params[:openday].to_date
+    finishday=params[:finishday].to_date
+    interval=params[:interval]
+    title=params[:title]
+    body=params[:body]
+    count=0
+    if title.present?
+      while openday <= finishday
+        @todo = Todo.new(
+        term:openday,
+        title:title,
+        body:body,
+        user_id:@userid)
+        openday=openday.next_day(interval.to_i)
+        @todo.save
+        count+=1
+      end
+    end
+    if count > 0
+      flash[:success] = "「#{title}」が#{count}件追加されました"
+    else
+      flash[:warning] = "登録に失敗しました。日付や必須項目等確認し再登録下さい。"
+    end
+    redirect_to request.referer
+  end
+
   def edit
     begin
-      @url=request.referer
+      @url = request.referer
       @todo = Todo.find(params[:id])
     rescue => exception
       redirect_to error_display_index_path
@@ -129,6 +135,22 @@ class TodosController < ApplicationController
       redirect_to session[:url]
     end
   end
+
+  def finished
+    todo=Todo.find(params[:id])
+    if params[:baction]=="1"
+      todo.finished=true
+      todo.finishday=Date.today
+      todo.save
+      flash[:success]="#{todo.title}が完了登録されました"
+    else
+      todo.finished=false
+      todo.finishday=nil
+      todo.save
+      flash[:success]="#{todo.title}が完了登録取消されました"
+    end
+    redirect_to request.referer
+  end
   
   def show
     begin
@@ -148,33 +170,6 @@ class TodosController < ApplicationController
     end
     @todos=Todo.where(user_id:@userid)
     @accounts=Account.joins(:todo).where('todos.user_id = ?', @userid)
-  end
-
-  def createmany
-    openday=params[:openday].to_date
-    finishday=params[:finishday].to_date
-    interval=params[:interval]
-    title=params[:title]
-    body=params[:body]
-    count=0
-    if title.present?
-      while openday <= finishday
-        @todo = Todo.new(
-        term:openday,
-        title:title,
-        body:body,
-        user_id:@userid)
-        openday=openday.next_day(interval.to_i)
-        @todo.save
-        count+=1
-      end
-    end
-    if count > 0
-      flash[:success] = "「#{title}」が#{count}件追加されました"
-    else
-      flash[:warning] = "登録に失敗しました。日付や必須項目等確認し再登録下さい。"
-    end
-    redirect_to request.referer
   end
 
   private

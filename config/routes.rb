@@ -1,9 +1,8 @@
-Rails.application.routes.draw do  
+Rails.application.routes.draw do
   post 'accounts/itemindex'
   get 'accounts/itemaggregate'
   get 'accounts/itemaggregateyear'
   get 'accounts/monthlychangesaccount'
-  put '/accounts/editmany'
   get 'login/new'
   get 'login/index'
   post 'login/login'
@@ -16,15 +15,15 @@ Rails.application.routes.draw do
   resources :search, only: [:index]
   get 'search/condition'
   post 'search/condition'
-  resources :todos
-  get 'todos/aggregate' 
-  post 'todos/createmany'
-  get 'todos/indexfinished'
+  #todo
+  get 'todos/aggregate'
   get 'todos/finished'
-  post 'todos/finishindex'
+  resources :todos
+  post 'todos/createmany'
   post 'todos/termindex'
   resources :schedules, only: [:index]
   resources :accounts, only: [:index,:create]
+  put '/accounts/editmany'
   resources :comments, only: [:create]
   resources :users
   resource :targets do
@@ -33,7 +32,6 @@ Rails.application.routes.draw do
       delete :delete_many 
     end
   end
-  resources :user
   resources :portals
   #エクスポート
   get 'toexport/condition'
@@ -44,6 +42,5 @@ Rails.application.routes.draw do
   resources :blogs, except: [:delete]
   get '/'=>'portals#index'
   post '/comments/comment_error', as: :comment_error
-  get '/comments/test', as: :test
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

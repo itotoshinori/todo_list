@@ -1,2 +1,23 @@
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
+パスワード編集
+<%= form_with(url: user_path, local: true, method: 'PUT') do |f| %>
+  <div class="field">
+    <%= f.label :名前 %><br>
+    <%= f.text_field :name , required: true, value:@user.name %>
+  </div>
+  <div class="field">
+    <%= f.label :現在のパスワード %><br>
+    <%= f.password_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :新パスワード %>(6文字以上)<br>
+    <%= f.password_field :newpassword %>
+  </div>
+  <div class="field">
+    <%= f.label :パスワード確認 %><br>
+    <%= f.password_field :password_confirmation %>
+  </div>
+  <br>
+  <div class="actions">
+    <%= f.submit value:"変更" %>
+  </div>
+<% end %>

@@ -92,10 +92,10 @@
                 <li><a href="/search/condition">タイトル検索</a></li>
                 <li><a href="/toexport/condition">エクスポート</a></li>
                 <li><a href="/login/logout">ログアウト</a></li>
-                <li><a href="/user/edit">パスワードの変更</a></li>
+                <li><%= link_to "パスワード変 更",edit_user_path(cookies[:userid]) %></li>
                 <li><a href="https://calendar.google.com/calendar/" target="new">google calendar</a></li>
-                <% if cookies[:userid] == "1" %>
-                  <li><a href="/user/new">新規会員登録</a></li>
+                <% if cookies[:userid] == "4" %>
+                  <li><a href="/users/new">新規会員登録</a></li>
                   <li><a href="/blogs/new">ブログ新規</a></li>
                   <li><%= link_to "ユーザー一覧",users_path %></li>
                 <% end %>
