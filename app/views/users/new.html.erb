@@ -1,6 +1,6 @@
 ユーザー新規登録
 <% if cookies[:userid].present? %>
-<%= form_with(url: users_path, local: true) do |f| %>
+<%= form_with(url: users_path, local: true, method: :post) do |f| %>
   <div class="field">
     <%= f.label :名前 %><br>
     <%= f.text_field :name %>
@@ -10,7 +10,7 @@
     <%= f.text_field :email %>
   </div>
   <div class="field">
-    <%= f.label :パスワード %>(7文字以上)<br>
+    <%= f.label :パスワード %><br>
     <%= f.password_field :password %>
   </div>
   <div class="field">

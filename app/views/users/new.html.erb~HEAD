@@ -1,0 +1,26 @@
+ユーザー新規登録
+<% if cookies[:userid].present? %>
+<%= form_with(url: users_path, local: true) do |f| %>
+  <div class="field">
+    <%= f.label :名前 %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :メールアドレス %><br>
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :パスワード %>(7文字以上)<br>
+    <%= f.password_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :パスワード確認 %><br>
+    <%= f.password_field :password_confirmation %>
+  </div>
+  <div class="actions">
+    <%= f.submit value:"登録" %>
+  </div>
+<% end %>
+<% else %>
+ログインが必要です
+<% end %>
