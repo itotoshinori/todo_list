@@ -1,12 +1,7 @@
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <% require 'date' %>
 <% @today=Date.today %>
 <% account=Account.where(registrationdate:@today) %>
 <% finish=Todo.where(finishday:@today) %>
-<% require 'date' %>
-<% @today=Date.today %>
 <div class="lead">出費額明細<%=@id %></div>
 <div>
 <table class="table1" align="left">
@@ -43,7 +38,7 @@
         </tbody>
     </table>
 </div>
-<%= link_to "集計表に戻る","/todos/aggregate" %>
+<%= link_to "集計表に戻る", totalizations_path %>
 <% session[:url]=request.url %>
 
 

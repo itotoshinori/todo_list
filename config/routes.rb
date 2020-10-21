@@ -1,16 +1,10 @@
 Rails.application.routes.draw do
-  post 'accounts/itemindex'
-  get 'accounts/itemaggregate'
-  get 'accounts/itemaggregateyear'
-  get 'accounts/monthlychangesaccount'
-  get 'login/new'
-  get 'login/index'
-  post 'login/login'
-  get 'login/logout'
-  get 'error_display/index'
   #分類別
   resources :categories, only: [:index]
   get 'categories/index_detail/' , to: 'categories#index_detail'
+  resources :totalizations, only: [:index]
+  get 'totalizations/account_item_index'
+  get 'totalizations/index_month'
   #検索条件
   resources :search, only: [:index]
   get 'search/condition'
@@ -21,12 +15,22 @@ Rails.application.routes.draw do
   resources :todos
   post 'todos/createmany'
   post 'todos/termindex'
+  #ｽｹｼﾞｭｰﾙ表
   resources :schedules, only: [:index]
+  #会計関係
   resources :accounts, only: [:index,:create]
   put '/accounts/editmany'
-  resources :comments, only: [:create]
+  post 'accounts/itemindex'
+  #ユーザー管理
   resources :users
-  resources :password_change, only: [:edit,:update]
+  resources :login, only: [:new,:index]
+  #get 'login/new'
+  #get 'login/index'
+  post 'login/login'
+  get 'login/logout'
+  #エラー時エラー画面に
+  get 'error_display/index'
+  #一斉削除
   resource :targets do
     collection do
       get :index
@@ -41,6 +45,7 @@ Rails.application.routes.draw do
   #ブログ
   delete 'blog/:id/delete', to: 'blogs#destroy'
   resources :blogs, except: [:delete]
+  resources :comments, only: [:create]
   get '/'=>'portals#index'
   post '/comments/comment_error', as: :comment_error
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

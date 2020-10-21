@@ -1,0 +1,53 @@
+<% provide(:title, "品目別集計表") %>
+  <% if @year.present? %>
+    <% @datedown=(@first_day-1).beginning_of_year %>
+    <% @dateup=(@last_day+1).beginning_of_month %>
+    <% year = "true" %>
+  <% else %>
+    <% @datedown=(@first_day-1).beginning_of_month %>
+    <% @dateup=(@last_day+1).beginning_of_month %>
+    <% year = "false" %>
+  <% end %>
+  <table>
+  <% @datedown=(@first_day-1).beginning_of_month %>
+  <tr>
+  <td><%= button_to"←", {controller: 'totalizations', action: 'account_item_index'}, {method: :get, params: {lday:@datedown,kubun:"1",year:year}} %></td>
+  <td>
+  <% if year=="false" %>
+    <div style="padding : 10px ;"><strong><%= nengetu(@first_day) %>分集計表</strong></div></td>
+  <% else %>
+    <div style="padding : 10px ;"><strong><%= @first_day.year %>年分集計表</strong></div></td>
+  <% end %>
+  <td><%= button_to"→", {controller: 'totalizations', action: 'account_item_index'}, {method: :get, params: {lday:@dateup,kubun:"2",year:year}} %></td>
+  </tr></table>
+  <% if @accounts.present? %>
+  <% kei = @accounts.sum(:amount) %>
+合計出費額:<%= kei.to_s(:delimited, delimiter: ',') %>
+<p><div style="display:inline-flex"><%= button_to "日別集計", {controller: 'totalizations', action: 'index'}, {method: :get, params: {lday:@first_day,kubun:"2"},class:"btn btn-primary"} %>　
+<% @first_dayyear = @date.beginning_of_year %>
+<% if year=="false" %>
+ <%= button_to "年度別集計", {controller: 'totalizations', action: 'account_item_index'}, {method: :get, params: {lday:@first_dayyear,year:"true"},class:"btn btn-primary"} %>
+<% else %>
+  <%= button_to "月別集計", {controller: 'totalizations', action: 'account_item_index'}, {method: :get, params: {lday:@first_dayyear,year:"false"},class:"btn btn-primary"} %>
+<% end %>
+</p></div>
+<p></p>
+<table class="table1">
+<tr><th>品目名</th><th>出費額</th><th>占有率</th></tr>
+<% (1..@item_max).each do |counta| %>
+<% ac=@accounts.where(item:counta).sum(:amount) %>
+<tr><td style="text-align: left;">
+  <% if ac>0 %>
+  <%= link_to Item.find(counta).name, {controller: "accounts", action: "itemindex", firstday:@first_day,lastday:@last_day,item:counta},method: :post %>
+  <% else %>
+    <%=Item.find(counta).name %>
+  <% end %>
+  </td>
+<td style="text-align: right;">
+  <%= ac.to_s(:delimited, delimiter: ',')  %></td>
+  <td style="text-align: right;"><%= (ac*100)/kei %>%</td></tr> 
+<% end %>
+</table>
+<% else %>
+対象はありません
+<% end %>

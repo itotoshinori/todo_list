@@ -1,6 +1,10 @@
-<div class="lead">仕掛一覧
-<%= react_component("HelloWorld", { greeting:"" }) %></div>
-<%= link_to "新規", "new", {class: "btn btn-primary"} %>
+<div class="lead">
+<% if @kubun == 1 %>
+  仕掛一覧
+<% else %>
+  完了一覧
+<% end %>
+<div><%= react_component("HelloWorld", { greeting:"" }) %></div></div>
 <button class="btn btn-primary"  data-toggle="modal" data-target="#modal-sa">
 定期的
 </button>

@@ -9,6 +9,14 @@ class TodosController < ApplicationController
     if params[:finished] == "true"
       @todos = Todo.where(finished:true).where(user_id:@userid).order(finishday: "DESC").paginate(page: params[:page], per_page: 20).order(created_at: "DESC")
       @kubun = 2
+    elsif params[:termdate].present?
+      date = params[:termdate]
+      @todos=Todo.includes(:accounts).where(user_id:@userid).where(term:date).order(finishday: "DESC").order(created_at: "DESC").paginate(page: params[:page], per_page: 20).order(created_at: "ASC")
+      @kubun = 1
+    elsif params[:finishday].present?
+      date = params[:finishday]
+      @todos = Todo.includes(:accounts).where(user_id:@userid).where(finishday:date).order(created_at: "DESC").paginate(page: params[:page], per_page: 20).order(created_at: "ASC")
+      @kubun = 2
     else
       @todos = Todo.includes(:accounts).where(finished:false).where(user_id:@userid).order(:term).paginate(page: params[:page], per_page: 20).order(created_at: "ASC")
       @kubun = 1
@@ -170,6 +178,9 @@ class TodosController < ApplicationController
     end
     @todos=Todo.where(user_id:@userid)
     @accounts=Account.joins(:todo).where('todos.user_id = ?', @userid)
+    @first_day = @date.beginning_of_month
+    @last_day = @date.end_of_month
+    @today = Date.today
   end
 
   private

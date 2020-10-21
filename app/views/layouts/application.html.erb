@@ -87,14 +87,13 @@
                 <li ><%= link_to "スケジュール",schedules_path + "#" + convertday %></li>
                 <li><%= link_to "分類別",categories_path %></li>
                 <li><%= link_to "削除対象一覧",targets_path %></li>
-                <li><a href="/todos/aggregate">集計表</a></li>
-                <li><a href="/accounts/monthlychangesaccount">年度別出費集計表</a></li>
+                <li><a href="/totalizations">会計集計表</a></li>
                 <li><a href="/search/condition">タイトル検索</a></li>
                 <li><a href="/toexport/condition">エクスポート</a></li>
                 <li><a href="/login/logout">ログアウト</a></li>
-                <li><%= link_to "パスワード変 更",edit_user_path(cookies[:userid]) %></li>
+                <li><%= link_to "パスワード変更",edit_user_path(cookies[:userid]) %></li>
                 <li><a href="https://calendar.google.com/calendar/" target="new">google calendar</a></li>
-                <% if cookies[:userid] == "4" %>
+                <% if cookies[:userid] == "1" %>
                   <li><a href="/users/new">新規会員登録</a></li>
                   <li><a href="/blogs/new">ブログ新規</a></li>
                   <li><%= link_to "ユーザー一覧",users_path %></li>

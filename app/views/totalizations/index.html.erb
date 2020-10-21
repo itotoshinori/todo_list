@@ -1,0 +1,56 @@
+<% provide(:title, "集計表") %>
+    <% @datedown=(@first_day-1).beginning_of_month %>
+    <% @dateup=(@last_day+1).beginning_of_month %>
+  <table>
+  <tr>
+  <td><%= button_to"←", {controller: 'totalizations', action: 'index'}, {method: :get, params: {lday:@datedown,kubun:"1"}} %></td>
+  <td><div style="padding : 10px ;"><strong><%= nengetu(@first_day) %>分集計表</strong></div></td>  
+  <td><%= button_to"→", {controller: 'totalizations', action: 'index'}, {method: :get, params: {lday:@dateup,kubun:"2"}} %></td>
+  </tr></table>
+  出費額：<%= @accounts.where("(registrationdate >= ?) and (registrationdate <= ?)", @first_day,@last_day).sum(:amount).to_s(:delimited, delimiter: ',') %>円
+  完了件数：<%= @todos.where("(finishday >= ?) and (finishday <= ?)", @first_day,@last_day).count %>件<br / >
+  <div style="display:inline-flex"><%= button_to "品目別集計", {controller: 'totalizations', action: 'account_item_index'}, {method: :get, params: {lday:@today.beginning_of_month,kubun:"2",year:"false"},class:"btn btn-primary"} %>&nbsp;
+  <%= button_to "月別集計", {controller: 'totalizations', action: 'index_month'}, {method: :get, params: {lday:@first_day,kubun:"2"},class:"btn btn-primary"} %></div>
+  <p></p>
+  <table class="table1">
+<tr><th>月日</th><th>出費額</th><th>期限件数</th><th>完了件数</th></tr>
+<% (@first_day..@last_day).each do |day| %>
+<% if day==@today %>
+  <tr style="background: #D7EEFF;">
+<% else %>
+  <tr>
+<% end %>
+  <td style="width:150px;">
+  <% if day.wday==0  or holiday(day) %>
+    <div style="color: rgb(255,0,0);" >
+  <% elsif day.wday==6 %>
+    <div style="color: blue;" >
+  <% else %>
+    <div>
+  <% end %>
+  <%=monthday(day) %>(<%=weekdate(day) %>)
+  </td>
+<td style="text-align:right; width:150px;">
+<% agg=@accounts.where("(registrationdate = ?)", day) %>
+<% kei=agg.sum(:amount).to_s(:delimited, delimiter: ',') %>
+<% if kei.to_i!=0 %>
+<%= link_to kei, {controller: "accounts", action: "index", registrationdate: day},method: :get %>
+<% end %>
+</td>
+<td style="text-align:right; width:60px;">
+  <% term = @todos.where("term = ?", day).count %>
+  <% if term > 0 %>
+   <%= link_to term, {controller: "todos", action: "index", termdate: day},method: :get %>
+  <% end %>
+</td>
+<td style="text-align:right; width:60px;">
+  <% finish = @todos.where("finishday = ?", day).count %>
+  <% if finish>0 %>
+    <%= link_to finish, {controller: "todos", action: "index", finishday: day},method: :get %>
+  <% end %>
+</td>
+</tr>
+<% end %>
+</table>
+<% session[:url]=request.url %>
+

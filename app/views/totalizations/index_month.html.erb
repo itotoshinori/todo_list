@@ -1,0 +1,14 @@
+<% mon=0 %>
+<% provide(:title, "集計表") %>
+<p><h4>月別出費額推移表</h4></p>
+<table class="table1">
+<tr><th>年月</th><th>出費額</th></tr> 
+<% @acym.each do |month| %>
+<% bigin=month.beginning_of_month %>
+<% endmo=month.end_of_month %>
+<% agg=@accounts.where("(registrationdate >= ?) and (registrationdate <= ?)", bigin,endmo) %>
+<% kei=agg.sum(:amount).to_s(:delimited, delimiter: ',') %>
+<tr><td><%=yearmonth(month) %></td><td><%= kei %></td></tr> 
+<% end %>
+</table>
+<% session[:url]=request.url %>

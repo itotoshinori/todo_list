@@ -25,13 +25,13 @@ class LoginController < ApplicationController
       redirect_to '/'
     else
       flash[:warning]="ログインに失敗しました"
-      redirect_to('/login/index')
+      redirect_to login_index_path
     end
-  end
+  end 
   
   def logout
     cookies.delete :userid
     cookies.delete :passwd
-    redirect_to('/login/index')
+    redirect_to login_index_path
   end
 end

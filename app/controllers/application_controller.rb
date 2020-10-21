@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
       :expires => 5.days.from_now
      }
     else
-      redirect_to('/login/index')
+      redirect_to login_index_path
     end
   end
 
@@ -23,13 +23,13 @@ class ApplicationController < ActionController::Base
     user = User.find(cookies[:userid].to_i)
     unless user.authenticate(cookies.signed[:secret])
       cookies.delete :userid
-      redirect_to('/login/index')
+      redirect_to login_index_path
     end
   end
 
   def unless_admin_user
     if cookies[:userid].present?
-      redirect_to('/login/index') if cookies[:userid] != "4"
+      redirect_to('/login/index') if cookies[:userid] != "1"
     end
   end
 
