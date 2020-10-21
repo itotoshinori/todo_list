@@ -24,8 +24,6 @@ Rails.application.routes.draw do
   #ユーザー管理
   resources :users
   resources :login, only: [:new,:index]
-  #get 'login/new'
-  #get 'login/index'
   post 'login/login'
   get 'login/logout'
   #エラー時エラー画面に

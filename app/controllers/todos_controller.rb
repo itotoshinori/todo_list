@@ -169,20 +169,6 @@ class TodosController < ApplicationController
     end
   end
 
-  def aggregate
-    kubun=params[:kubun]
-    if kubun.present?
-      @date=params[:lday].to_date
-    else
-      @date = Date.today
-    end
-    @todos=Todo.where(user_id:@userid)
-    @accounts=Account.joins(:todo).where('todos.user_id = ?', @userid)
-    @first_day = @date.beginning_of_month
-    @last_day = @date.end_of_month
-    @today = Date.today
-  end
-
   private
     def todo_params
       params.require(:todo).permit(:title, :body,:term,:starttimehour,:starttimemin,:item,:itemmoney,:remark,:category_id,:category_id2,:category_id3)
