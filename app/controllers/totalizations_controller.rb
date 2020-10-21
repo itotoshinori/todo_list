@@ -30,7 +30,7 @@ class TotalizationsController < ApplicationController
    end  
     @today = Date.today
     @accounts = Account.joins(:todo).where("registrationdate >= ? and registrationdate <= ?", @first_day, @last_day).where("todos.user_id = ?", @userid)
-    @item_max = 3 #push時こちらに変更すること
+    @item_max = 15 #push時こちらに変更すること
   end
   private
     def date_setteing
