@@ -35,6 +35,7 @@ Rails.application.routes.draw do
       delete :delete_many 
     end
   end
+  #トップページを表示
   resources :portals
   #エクスポート
   get 'toexport/condition'

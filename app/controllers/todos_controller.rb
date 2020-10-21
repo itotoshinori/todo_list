@@ -127,7 +127,10 @@ class TodosController < ApplicationController
       newcreate
       if @todo.save
         flash[:success]="「#{@todo.title}」がコピー新規登録されました"
-        category_create
+        @category = Category.new
+        @categories = @category.category_array(@todo)
+        @category.category_insert(@categories,@todo.id) if @categories.present?
+        #category_create
         redirect_to "/todos/#{@todo.id}"
       else
         flash[:danger]="新規登録に失敗しました"
