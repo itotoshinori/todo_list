@@ -1,4 +1,4 @@
-.table1 {
+  .table1 {
   width: 98%;
   border-collapse: separate;
   border-spacing: 0; }
@@ -58,4 +58,16 @@
   width:90px;
   height:40px;
   vertical-align: middle;
+}
+
+.link_groupe{
+  margin-top:20px;
+}
+
+.input_link{
+  width: 330px;
+  padding: 5px;
+  margin: 0 0 10px 0;
+  height:25px;
+  border: 1px solid #a8aabc;
 }

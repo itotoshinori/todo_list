@@ -2,21 +2,24 @@
     <p></p>
       <%= f.label :タイトル %><br>
       <%= f.text_field :title, placeholder: 'タイトル(必須)'  %>
-      <p>
+      <br>
        <%= f.label :期限・開催※時間はイベント時のみ入力 %><br>
       <%= f.collection_select :term, @dates, :id, :dateweek, :selected=>@sdate %>
       <% Account.new %>
       <% itemselect=Item.all %>
       <%= f.select:starttimehour,@hourselect, :include_blank => true %>-
       <%= f.select :starttimemin,@minselect %><br>
-      <p>
+      <br>
       <%= f.label :内容 %><br>
-      <%= f.text_area :body, placeholder: '内容',cols:65,rows:10,value:@body %></p>
-      <p>
+      <%= f.text_area :body, placeholder: '内容',cols:50,rows:5,id:'body',value:@body %></p>
+      <%= render partial: "common" %>
+      <hr class="line">
+      <div>
         <%= f.label :分類： %><%= f.select :category_id, Category.category_ids, include_blank: true %><br>
         <%= f.label :分類： %><%= f.select :category_id2, Category.category_ids, include_blank: true %><br>
-        <%= f.label :分類： %><%= f.select :category_id3, Category.category_ids, include_blank: true %><br>
-      </P>
+        <%= f.label :分類： %><%= f.select :category_id3, Category.category_ids, include_blank: true %>
+      </div>
+      <hr class="line">
       <%= f.label :費用品目： %><br>
       <%= f.select :item,Item.all.collect { |i| [ i.name, i.id ] } %><br>
       <%= f.label :金額%><br>
@@ -27,4 +30,4 @@
       <%= f.submit "登録", class: "btn btn-primary",data: { disable_with: '送信中...', confirm: "本当に登録しますか？" },style:"width:100px;height:50px" %>
       </p>
 <% end %>
-<%= link_to("一覧に戻る",session[:url]) if session[:url]%>
+<%= link_to("一覧に戻る",session[:url]) if session[:url] %>
