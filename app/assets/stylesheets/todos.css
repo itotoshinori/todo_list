@@ -71,3 +71,8 @@
   height:25px;
   border: 1px solid #a8aabc;
 }
+
+.box1{
+  display: inline-block;
+}
+
