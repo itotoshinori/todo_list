@@ -1,50 +1,46 @@
 <%= form_for(@todo) do |f| %>
-    <p></p>
-      <%= f.label :件名 %><br>
-      <%= f.text_field :title, placeholder: 'enter タイトル'  %>
-      <p>
-       <%= f.label :期限・開催 %><br>
-      <%= f.collection_select :term, @dates, :id, :dateweek, :selected=>@todo.term %>
-      <% if @todo.starttime.present? %>
-        <% timehm=@todo.starttime %>
-        <%= f.select:starttimehour,@hourselect,  :selected=>timehm.hour %>-
-        <%= f.select :starttimemin,@minselect, :selected=>timehm.min %>
-        <input type="button" id="timeclear" value="時間クリア" />
-      <% else %>
-        <%= f.select:starttimehour,@hourselect,  :include_blank => true %>-
-        <%= f.select :starttimemin,@minselect, :include_blank => true %>
-      <% end %>
-      <% categiries = Category.where(todo_id:@todo.id) %>
+<p></p>
+<%= f.label :件名 %><br>
+<%= f.text_field :title, placeholder: 'enter タイトル' %>
+<p>
+  <%= f.label :期限・開催 %><br>
+  <%= f.collection_select :term, @dates, :id, :dateweek, :selected=>@todo.term %>
+  <% if @todo.starttime.present? %>
+    <% timehm=@todo.starttime %>
+      <%= f.select:starttimehour,@hourselect, :selected=>timehm.hour %>-
+      <%= f.select :starttimemin,@minselect, :selected=>timehm.min %>
+      <input type="button" id="timeclear" value="時間クリア"/>
+    <% else %>
+      <%= f.select:starttimehour,@hourselect, :include_blank => true %>-
+      <%= f.select :starttimemin,@minselect, :include_blank => true %>
+    <% end %>
+    <% categiries = Category.where(todo_id:@todo.id) %>
       <% category_ids = [] %>
-      <% categiries.each do |ctg| %>
-        <% category_id = Category.category_ids[ctg.category_id] %>
-        <% category_ids.push(category_id) %>
-      <% end %>
-      <br>
-        <%= f.label :分類： %><%= f.select :category_id, Category.category_ids, :selected=>category_ids[0], include_blank: true %><br>
-        <%= f.label :分類： %><%= f.select :category_id2, Category.category_ids, :selected=>category_ids[1], include_blank: true %><br>
-        <%= f.label :分類： %><%= f.select :category_id3, Category.category_ids, :selected=>category_ids[2], include_blank: true %><br>
-      <p>
-      <%= f.label :内容 %><br>
-      <%= f.text_area :body, placeholder: 'enter 内容',cols:50,rows:5,id:'body' %><br>
-      <%= render partial: "common" %>
-      <hr class="line">
-      <%= f.submit "修正登録", class: "btn btn-primary button3",data: { disable_with: '送信中...',confirm: "本当に上書き修正しますか？" } %>
-    　<%= f.submit "コピー登録", class: "btn btn-warning button3",data: { confirm: "本当にコピーして新規登録しますか？" } %>
-    　<%= f.submit "削除", class: "btn btn-danger button3",data: { confirm: "本当に削除しますか？" }  %>
-<% end %>
-  <%= link_to "プレビュー","/todos/#{@todo.id}" %>
-  <%= link_to("前のページに戻る",request.referer) %>
-  <%= link_to("一覧に戻る",session[:url]) if session[:url]%>
-<br>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script>
-$(function() {
-	$("#timeclear").click(function() {
-		$('#todo_starttimehour').val("");
-    $('#todo_starttimemin').val("0");
-	}); 
-  }
-);
-</script>
-
+        <% categiries.each do |ctg| %>
+          <% category_id = Category.category_ids[ctg.category_id] %>
+            <% category_ids.push(category_id) %><% end %>
+            <br>
+            <%= f.label :分類： %><%= f.select :category_id, Category.category_ids, :selected=>category_ids[0], include_blank: true %><br>
+            <%= f.label :分類： %><%= f.select :category_id2, Category.category_ids, :selected=>category_ids[1], include_blank: true %><br>
+            <%= f.label :分類： %><%= f.select :category_id3, Category.category_ids, :selected=>category_ids[2], include_blank: true %><br>
+            <p>
+              <%= f.label :内容 %><br>
+              <%= f.text_area :body, placeholder: 'enter 内容',cols:50,rows:5,id:'body' %><br>
+              <%= render partial: "common" %>
+              <hr class="line">
+              <%= f.submit "修正登録", class: "btn btn-primary button3",data: { disable_with: '送信中...',confirm: "本当に上書き修正しますか？" } %>
+              <%= f.submit "コピー登録", class: "btn btn-warning button3",data: { confirm: "本当にコピーして新規登録しますか？" } %>
+              <%= f.submit "削除", class: "btn btn-danger button3",data: { confirm: "本当に削除しますか？" } %>
+        <% end %>
+    <%= link_to "プレビュー","/todos/#{@todo.id}" %>
+    <%= link_to("前のページに戻る",request.referer) %>
+    <%= link_to("一覧に戻る",session[:url]) if session[:url]%>
+    <br>
+    <script>
+    $(function () {
+      $("#timeclear").click(function () {
+        $('#todo_starttimehour').val("");
+        $('#todo_starttimemin').val("0");
+        });
+      });
+    </script>
