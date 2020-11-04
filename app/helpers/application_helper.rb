@@ -121,7 +121,8 @@ module ApplicationHelper
       else
         date=d.day.to_s
       end
-        kekka=mon+"月"+date+"日"
+        #kekka=mon+"月"+date+"日"
+        kekka = date+"日"
     end
     kekka
   end
