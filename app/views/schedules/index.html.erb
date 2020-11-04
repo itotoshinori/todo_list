@@ -4,6 +4,8 @@
   <% @last_day = @date.end_of_month %>
   <% today = Date.today %>
   <div><%= react_component("HelloWorld", { greeting:"" }) %></div> 
+  今日の天気は<img src=<%=@weather.display[0] %>>
+  あすは<img src=<%=@weather.display[1] %>>
   <table >
   <% @datedown=(@first_day-1).beginning_of_month %>
   <tr>
@@ -13,7 +15,7 @@
   <td><%= button_to"→", {controller: 'schedules', action: 'index'}, {method: :get, params: {lday:@dateup,kubun:"2"}} %></td>
   </tr></table>
   <table class="table1">
-<tr><th>月日</th><th>天気</th><th>イベント名</th></tr> 
+<tr><th>月日</th><th>イベント名</th></tr> 
 <% (@first_day..@last_day).each do |day| %>
 <% if day==today %>
   <tr style="background: #D7EEFF;">
@@ -37,16 +39,10 @@
   <%= link_to '+', controller: "todos", action: "new", gday:day,section:1  %>
   <%#= link_to "+", "new", gday:day %></div>
   </td>
-<td style="width:70px;">
-<% if @weather.display(day).present? %>
-  <img src=<%=@weather.display(day)  %>>
-<% end %>
-</td>
 <td style="text-align: left;">
   <% dayevent=@event.where(term:day).order(:starttime) %>
   <% dayevent.each do |dayev| %>
     <% times=dayev.starttime %>
-    
     <%=times.strftime("%H:%M") %>-
     <% if dayev.body.present? %>
       <span class="badge badge-pill badge-info">添</span>

@@ -1,10 +1,12 @@
 <div class="lead">
 <% if @kubun == 1 %>
   仕掛一覧
-<% else %>
+<% else %>  
   完了一覧
 <% end %>
-<div><%= react_component("HelloWorld", { greeting:"" }) %></div></div>
+<div><%= react_component("HelloWorld", { greeting:"" }) %></div>
+  今日の天気は<img src=<%=@weather.display[0] %>>
+  あすは<img src=<%=@weather.display[1] %>></div>
 <button class="btn btn-primary"  data-toggle="modal" data-target="#modal-sa">
 定期的
 </button>

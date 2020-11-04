@@ -1,5 +1,5 @@
 class Weather
-  def display(day)
+  def display
     city_code = "130010"
     uri = URI.parse("https://weather.tsukumijima.net/api/forecast?city=#{city_code}")
     json = Net::HTTP.get(uri) #NET::HTTPを利用してAPIを叩く
@@ -12,12 +12,8 @@ class Weather
     date3 = result['forecasts'][2]['date']
     dis = ""
     day = day.to_s
-    if day == date1
-      dis = url1
-    elsif day == date2
-      dis = url2
-    elsif day == date3
-      dis = url3
-    end
+    dis = []
+    dis << url1
+    dis << url2
   end
 end
