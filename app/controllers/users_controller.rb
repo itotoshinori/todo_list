@@ -61,7 +61,7 @@ class UsersController < ApplicationController
       end
       redirect_to '/'
     else
-      flash[:warning] = "パスワードの変更にに失敗しました。再度処理方願います。"
+      flash[:warning] = "パスワードの変更に失敗しました。再度処理方願います。"
       redirect_to "/users/#{@user.id}/edit" 
     end
   end
