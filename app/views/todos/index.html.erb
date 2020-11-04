@@ -6,7 +6,10 @@
 <% end %>
 <div><%= react_component("HelloWorld", { greeting:"" }) %></div>
   今日の天気は<img src=<%=@weather.display[0] %>>
-  あすは<img src=<%=@weather.display[1] %>></div>
+  あすは<img src=<%=@weather.display[1] %>>
+  <% if @weather.display[2].present? %>
+    明後日は<img src=<%=@weather.display[2] %>>
+  <% end %></div>
 <button class="btn btn-primary"  data-toggle="modal" data-target="#modal-sa">
 定期的
 </button>
