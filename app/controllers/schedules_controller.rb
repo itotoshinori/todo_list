@@ -12,5 +12,6 @@ class SchedulesController < ApplicationController
       @date = Date.today
       @datekakuni = "true"
     end
+    @weather = Weather.new
   end
 end
