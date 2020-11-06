@@ -10,7 +10,7 @@ class HelloWorld extends React.Component
   constructor( props )
   {
     super( props );
-    this.state = { aisatu: "おはようございます!" }
+    this.state = { aisatu: "おはよう!" }
   }
   render()
   {
