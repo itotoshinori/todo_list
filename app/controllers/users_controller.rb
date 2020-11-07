@@ -52,10 +52,11 @@ class UsersController < ApplicationController
       flash[:warning] = "パスワード確認の入力が異なります"
       redirect_to '/user/edit'
     elsif @user and @user.authenticate(pass)
-      @user.password=newpass
+      @user.password = newpass
       @user.name = name
       if @user.save
         flash[:success] = "修正に成功しました"
+        UserNotifier.send_signup_email(@user).deliver
       else
         flash[:warning] = "修正に失敗しました。再度処理方願います。"
       end

@@ -4,12 +4,11 @@
 <% else %>  
   完了一覧
 <% end %>
+</div>
 <div><%= react_component("HelloWorld", { greeting:"" }) %></div>
-  今日<img src=<%=@weather.display[0] %>>
-  あす<img src=<%=@weather.display[1] %>>
-  <% if @weather.display[2].present? %>
-    明後日<img src=<%=@weather.display[2] %>>
-  <% end %></div>
+<p>  
+<%=render partial: 'common/form' %>
+</p>
 <button class="btn btn-primary"  data-toggle="modal" data-target="#modal-sa">
 定期的
 </button>
