@@ -3,7 +3,7 @@ class Category < ApplicationRecord
   validates :todo_id, presence: true
   validates :category_id, presence: true
     
-  enum category_id: { 医療: 1, 薬: 2, 検査結果: 3,プログラム:4,映画・テレビ:5,自宅:6,税金等支払:7, スポーツ: 8, 旅行:9,保険等:10,契約書:11,ブックマーク:12 }
+  enum category_id: { 医療: 1,薬: 2,検査結果: 3,プログラム:4,映画・TV・本:5,自宅:6,税金等支払:7,スポーツ:8, 旅行:9,保険等:10,契約書:11,ブックマーク:12 }
 
   def category_array(todo)
     if todo.category_id.present? or todo.category_id2.present? or todo.category_id3.present?
