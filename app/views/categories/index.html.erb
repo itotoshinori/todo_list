@@ -1,4 +1,4 @@
-<h1>分類別</h1>
+<h3>分類別</h3>
 <% @category_ids.each do |category,count,unfinish_count| %>
   <h2><%= link_to category, "/categories/index_detail/?category=#{category}" %>(<%= unfinish_count %>/<%= count %>)</h2>
 <% end %> 
