@@ -2,3 +2,4 @@
   Item.create(name:"仕事")
   Item.create(name:"勉強")
   Item.create(name:"余暇")
+ 
