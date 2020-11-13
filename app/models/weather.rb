@@ -1,7 +1,8 @@
 class Weather
-  def initialize
-    city_code = "130010"
-    uri = URI.parse("https://weather.tsukumijima.net/api/forecast?city=#{city_code}")
+  def initialize(placecode)
+    #placecode = User.find(@cookies[:userid].to_i).placecode
+    #city_code = "130010"
+    uri = URI.parse("https://weather.tsukumijima.net/api/forecast?city=#{placecode}")
     json = Net::HTTP.get(uri) #NET::HTTPを利用してAPIを叩く
     result = JSON.parse(json) #返り値をubyの配列に変
     @url1 = result['forecasts'][0]['image']['url']

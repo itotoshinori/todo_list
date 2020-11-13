@@ -5,8 +5,16 @@
     <%= f.text_field :name , required: true, value:@user.name %>
   </div>
   <div class="field">
+    <%= f.label :email %><br>
+    <%= f.email_field :email , required: true, value:@user.email %>
+  </div>
+  <div class="field">
+    <%= f.label :地域 %><br>
+    <%= f.select :placecode,Place.all.collect { |i| [ i.name, i.code ]} ,{selected: @user.placecode} %>
+  </div>
+  <div class="field">
     <%= f.label :現在のパスワード %><br>
-    <%= f.password_field :password %>
+    <%= f.password_field :password, required: true %>
   </div>
   <div class="field">
     <%= f.label :新パスワード %>(6文字以上)<br>

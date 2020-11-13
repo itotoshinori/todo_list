@@ -10,7 +10,11 @@
     <%= f.text_field :email %>
   </div>
   <div class="field">
-    <%= f.label :パスワード %><br>
+    <%= f.label :地域 %><br>
+    <%= f.select :placecode,Place.all.collect { |i| [ i.name, i.code ]} %>
+  </div>
+  <div class="field">
+    <%= f.label :パスワード(6文字以上) %><br>
     <%= f.password_field :password %>
   </div>
   <div class="field">

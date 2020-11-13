@@ -3,6 +3,7 @@ class TodosController < ApplicationController
   before_action :userid_set
   before_action :unless_user,  only: [:index,:indexfinished,:show,:edit,:schedule]
   before_action :timeselect,   only: [:new,:create,:edit,:update,:index,:searchresult,:research]
+  before_action :place_setting, only: [:index]
   require 'active_support/core_ext/date'
 
   def index
@@ -21,7 +22,6 @@ class TodosController < ApplicationController
       @todos = Todo.includes(:accounts).where(finished:false).where(user_id:@userid).order(:term).paginate(page: params[:page], per_page: 20).order(created_at: "ASC")
       @kubun = 1
     end
-    @weather = Weather.new
   end
 
   def termindex

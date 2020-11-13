@@ -18,8 +18,9 @@ class UsersController < ApplicationController
     end
     name = params[:name]
     email = params[:email]
+    code = params[:placecode]
     user = User.new(
-      name:name, email:email,
+      name:name, email:email, placecode:code,
       password:password) 
     if user.save
       cookies[:userid] = {:value => user.id, :expires => 5.days.from_now }
@@ -42,28 +43,35 @@ class UsersController < ApplicationController
   end
   
   def update
-    email=User.find(cookies[:userid].to_i).email
-    name = params[:name]
+    id = cookies[:userid].to_i
+    @user = User.find(id)
+    email = params[:email]
     pass = params[:password]
     newpass = params[:newpassword]
     passcon = params[:password_confirmation]
-    @user = User.find_by(email:email)
-    if newpass!=passcon
-      flash[:warning] = "パスワード確認の入力が異なります"
-      redirect_to '/user/edit'
-    elsif @user and @user.authenticate(pass)
-      @user.password = newpass
+    placecode = params[:placecode]
+    #email=User.find(cookies[:userid].to_i).email
+    name = params[:name]
+    if  @user.authenticate(pass).present? and newpass == passcon
+      if newpass.present?
+        newpass = params[:newpassword] 
+      elsif  newpass.blank?
+        newpass = pass
+      end
+      @user.password = newpass 
       @user.name = name
+      @user.email = email
+      @user.placecode = placecode
       if @user.save
         flash[:success] = "修正に成功しました"
-        UserNotifier.send_signup_email(@user).deliver
       else
         flash[:warning] = "修正に失敗しました。再度処理方願います。"
       end
       redirect_to '/'
-    else
-      flash[:warning] = "パスワードの変更に失敗しました。再度処理方願います。"
-      redirect_to "/users/#{@user.id}/edit" 
+    else   
+      flash[:warning] = "パスワード等入力に誤りがありました。修正に失敗しました。"
+      redirect_to "/users/#{@user.id}/edit"
     end
+    
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_11_095858) do
+ActiveRecord::Schema.define(version: 2020_11_12_085139) do
 
   create_table "accounts", force: :cascade do |t|
     t.integer "item"
@@ -62,6 +62,13 @@ ActiveRecord::Schema.define(version: 2020_09_11_095858) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "places", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "portals", force: :cascade do |t|
     t.string "title"
     t.string "content"
@@ -104,6 +111,7 @@ ActiveRecord::Schema.define(version: 2020_09_11_095858) do
     t.boolean "activated", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "placecode"
   end
 
 end

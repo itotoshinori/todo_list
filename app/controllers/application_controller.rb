@@ -56,4 +56,11 @@ class ApplicationController < ActionController::Base
         @dates << Datecollection.new(date,iw)
       end
     end
+    def place_setting
+      userid_set
+      user = User.find(@userid)
+      placecode = user.placecode
+      @placename = Place.find_by(code:placecode).name
+      @weather = Weather.new(placecode)
+    end
 end
