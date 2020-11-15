@@ -1,6 +1,6 @@
 <% require 'date' %>
 <% @today=Date.today %>
-<%# account=Account.where(registrationdate:@today) %>
+<% account=Account.where(registrationdate:@today) %>
 <% finish=Todo.where(finishday:@today) %>
 <%= link_to "仕掛一覧", "index", {class: "btn btn-primary"} %> <%= link_to "完了一覧", "indexfinished", {class: "btn btn-primary"} %>
 <br>終了タスク：<%= @todos.count %>件</b>

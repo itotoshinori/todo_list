@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Place, type: :model do
   before do
-    @place = Place.create(code:"1",name:"北海道")
+    @place = create(:place) 
   end
   describe '必須項目バリデーション確認' do
     it '必須項目が入力されていれば OK' do

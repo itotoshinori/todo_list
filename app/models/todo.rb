@@ -1,5 +1,7 @@
 class Todo < ApplicationRecord
     validates :title, presence: true
+    validates :term, presence: true
+    validates :user_id, presence: true
     attr_accessor :starttimehour
     attr_accessor :starttimemin
     attr_accessor :item

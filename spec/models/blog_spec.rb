@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
   before do
-    @blog = Blog.new(title:"john",content:"pass")
+    @blog = create(:blog)
   end 
-  
+ 
   describe 'バリデーション' do
     it '必須項目が入力されていれば、OK' do
       expect(@blog.valid?).to eq(true)

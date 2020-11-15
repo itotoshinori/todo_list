@@ -14,7 +14,7 @@
     <%= f.select :placecode,Place.all.collect { |i| [ i.name, i.code ]} %>
   </div>
   <div class="field">
-    <%= f.label :パスワード(6文字以上) %><br>
+    <%= f.label :パスワード（6文字以上） %><br>
     <%= f.password_field :password %>
   </div>
   <div class="field">
