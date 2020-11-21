@@ -26,7 +26,8 @@
             <p>
               <%= f.label :内容 %><br>
               <%= f.text_area :body, placeholder: 'enter 内容',cols:50,rows:5,id:'body' %><br>
-              <%= render partial: "common" %>
+              <%=render partial: 'common/tag' %>
+              <%#= render partial: "common" %>
               <hr class="line">
               <%= f.submit "修正登録", class: "btn btn-primary button3",data: { disable_with: '送信中...',confirm: "本当に上書き修正しますか？" } %>
               <%= f.submit "コピー登録", class: "btn btn-warning button3",data: { confirm: "本当にコピーして新規登録しますか？" } %>

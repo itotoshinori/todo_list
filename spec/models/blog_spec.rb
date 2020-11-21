@@ -9,16 +9,12 @@ RSpec.describe Comment, type: :model do
     it '必須項目が入力されていれば、OK' do
       expect(@blog.valid?).to eq(true)
     end
-  end
-  describe 'バリデーション' do
     it 'タイトルがブランクだとNG' do
-      @blog.title=''
+      @blog.title = ''
       expect(@blog.valid?).to eq(false)
     end
-  end
-  describe 'バリデーション' do
     it '中身がブランクだとNG' do
-      @blog.content=''
+      @blog.content = ''
       expect(@blog.valid?).to eq(false)
     end
   end

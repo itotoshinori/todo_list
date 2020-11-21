@@ -4,6 +4,7 @@
       <%= f.text_field :title, placeholder: 'タイトル(必須)'  %>
       <p>
       <%= f.label :ブログ記事 %><br>
-      <%= f.text_area :content, placeholder: '記事(必須)',cols:65,rows:10 %><br>
+      <%= f.text_area :content, placeholder: '記事(必須)', id:"body",cols:65,rows:10 %><br>
+      <%=render partial: 'common/tag' %><br /><br />
        <%= f.submit "実行", class: "btn btn-primary",data: { disable_with: '送信中...' },style:"width:100px;height:50px" %>
     <% end %>

@@ -26,7 +26,15 @@
   $("#linkbutton").click(function () {
       var input = $('#input').val();
       var input2 = $('#input2').val();
-      var body = $('#body').val();
+      var dir = location.href.split("/");
+      var dir2 = dir[dir.length -3];
+      alert(dir2);
+
+      if(dir2 == "todos") {
+        var body = $('#body').val();
+      }else{
+        var body = $('#content').val();  
+      }
       $('#input').val("");
       $('#input2').val("");
       if(!input2){

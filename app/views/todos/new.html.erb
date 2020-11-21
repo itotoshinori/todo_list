@@ -12,7 +12,8 @@
       <br>
       <%= f.label :内容 %><br>
       <%= f.text_area :body, placeholder: '内容',cols:50,rows:5,id:'body',value:@body %></p>
-      <%= render partial: "common" %>
+      <%=render partial: 'common/tag' %>
+      <%#= render partial: "common" %>
       <hr class="line">
       <div>
         <%= f.label :分類： %><%= f.select :category_id, Category.category_ids, include_blank: true %><br>
