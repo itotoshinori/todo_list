@@ -19,11 +19,12 @@ Rails.application.routes.draw do
   resources :schedules, only: [:index]
   #会計関係
   resources :accounts, only: [:index,:create]
-  put '/accounts/editmany'
+  put '/accousnts/editmany'
   post 'accounts/itemindex'
   #ユーザー管理
   resources :users
   resources :login, only: [:new,:index]
+  post 'users/password_reset'
   post 'login/login'
   get 'login/logout'
   #エラー時エラー画面に

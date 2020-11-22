@@ -41,7 +41,7 @@ class UsersController < ApplicationController
   def edit
     @user = User.find(@userid)
   end
-  
+
   def update
     id = cookies[:userid].to_i
     @user = User.find(id)
@@ -72,6 +72,16 @@ class UsersController < ApplicationController
       flash[:warning] = "パスワード等入力に誤りがありました。修正に失敗しました。"
       redirect_to "/users/#{@user.id}/edit"
     end
-    
+  end
+
+  def password_reset
+    target_user = User.find(params[:id])
+    target_user.password = "password"
+    if target_user.save
+      flash[:success] = "該当のユーザーパスワードを「password」に変更しました。"
+    else
+      flash[:warning] = "該当のユーザーパスワード変更に失敗しました。"
+    end
+    redirect_to '/'
   end
 end

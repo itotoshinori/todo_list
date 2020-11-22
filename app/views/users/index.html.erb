@@ -9,6 +9,8 @@
     <td><%= user.name %></td>
     <td><%= user.email %></td>
     <td><%= link_to "削除", user_path(user.id) , method: :DELETE,data: { confirm: "本当に削除しますか？?" } %></td>
+    <td><%#= button_to "パスワードリセット", url:"/users/#{user.id}/password_reset" , method: :PATCH, data: { confirm: "本当にパスワードをリセットしますか？?" } %></td>
+    <td><%= button_to "リセット", users_password_reset_path, { method: :post,params: {id: user.id},class:"btn btn-warning" } %></td>
   </tr>
 <% end %>
 </table>
