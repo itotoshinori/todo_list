@@ -29,5 +29,11 @@ RSpec.describe User, type: :model do
       @user.password = '123'
       expect(@user.valid?).to eq(false)
     end
+
+    it 'パスワードのリセットメソッド' do
+        @password_reset = User.new.password_reset(@user.id)
+        #@user = User.find(@user.id)
+        expect(@password_reset).to eq true 
+    end
   end
 end

@@ -29,7 +29,8 @@ class ApplicationController < ActionController::Base
 
   def unless_admin_user
     if cookies[:userid].present?
-      redirect_to('/login/index') if cookies[:userid] != "1"
+      user = User.find(cookies[:userid].to_i)
+      redirect_to('/login/index') if user.admin != true
     end
   end
 

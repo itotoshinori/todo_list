@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   resources :schedules, only: [:index]
   #会計関係
   resources :accounts, only: [:index,:create]
-  put '/accousnts/editmany'
+  put '/accounts/editmany'
   post 'accounts/itemindex'
   #ユーザー管理
   resources :users
