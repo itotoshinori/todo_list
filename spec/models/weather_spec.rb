@@ -22,5 +22,13 @@ RSpec.describe Weather, type: :model do
         @url = @result['forecasts'][2]['image']['url']
         expect(@weather.display3).to eq @url
     end
+    it '該当の地域がないとfalseを返す' do
+        @weather = Weather.new("1")
+        expect(@weather.re_info).to eq false
+    end
+    it '該当の地域が存在すればtrueを返す' do
+        @weather = Weather.new("011000")
+        expect(@weather.re_info).to eq true
+    end
   end
 end

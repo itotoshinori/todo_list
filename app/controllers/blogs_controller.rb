@@ -51,7 +51,6 @@ class BlogsController < ApplicationController
         @name = User.find(@userid).name if @userid.present?
         @email = User.find(@userid).email if @userid.present?
       end
-
     rescue => exception
       redirect_to error_display_index_path
     end

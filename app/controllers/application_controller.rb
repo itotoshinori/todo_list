@@ -62,10 +62,6 @@ class ApplicationController < ActionController::Base
       user = User.find(@userid)
       placecode = user.placecode
       @placename = Place.find_by(code:placecode).name
-      begin
-        @weather = Weather.new(placecode)
-      rescue => exception
-        redirect_to error_display_index_path
-      end
+      @weather = Weather.new(placecode)
     end
 end
