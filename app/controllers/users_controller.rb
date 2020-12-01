@@ -21,7 +21,7 @@ class UsersController < ApplicationController
     code = params[:placecode]
     user = User.new(
       name:name, email:email, placecode:code,
-      password:password) 
+      password:password, admin:false) 
     if user.save
       cookies[:userid] = {:value => user.id, :expires => 5.days.from_now }
       flash[:success] = "ユーザー登録されました"
@@ -75,9 +75,8 @@ class UsersController < ApplicationController
   end
 
   def password_reset
-    target_user = User.find(params[:id])
-    target_user.password = "password"
-    if target_user.save
+    password_reset = User.new.password_reset(params[:id])
+    if password_reset
       flash[:success] = "該当のユーザーパスワードを「password」に変更しました。"
     else
       flash[:warning] = "該当のユーザーパスワード変更に失敗しました。"

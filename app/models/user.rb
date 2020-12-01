@@ -32,4 +32,13 @@ class User < ApplicationRecord
   def authenticated?(remember_token)
     BCrypt::Password.new(remember_digest).is_password?(remember_token)
   end
+  def password_reset(id)
+    target_user = User.find(id)
+    target_user.password = "password"
+    if target_user.save
+      result = true
+    else
+      result = false
+    end
+  end
 end
