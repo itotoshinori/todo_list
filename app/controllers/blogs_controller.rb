@@ -1,5 +1,5 @@
 class BlogsController < ApplicationController
-  before_action :userid_set,only: [:new,:create,:edit,:update]
+  before_action :userid_set,only: [:new,:create,:edit,:update,:show]
   
   def index
     @blogs=Blog.paginate(page: params[:page], per_page: 5).order(created_at: "DESC")
@@ -44,9 +44,14 @@ class BlogsController < ApplicationController
 
   def show
     begin
-      @blog=Blog.find(params[:id])
-      @commentcontent=Comment.where(blog_id:@blog.id)
-      @comment=Comment.new
+      @blog = Blog.find(params[:id])
+      @commentcontent = Comment.where(blog_id:@blog.id)
+      @comment = Comment.new
+      if @userid.present?
+        @name = User.find(@userid).name if @userid.present?
+        @email = User.find(@userid).email if @userid.present?
+      end
+
     rescue => exception
       redirect_to error_display_index_path
     end

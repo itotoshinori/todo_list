@@ -1,5 +1,5 @@
 class TodosController < ApplicationController
-  protect_from_forgery with: :exception
+  #protect_from_forgery with: :exception
   before_action :userid_set
   before_action :unless_user,  only: [:index,:indexfinished,:show,:edit,:schedule]
   before_action :timeselect,   only: [:new,:create,:edit,:update,:index,:searchresult,:research]
