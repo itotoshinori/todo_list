@@ -4,4 +4,5 @@
   <%= link_to "一覧", "/categories/detail_lists/?category=#{category}" %>
   </h2>
 <% end %> 
-<hr />    
+<hr />
+<% session[:url]=request.url %>    

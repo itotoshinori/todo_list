@@ -25,4 +25,5 @@
     <% end %>
     </tbody>
 </table>
+<p><%= link_to("一覧に戻る",session[:url]) if session[:url]%></p>
 <% session[:url]=request.url %>

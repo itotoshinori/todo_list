@@ -30,6 +30,7 @@
 </table>
 <hr class="line">
 <% end %>
+<p><%= link_to("一覧に戻る",session[:url]) if session[:url]%></p>
 <% session[:url]=request.url %>
 
 
