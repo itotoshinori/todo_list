@@ -29,7 +29,12 @@ class CategoriesController < ApplicationController
   end
 
   def index_detail
-      @category =  params[:category]
-      @index_details = Category.joins(:todo).where(category_id: @category).order(term:"DESC")
+    @category =  params[:category]
+    @index_details = Category.joins(:todo).where(category_id: @category).order(term:"DESC")
+  end
+
+  def detail_lists
+    @category = params[:category]
+    @index_details = Category.joins(:todo).where(category_id: @category).order(term:"DESC")
   end
 end

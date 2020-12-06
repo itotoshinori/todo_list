@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   #分類別
   resources :categories, only: [:index]
   get 'categories/index_detail/' , to: 'categories#index_detail'
+  get 'categories/detail_lists/' , to: 'categories#detail_lists'
+  #会計集計
   resources :totalizations, only: [:index]
   get 'totalizations/account_item_index'
   get 'totalizations/index_month'
