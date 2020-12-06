@@ -1,5 +1,6 @@
 <h3>分類：<%= @category %></h3>
   <% @index_details.each do |form| %>
+  <div class="container">
     <table>
     <tr><td>
     ■名　称：<%= form.todo.title %></td></tr>
@@ -28,6 +29,7 @@
     </td></tr>
 </td></tr>
 </table>
+</div>
 <hr class="line">
 <% end %>
 <p><%= link_to("一覧に戻る",session[:url]) if session[:url]%></p>
