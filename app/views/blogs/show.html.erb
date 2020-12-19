@@ -15,13 +15,12 @@
   <hr class="line">
   <% if @commentcontent.present? %>
     <% @commentcontent.each do |f| %>
-      <p>
       <% if f.url.present? %>
         <%= link_to f.name,f.url %>
       <% else %>
         <%= f.name %>
       <% end %>
-      さん　投稿日時：<%=f.created_at.strftime("%Y-%m-%d %H:%M") %></p>
+      さん　投稿日時：<%=f.created_at.strftime("%Y-%m-%d %H:%M") %>
       <br>
       <table>
         <tr>

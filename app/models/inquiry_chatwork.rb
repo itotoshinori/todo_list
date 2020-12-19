@@ -13,7 +13,7 @@ class InquiryChatwork
     if message.present? and num <=2
       if num == 1
         title = message.blog.title
-        messagetext = "[To:3775224]#{message.name}さんから「#{title}」のブログにコメントがありました。確認をお願いします。"
+        messagetext = "[To:3775224]#{message.name}さん(#{message.email})から「#{title}」のブログにコメントがありました。確認をお願いします。"
       elsif num == 2
         title ="ログインされました"
         messagetext = "[To:3775224]ユーザー#{message.name}にログインがありました。心当たりがなければ、パスワードを変更して下さい。"

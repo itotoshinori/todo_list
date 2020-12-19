@@ -1,5 +1,5 @@
 class BlogsController < ApplicationController
-  before_action :userid_set,only: [:new,:create,:edit,:update,:show]
+  before_action :userid_set,only: [:new,:create,:edit,:update]
   
   def index
     @blogs=Blog.paginate(page: params[:page], per_page: 5).order(created_at: "DESC")
