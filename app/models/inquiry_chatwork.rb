@@ -2,7 +2,7 @@ class InquiryChatwork
   require 'net/https'
   require 'uri'
   require 'json'
-
+  #git hubでの編集要
   def push_chatwork_message(message,num)
     chatwork_room_id = '197330662'
     chatwork_api_token = '74bfe242711fcf573a2379c183b250fb'
