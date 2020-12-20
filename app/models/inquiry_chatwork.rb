@@ -3,7 +3,7 @@ class InquiryChatwork
   require 'uri'
   require 'json'
   #git hubでの編集要
-  def push_chatwork_message(message,num)xxxxx
+  def push_chatwork_message(message,num)
     chatwork_room_id = 'xx'
     chatwork_api_token = 'xx'
     uri = URI.parse("https://api.chatwork.com/v2/rooms/#{chatwork_room_id}/messages")
