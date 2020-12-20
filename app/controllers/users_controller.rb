@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :userid_set,  only: [:edit,:update]
+  before_action :userid_set,  only: [:index,:new,:edit,:update]
   before_action :unless_admin_user,  only: [:index,:destroy]
 
   def index
