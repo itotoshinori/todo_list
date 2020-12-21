@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :unless_admin_user,  only: [:index,:destroy]
 
   def index
-    @users = User.all
+      @users = User.all
   end
 
   def new
