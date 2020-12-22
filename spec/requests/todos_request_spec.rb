@@ -12,7 +12,7 @@ RSpec.describe TodosController, type: :request do
 
   describe "#index" do
     # ログインしてなければログイン画面に遷移する
-    it "responds successfully" do
+    it "未ログイン時　responds successfully" do
       cookies[:userid] = nil
       post todos_path
       expect(response).to redirect_to login_index_path
