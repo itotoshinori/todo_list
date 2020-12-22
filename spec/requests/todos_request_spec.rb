@@ -4,7 +4,7 @@ RSpec.describe TodosController, type: :request do
   before do
     @user = FactoryBot.create(:user)
     @todo = @user.todos.create(
-      title: "コロナ対策",
+      title: "買い物",
       term: 2020-10-22)
     @account = @todo.accounts.create(
       amount: 100)

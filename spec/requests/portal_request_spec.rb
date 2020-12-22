@@ -6,7 +6,7 @@ RSpec.describe "Portals", type: :request do
   end
   describe "#index" do
     # 正常にレスポンスを返すこと
-    it "responds successfully" do
+    it "not_login responds successfully" do
      get portals_url
      expect(response.status).to eq 200
      #expect(response.title).to eq "テスト"
